@@ -1,7 +1,7 @@
 {
   "name": "world-of-code",
   "version": "0.0.1",
-  "description": "Boilerplate for Chrome extension React.js project",
+  "description": "turn your youtube channel into a learning platform",
   "scripts": {
     "dev": "node scripts/dev",
     "build": "node scripts/build",
