@@ -30,16 +30,26 @@
     "webpack",
     "boilerplate"
   ],
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ]
+  },
   "author": "Andrew Ziegler, Kyle Uehlein, Mariel Werner, Veekas Shrivastava",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
+    "brace": "^0.10.0",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
@@ -54,6 +64,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.2",
     "sequelize": "^4.3.1",
     "socket.io": "^2.0.3"
   },
