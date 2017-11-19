@@ -1,13 +1,11 @@
 'use strict'
 
 import React from 'react'
-
+import App from './example'
 
 const Repl = () => (
   <div>
-    Our repl might go here?
+    <App />
   </div>
 )
-
-
 export default Repl
