@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const db = require('../../db')
 
 
-const Location = db.define('url', {
+const Location = db.define('location', {
   url: {
     type: Sequelize.TEXT,
     allowNull: false,
