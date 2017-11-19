@@ -1,6 +1,7 @@
 'use strict'
 
 const User = require('./user')
+const Location = require('./location')
 const Question = require('./question')
 
 
@@ -9,5 +10,6 @@ const Question = require('./question')
 
 module.exports = {
   User,
+  Location,
   Question
 }
