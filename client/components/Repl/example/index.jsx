@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import AceEditor from '../src/ace.js';
+import AceEditor from '../src/ace.jsx';
 import 'brace/mode/jsx';
 
 const languages = [
