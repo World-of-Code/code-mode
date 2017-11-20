@@ -1,7 +1,7 @@
 jest.unmock('./ReactDrawer.js');
 /*eslint no-unused-vars: ["error", {varsIgnorePattern: "React[Drawer]*"}]*/
 import React from 'react';
-import ReactDrawer from './ReactDrawer';
+import Drawer from '../../../client/components/Drawer/Drawer.js';
 import { shallow } from 'enzyme';
 
 describe('ReactDrawer', () => {
