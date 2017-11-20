@@ -46,6 +46,7 @@ themes.forEach((theme) => {
 /*eslint-disable no-alert, no-console */
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
+import { type } from 'os';
 //import { JSDOM } from '../../../../../Library/Caches/typescript/2.6/node_modules/@types/jsdom';
 
 
@@ -58,20 +59,20 @@ class App extends Component {
     console.log('i\'ve loaded');
   }
   onChange(newValue) {
-    console.log('change', newValue);
+   // console.log('change', newValue);
     this.setState({
       value: newValue
     })
   }
 
   onSelectionChange(newValue, event) {
-    console.log('select-change', newValue);
-    console.log('select-change-event', event);
+    //console.log('select-change', newValue);
+    //console.log('select-change-event', event);
   }
 
   onCursorChange(newValue, event) {
-    console.log('cursor-change', newValue);
-    console.log('cursor-change-event', event);
+    //console.log('cursor-change', newValue);
+    //console.log('cursor-change-event', event);
   }
 
   onValidate(annotations) {
@@ -125,7 +126,47 @@ class App extends Component {
   handleClick(event){
     event.preventDefault()
     let value = this.state.value
-    this.setState({result: eval(value).toString()})
+    //this.setState({result: window[value.toString()]})
+    //console.log("value",value.toString())
+    //console.log(typeof(value))
+    // console.log("includes",'function'.includes(value))
+    // console.log("indexof","function".indexOf(value))
+   // console.log("test", value.includes("function"))
+    let test = value.split(" ")
+    let b 
+    let a = test.filter(element => {
+      if(element.includes("console.log")){
+        return element
+      }
+    })
+console.log("shshshs",a)
+b = a.map((element)=>{
+  return element.slice(12,-2)
+// "find me"
+})
+console.log("fjghfrhj",b.join(" "))
+//this.setState({result: b.join(" ")})  
+//console.log("this is a test",test[1]+[2])
+// console.log(eval(value))
+var newVal
+
+// if(value.includes("console.log")) 
+// foreach( 
+//   console.log()= this.state.console[count++]
+// )
+
+let dumb = eval(value) === undefined ? "undefined" : eval(value).toString()
+  // if(value.includes("function")===true){
+    // let foo = test[1]+test[2]
+   
+  //  
+//!eval(value)
+   //console.log( this.setState({result: eval(value).toString().concat(`${test[1]}()`)}) )
+ //  } else{
+  //console.log( this.setState({result: eval(value).toString()}) )
+  // }
+    // console.log("result", eval(value).toString())
+    this.setState({result: dumb })
   }
   render() {
     // let old = console.log;
@@ -140,6 +181,7 @@ class App extends Component {
     //     }
     //   }
     return (
+      
       <div className="columns">
         <div className="column">
            <div className="field">
@@ -269,7 +311,7 @@ class App extends Component {
 theme="monokai"
 readOnly={true}
 
-value = {this.state.result}
+ value = {this.state.result}
 
             />
       </div>
