@@ -13,39 +13,28 @@ if (!process.env.YOUTUBE_CLIENT_ID || !process.env.YOUTUBE_CLIENT_SECRET) {
 
 } else {
 
-  // const googleConfig = {
-  //   clientID: process.env.GOOGLE_CLIENT_ID,
-  //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  //   callbackURL: process.env.GOOGLE_CALLBACK
-  // }
-
-  // const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
-  //   const googleId = profile.id
-  //   const name = profile.displayName
-  //   const email = profile.emails[0].value
-
-  //   User.find({ where: { googleId } })
-  //     .then(foundUser => (foundUser
-  //       ? done(null, foundUser)
-  //       : User.create({name, email, googleId})
-  //           .then(createdUser => done(null, createdUser))
-  //     ))
-  //     .catch(done)
-  // })
-
-  passport.use(new YoutubeV3Strategy({
+   const youtubeConfig = {
     clientID: process.env.YOUTUBE_CLIENT_ID,
     clientSecret: process.env.YOUTUBE_CLIENT_SECRET,
     callbackURL: process.env.YOUTUBE_CALLBACK
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ 
-      userId: profile.id 
-    }, function (err, user) {
-      return done(err, user);
-    });
-  }
-))
+    // scope: ['https://www.googleapis.com/auth/youtube.readonly']
+   }
+//google id needs to be changed, but it is in db
+  passport.use(new YoutubeV3Strategy(youtubeConfig, (token, refreshToken, profile, done) =>{
+    console.log("hi",profile)
+     const googleId = profile.id
+     const email = profile.emails[0].value
+
+     User.find({ where: { googleId } })
+         .then(foundUser => (foundUser
+           ? done(null, foundUser)
+           : User.create({ email, googleId})
+               .then(createdUser => done(null, createdUser))
+         ))
+         .catch(done)
+     })
+    );
+
 
   router.get('/', passport.authenticate('youtube', { scope: 'https://www.googleapis.com/auth/youtube' }))
 
