@@ -35,10 +35,10 @@ export const makeQuestion = question =>
       .catch(err => console.log(err))
 
 export const changeQuestion = question =>
-  dispatch => {
+  dispatch =>
     axios.put(`/api/questions/${question.id}`, question)
       .then(res => dispatch(editQuestion(res.data)))
-      .catch(err => console.log(err)) }
+      .catch(err => console.log(err))
 
 // find next question, delete previous, switch the state to the next
 export const removeQuestion = question =>

@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import ReadQuestion from './ReadQuestion'
 import { fetchQuestion, makeQuestion, changeQuestion } from '../../store'
 
