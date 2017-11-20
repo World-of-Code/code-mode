@@ -5,7 +5,6 @@ const db = require('../../db')
 
 
 const Question = db.define('question', {
-  author: Sequelize.STRING,
   content: {
     type: Sequelize.TEXT,
     allowNull: false
