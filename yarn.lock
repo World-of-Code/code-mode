@@ -5100,7 +5100,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5280,6 +5280,12 @@ react-dom@^16.0.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-drawer@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/react-drawer/-/react-drawer-1.2.5.tgz#2e4d9e8804216b37204875a922caa7b39a031ae7"
+  dependencies:
+    classnames "^2.2.5"
 
 react-redux@^5.0.2:
   version "5.0.6"

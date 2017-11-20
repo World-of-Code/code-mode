@@ -12,7 +12,7 @@ const Main = props => {
 
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>CodeMode</h1>
       <nav>
         {
           isLoggedIn
