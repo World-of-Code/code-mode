@@ -4,11 +4,11 @@ import React from 'react'
 // import react-semantic-ui?
 
 
-// render add view
-const AddButton = props => {
+// render edit view
+const EditButton = props => {
   const handleSubmit = (event) => {
     event.preventDefault()
-    // render QuestionDisplay/AddQuestion
+    // render QuestionDisplay/EditQuestion
     // repl thunk
   }
 
@@ -19,10 +19,10 @@ const AddButton = props => {
       style={ { margin: '0 0 0.5em 0' } }
       onClick={ () => handleSubmit() }
     >
-      Add
+      Edit
     </button>
   )
 }
 
 
-export default AddButton
+export default EditButton

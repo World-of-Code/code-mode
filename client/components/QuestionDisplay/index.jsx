@@ -1,46 +1,56 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
 import ReadQuestion from './ReadQuestion'
-import AddQuestion from './AddQuestion'
-import EditQuestion from './EditQuestion'
-import { fetchQuestion } from '../../store'
+import { fetchQuestion, makeQuestion, changeQuestion } from '../../store'
 
 
-const QuestionDisplay = props => (
-  <div>
-    {/* conditionally render question, edit form, or clean form */}
-  </div>
-)
+// ContentManagementButton should choose view here
+class QuestionDisplay extends Component {
+  constructor (props) {
+    super(props)
+  }
+
+  componentDidMount () {
+    this.props.fetchQuestion(this.props.question.id)
+  }
+
+  render () {
+    return (
+      <div>
+        {/* configure layout */}
+
+        {/* Read Question */}
+        <ReadQuestion
+          question={ props.question }
+        />
+
+        {/* Add Question */}
+        <QuestionForm
+          action={ props.makeQuestion }
+        />
+
+        {/* Edit Question */}
+        <QuestionForm
+          question={ props.question }
+          action={ changeQuestion }
+        />
+
+      </div>
+    )
+  }
+
+}
 
 const mapStateToProps = state => ({
   question: state.question
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestion: id => dispatch(fetchQuestion(id))
+  fetchQuestion: id => dispatch(fetchQuestion(id)),
+  makeQuestion: question => dispatch(makeQuestion(question)),
+  changeQuestion: question => dispatch(changeQuestion(question))
 })
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionDisplay)
-
-
-
-{ review.user.id === this.props.user.id ? (
-  <div className="ui buttons">
-    <EditReviewButton
-      review={ review }
-      handleClick={ this.handleClick }
-      editId={ this.editId }
-    />
-    <DeleteReviewButton reviewId={ review.id } />
-  </div>
-) : (
-  ''
-) }
-
-) : (
-  <div>
-    <EditReviewForm review={ review } handleClick={ this.handleClick } />
-  </div>
-) }

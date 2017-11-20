@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { removeQuestion } from '../../store'
 // import react-semantic-ui?
@@ -9,7 +9,8 @@ import { removeQuestion } from '../../store'
 const DeleteButton = props => {
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.removeQuestion(props.questionId)
+    props.removeQuestion(props.question) // render next question in read view
+    // repl thunk
   }
 
   return (
