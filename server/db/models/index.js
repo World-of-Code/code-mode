@@ -2,11 +2,20 @@
 
 const User = require('./user')
 const Input = require('./input')
+const Location = require('./location')
+const Question = require('./question')
 
-// associations
+
+Location.belongsTo(User)
+User.hasMany(Location)
+
+Location.hasMany(Question, { as: 'Challenges' })
+Question.belongsTo(Location)
 
 module.exports = {
   User,
   Input,
 
+  Location,
+  Question
 }
