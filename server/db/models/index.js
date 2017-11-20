@@ -8,7 +8,7 @@ const Question = require('./question')
 Location.belongsTo(User)
 User.hasMany(Location)
 
-Location.hasMany(Question, { as: 'Challenges' })
+Location.hasMany(Question)
 Question.belongsTo(Location)
 
 
