@@ -4,6 +4,7 @@ import React from 'react'
 import ReadQuestion from './ReadQuestion'
 import AddQuestion from './AddQuestion'
 import EditQuestion from './EditQuestion'
+import { fetchQuestion } from '../../store'
 
 
 const QuestionDisplay = props => (
@@ -12,8 +13,17 @@ const QuestionDisplay = props => (
   </div>
 )
 
+const mapStateToProps = state => ({
+  question: state.question
+})
 
-export default QuestionDisplay
+const mapDispatchToProps = dispatch => ({
+  fetchQuestion: id => dispatch(fetchQuestion(id))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionDisplay)
+
 
 
 { review.user.id === this.props.user.id ? (

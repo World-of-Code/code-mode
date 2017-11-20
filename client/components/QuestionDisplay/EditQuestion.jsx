@@ -2,30 +2,24 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { editQuestion } from '../../store'
+import QuestionForm from './QuestionForm'
+import { changeQuestion } from '../../store'
 
 
-class EditQuestion extends Component {
-  constructor (props) {
-    super(props)
-  }
+const EditQuestion = props => (
+  <QuestionForm
+    content={ props.question.content }
+    action={ props.changeQuestion }
+  />
+)
 
-  render () {
-    return (
-      <div>
-        Edit Question Form
-      </div>
-    )
-  }
-
-}
 
 const mapStateToProps = state => ({
   question: state.question
 })
 
 const mapDispatchToProps = dispatch => ({
-  editQuestion: question => dispatch(editQuestion(question))
+  changeQuestion: question => dispatch(changeQuestion(question))
 })
 
 
