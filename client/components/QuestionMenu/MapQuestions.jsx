@@ -3,10 +3,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import history from '../history'
+import { fetchQuestions } from '../../store'
 //import react-semantic-ui?
 
 
-class MapQuestions extends Component { // is class necessary?
+class MapQuestions extends Component {
+  componentDidMount () {
+    this.props.fetchQuestions() // whatever the url is here
+  }
+
   render() {
     const sortedQuestions = this.props.questions.sort((q1, q2) => q1.id - q2.id)
 
@@ -36,7 +41,13 @@ class MapQuestions extends Component { // is class necessary?
 }
 
 const mapStateToProps = state => ({
-  questions: state.questions
+  questions: state.questions,
+  location: state.location
 })
 
-export default connect(mapStateToProps, mapoDispatchToProps)(MapQuestions)
+const mapDispatchToProps = dispatch => ({
+  fetchQuestions: url => dispatch(fetchQuestions(url))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapQuestions)

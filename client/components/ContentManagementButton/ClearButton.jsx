@@ -1,15 +1,17 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { changeQuestion } from '../../store'
+import { eraseQuestion } from '../../store'
 // import react-semantic-ui?
 
 
-const EditButton = props => {
+// clear content when adding
+const ClearButton = props => {
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.changeQuestion(props.questionId)
+    props.eraseQuestion() // maintain add view
+    // repl thunk
   }
 
   return (
@@ -19,14 +21,14 @@ const EditButton = props => {
       style={ { margin: '0 0 0.5em 0' } }
       onClick={ () => handleSubmit() }
     >
-      Edit
+      Clear
     </button>
   )
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeQuestion: question => dispatch(changeQuestion(question))
+  eraseQuestion: () => dispatch(eraseQuestion())
 })
 
 
-export default connect(null, mapDispatchToProps)(EditButton)
+export default connect(null, mapDispatchToProps)(ClearButton)

@@ -9,6 +9,7 @@ import axios from 'axios'
 const GET_QUESTION = 'GET_QUESTION'
 const CREATE_QUESTION = 'CREATE_QUESTION'
 const EDIT_QUESTION = 'EDIT_QUESTION'
+const CLEAR_QUESTION = 'CLEAR_QUESTION'
 
 /**
  * ACTION CREATORS
@@ -16,6 +17,7 @@ const EDIT_QUESTION = 'EDIT_QUESTION'
 const getQuestion = question => ({ type: GET_QUESTION, question })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
 const editQuestion = question => ({ type: EDIT_QUESTION, question })
+const clearQuestion = () => ({ type: CLEAR_QUESTION })
 
 /**
  * THUNK CREATORS
@@ -38,7 +40,7 @@ export const changeQuestion = question =>
       .then(res => dispatch(editQuestion(res.data)))
       .catch(err => console.log(err)) }
 
-// find next question, switch the state to the next, delete previous
+// find next question, delete previous, switch the state to the next
 export const removeQuestion = question =>
   dispatch =>
     axios.get('/api/questions/')
@@ -55,6 +57,11 @@ export const removeQuestion = question =>
       })
       .catch(err => console.log(err))
 
+export const eraseQuestion = () =>
+  dispatch => {
+      dispatch(clearQuestion())
+      .catch(err => console.log(err)) }
+
 /**
  * REDUCER
  */
@@ -66,6 +73,7 @@ export default (state = {}, action) => {
     case EDIT_QUESTION:
       return action.question
 
+    case CLEAR_QUESTION:
     default:
       return state
   }
