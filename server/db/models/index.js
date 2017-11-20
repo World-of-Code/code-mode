@@ -5,8 +5,8 @@ const Input = require('./input')
 
 // associations
 
-
 module.exports = {
   User,
-  Input
+  Input,
+
 }

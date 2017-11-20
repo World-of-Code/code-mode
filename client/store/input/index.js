@@ -8,12 +8,13 @@ import history from '../../history'
  * ACTION TYPES
  */
 const GET_INPUT = 'GET_INPUT'
+const POST_INPUT = 'POST_INPUT'
 
 /**
  * ACTION CREATORS
  */
 const getInput = input => ({ type: GET_INPUT, input })
-
+const postNewInput = newInput => ({ type: POST_INPUT, newInput})
 /**
  * THUNK CREATORS
  */
@@ -22,6 +23,10 @@ export const fetchInput = () =>
     .then(res => dispatch(getInput(res.data)))
     .catch(err => console.log('Error getting input', err))
 
+export const postInput = input => 
+  dispatch => axios.post('/api/input', input)
+    .then(res => dispatch(postNewInput(res.data)))
+    .catch(err => console.log('Error getting input', err))
     /**
  * REDUCER
  */
@@ -30,6 +35,9 @@ export default function (state = [], action) {
 
     case GET_INPUT:
       return action.input
+  
+    case POST_INPUT: 
+      return action.newInput
 
     default:
       return state
