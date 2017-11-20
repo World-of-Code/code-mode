@@ -7,14 +7,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import user from './user'
 import input from './input'
-
-const reducer = combineReducers({ user, input })
 import question from './question'
 import questions from './questions'
 import location from './location'
 
 
 const reducer = combineReducers({
+  input,
   user,
   question,
   questions,

@@ -14,7 +14,7 @@ const POST_INPUT = 'POST_INPUT'
  * ACTION CREATORS
  */
 const getInput = input => ({ type: GET_INPUT, input })
-const postNewInput = newInput => ({ type: POST_INPUT, newInput})
+const postNewInput = input => ({ type: POST_INPUT, input})
 /**
  * THUNK CREATORS
  */
@@ -34,10 +34,8 @@ export default function (state = [], action) {
   switch (action.type) {
 
     case GET_INPUT:
-      return action.input
-  
     case POST_INPUT: 
-      return action.newInput
+      return action.input
 
     default:
       return state
