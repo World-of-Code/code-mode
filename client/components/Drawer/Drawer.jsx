@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import style from '../../../public/style/drawer.scss';
+import theme from '../../../public/style/drawer.scss';
 import animate from '../../../public/style/animate.css';
 
 class Drawer extends Component {
@@ -10,28 +10,6 @@ class Drawer extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
     this.onAnimationEnded = this.onAnimationEnded.bind(this);
-  }
-
-  componentWillMount() {
-    this.state = {
-      open: this.props.open,
-      hiddenOverlay: true,
-      hiddenDrawer: true
-    };
-  }
-
-  componentDidMount() {
-    this.drawer.addEventListener('webkitAnimationEnd', this.onAnimationEnded);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.open !== this.state.open) {
-      nextProps.open ? this.openDrawer() : this.closeDrawer();
-    }
-  }
-
-  componentWillUnmount() {
-    this.drawer.removeEventListener('webkitAnimationEnd', this.onAnimationEnded);
   }
 
   onAnimationEnded() {
@@ -43,23 +21,61 @@ class Drawer extends Component {
     }
   }
 
-  getOverlayClassName(style, animate) {
+  componentWillMount() {
+    this.setState({
+      open: this.props.open,
+      hiddenOverlay: true,
+      hiddenDrawer: true
+    });
+  }
+
+  closeDrawer() {
+    this.setState({
+      open: false
+    });
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
+  }
+  openDrawer() {
+    this.setState({
+      hiddenOverlay: false,
+      hiddenDrawer: false,
+      open: true
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.open != this.state.open) {
+      nextProps.open ? this.openDrawer() : this.closeDrawer();
+    }
+  }
+
+  componentDidMount() {
+    this.drawer.addEventListener('webkitAnimationEnd', this.onAnimationEnded);
+  }
+
+  componentWillUnmount() {
+    this.drawer.removeEventListener('webkitAnimationEnd', this.onAnimationEnded);
+  }
+
+  getOverlayClassName(theme, animate) {
     return classNames(
-      'drawer-overlay',
-      style.overlay,
+      'react-drawer-overlay',
+      theme.overlay,
       animate.animated,
       {
         [`${animate.fadeIn}`]: this.state.open,
         [`${animate.fadeOut}`]: !this.state.open,
-        [`${style.hidden}`]: this.state.hiddenOverlay
+        [`${theme.hidden}`]: this.state.hiddenOverlay
       }
     );
   }
 
-  getDrawerClassName(style, animate) {
+  getDrawerClassName(theme, animate) {
     const position = this.props.position || 'right';
     const themeAttr = `drawer-${position}`;
-    const drawerTheme = style[themeAttr];
+    const drawerTheme = theme[themeAttr];
     let direction, start;
     if (this.state.open) {
       direction = 'In';
@@ -88,48 +104,33 @@ class Drawer extends Component {
     }
     const fade = animate[`fade${direction}${start}`];
     return classNames(
-      'drawer-drawer',
-      style.drawer,
+      'react-drawer-drawer',
+      theme.drawer,
       drawerTheme,
       animate.animated,
       fade,
       {
-        [`${style.hidden}`]: this.state.hiddenDrawer
+        [`${theme.hidden}`]: this.state.hiddenDrawer
       }
     );
   }
 
-  openDrawer() {
-    this.setState({
-      hiddenOverlay: false,
-      hiddenDrawer: false,
-      open: true
-    });
-  }
-
-  closeDrawer() {
-    this.setState({
-      open: false
-    });
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  }
-
   render() {
-    const overlayClass = this.getOverlayClassName(style, animate);
-    const drawerClass = this.getDrawerClassName(style, animate);
+    const overlayClass = this.getOverlayClassName(theme, animate);
+    const drawerClass = this.getDrawerClassName(theme, animate);
+
+    console.log('some propies', this.props)
 
     return (
       <div>
         {!this.props.noOverlay ? <div
-          ref={(c) => this.overlay = c}
+          ref={elem => this.overlay = elem}
           className={overlayClass}
           onClick={this.closeDrawer}>
         </div> : null}
         <div
           className={drawerClass}
-          ref={(c) => this.drawer = c}>
+          ref={elem => this.drawer = elem}>
           {this.props.children}
         </div>
       </div>
@@ -145,9 +146,4 @@ Drawer.propTypes = {
   noOverlay: PropTypes.bool
 };
 
-// Drawer.defaultProps = {
-//   open: false, // default status of the drawer
-//   transform: 0 // 0: inital close, 1: from open to close, 2: from close to open
-// };
-
-export default Drawer;
+export default Drawer
