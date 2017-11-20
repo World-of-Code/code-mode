@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import style from '../../../public/styles/drawer.scss';
-import animate from '../../../public/styles/animate.css';
+import style from '../../../public/style/drawer.scss';
+import animate from '../../../public/style/animate.css';
 
 class Drawer extends Component {
   constructor(props) {
