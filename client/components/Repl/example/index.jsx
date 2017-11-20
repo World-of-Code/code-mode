@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchInput, postInput } from '../../../store'
 import AceEditor from '../src/ace.js';
+=======
+import { render } from 'react-dom';
+import AceEditor from '../src/ace.jsx';
+>>>>>>> master
 import 'brace/mode/jsx';
 
 const languages = [
