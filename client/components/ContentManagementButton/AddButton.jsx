@@ -5,7 +5,7 @@ import React from 'react'
 
 const AddButton = props => (
   <div>
-    {/* non content-creator user send a suggested question */}
+    {/* Sets state to add question */}
   </div>
 )
 

@@ -9,7 +9,6 @@ import axios from 'axios'
 const GET_QUESTION = 'GET_QUESTION'
 const CREATE_QUESTION = 'CREATE_QUESTION'
 const EDIT_QUESTION = 'EDIT_QUESTION'
-const DELETE_QUESTION = 'DELETE_QUESTION'
 
 /**
  * ACTION CREATORS
@@ -17,7 +16,6 @@ const DELETE_QUESTION = 'DELETE_QUESTION'
 const getQuestion = question => ({ type: GET_QUESTION, question })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
 const editQuestion = question => ({ type: EDIT_QUESTION, question })
-const deleteQuestion = question => ({ type: DELETE_QUESTION, question })
 
 /**
  * THUNK CREATORS
@@ -40,10 +38,21 @@ export const changeQuestion = question =>
       .then(res => dispatch(editQuestion(res.data)))
       .catch(err => console.log(err)) }
 
-export const removeQuestion = questionId =>
+// find next question, switch the state to the next, delete previous
+export const removeQuestion = question =>
   dispatch =>
-    axios.delete(`/api/questions/${questionId}`)
-      .then(res => dispatch(deleteQuestion(res.data)))
+    axios.get('/api/questions/')
+      .then(questions => {
+        const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
+        const questionIndex = sortedQuestions[sortedQuestions.indexOf(question.id)]
+        return sortedQuestions[questionIndex + 1]
+             ? sortedQuestions[questionIndex + 1]
+             : sortedQuestions[questionIndex - 1]
+      })
+      .then(nextQuestionId => {
+        axios.delete(`/api/questions/${question.id}`)
+        return nextQuestionId ? fetchQuestion(nextQuestionId) : null
+      })
       .catch(err => console.log(err))
 
 /**
@@ -57,7 +66,6 @@ export default (state = {}, action) => {
     case EDIT_QUESTION:
       return action.question
 
-    case DELETE_QUESTION:
     default:
       return state
   }
