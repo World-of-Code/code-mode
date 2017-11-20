@@ -5,7 +5,7 @@ const isDev = process.env.NODE_ENV === 'development'
 const path = require('path')
 
 module.exports = {
-  entry: './client/index.js',
+  entry: './client/index.jsx',
   output: {
     path: __dirname,
     filename: './public/bundle.js'
