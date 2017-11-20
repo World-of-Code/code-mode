@@ -6,12 +6,14 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import user from './user'
+import input from './input'
 import question from './question'
 import questions from './questions'
 import location from './location'
 
 
 const reducer = combineReducers({
+  input,
   user,
   question,
   questions,
@@ -28,6 +30,7 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
+export * from './input'
 export * from './question'
 export * from './questions'
 export * from './location'
