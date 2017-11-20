@@ -2,14 +2,14 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeQuestion } from '../../store'
+import { changeQuestion } from '../../store'
 // import react-semantic-ui?
 
 
-const DeleteButton = props => {
+const EditButton = props => {
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.removeQuestion(props.questionId)
+    props.changeQuestion(props.questionId)
   }
 
   return (
@@ -19,14 +19,14 @@ const DeleteButton = props => {
       style={ { margin: '0 0 0.5em 0' } }
       onClick={ () => handleSubmit() }
     >
-      Delete
+      Edit
     </button>
   )
 }
 
 const mapDispatchToProps = dispatch => ({
-  removeQuestion: question => dispatch(removeQuestion(question))
+  changeQuestion: question => dispatch(changeQuestion(question))
 })
 
 
-export default connect(null, mapDispatchToProps)(DeleteButton)
+export default connect(null, mapDispatchToProps)(EditButton)
