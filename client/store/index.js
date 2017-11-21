@@ -8,12 +8,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import question from './question'
 import questions from './questions'
+import input from './input'
 
 
 const reducer = combineReducers({
   user,
   question,
-  questions
+  questions,
+  input
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -28,3 +30,4 @@ export default store
 export * from './user'
 export * from './questions'
 export * from './question'
+export * from './input'

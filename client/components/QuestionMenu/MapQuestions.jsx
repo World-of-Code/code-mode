@@ -11,9 +11,10 @@ class MapQuestions extends Component {
   constructor(props) {
     super(props)
   }
-  componentDidMount () {
-    this.props.fetchQuestions(this.props.location[0]) // whatever the url is here
-  }
+  // necessary? 
+  // componentDidMount () {
+  //   this.props.fetchQuestions(this.props.location[0]) // whatever the url is here
+  // }
 
   render() {
     const sortedQuestions = this.props.questions.sort((q1, q2) => q1.id - q2.id)
@@ -57,5 +58,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapQuestions)
 
-//
 
