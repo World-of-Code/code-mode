@@ -12,11 +12,6 @@ export default class Drawer extends Component {
       position: 'right',
       noOverlay: false
     };
-    this.toggleDrawer = this.toggleDrawer.bind(this);
-    this.closeDrawer = this.closeDrawer.bind(this);
-    this.onDrawerClose = this.onDrawerClose.bind(this);
-    this.setPosition = this.setPosition.bind(this);
-    this.setNoOverlay = this.setNoOverlay.bind(this);
   }
   setPosition(e) {
     this.setState({ position: e.target.value });
