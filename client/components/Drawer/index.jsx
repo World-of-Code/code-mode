@@ -1,72 +1,84 @@
-import React, {Component} from 'react';
-import ReactDrawer from 'react-drawer';
+import Drawer from 'rc-drawer';
+import React, { Component } from 'react';
+import '../../../public/style/drawer.less';
+import ReactDOM from 'react-dom';
 
-/* if you using webpack, should not apply identity to this css */
-// import 'react-drawer/lib/react-drawer.css';
-
-export default class Drawer extends Component {
+class DrawerWrapper extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      docked: false,
       open: false,
-      position: 'right',
-      noOverlay: false
+      transitions: true,
+      touch: true,
+      enableDragHandle: true,
+      position: 'bottom',
+      dragToggleDistance: 100,
     };
   }
-  setPosition(e) {
-    this.setState({ position: e.target.value });
+  onOpenChange = (open) => {
+    console.log('onOpenChange', open);
+    this.setState({ open });
   }
-  setNoOverlay(e) {
-    this.setState({ noOverlay: e.target.checked });
-  }
-  toggleDrawer() {
-    this.setState({ open: !this.state.open });
-  }
-  closeDrawer() {
-    this.setState({ open: false });
-  }
-  onDrawerClose() {
-    this.setState({ open: false });
+  onDock = () => {
+    const docked = !this.state.docked;
+    this.setState({
+      docked,
+    });
+    if (!docked) {
+      this.onOpenChange(false);
+    }
   }
   render() {
-    return (
+    const drawer = (
       <div>
-        <div style={{ margin: 200 }}>
-          <h1>React Drawer configuration</h1>
-          <div style={{ margin: 20 }}>
-            <label>Position</label>
-            <select value={this.state.position} onChange={this.setPosition}>
-              <option value="top">top</option>
-              <option value="bottom">bottom</option>
-              <option value="left">left</option>
-              <option value="right">right</option>
-            </select>
-          </div>
-          <div style={{ margin: 20 }}>
-            <input type="checkbox"
-              checked={this.state.noOverlay}
-              onChange={this.setNoOverlay}
-            />
-            <label>No overlay</label>
-            <small>(The overlay lets you close the drawer on click)</small>
-          </div>
-          <button
-            style={{ margin: 20 }}
-            onClick={this.toggleDrawer}
-            disabled={this.state.open && !this.state.noOverlay}
-          >
-            {!this.state.open ? <span>show drawer</span> : <span>close drawer</span>}
+        <h3>
+          CodeMode Drawer
+          <button onClick={this.onDock}>
+            {this.state.docked ? 'unpin' : 'pin'}
           </button>
-        </div>
-        <ReactDrawer
-          open={this.state.open}
-          position={this.state.position}
-          onClose={this.onDrawerClose}
-          noOverlay={this.state.noOverlay}>
-          <i onClick={this.closeDrawer} className="icono-cross"></i>
-          <h2>What a nice drawer !</h2>
-        </ReactDrawer>
+        </h3>
+        <p>this is where the repl will go!</p>
+      </div>
+    );
+
+    const drawerProps = {
+      docked: this.state.docked,
+      open: this.state.open,
+      touch: this.state.touch,
+      enableDragHandle: this.state.enableDragHandle,
+      position: this.state.position,
+      dragToggleDistance: this.state.dragToggleDistance,
+      transitions: this.state.transitions,
+      onOpenChange: this.onOpenChange,
+    };
+
+    return (
+      <div className="drawer-container">
+        <Drawer
+          sidebar={drawer} {...drawerProps}
+          style={{ overflow: 'auto' }}>
+          <div className="main">
+            <button onClick={() => { this.setState({ open: !this.state.open }); }}>
+              switch-open
+            </button>
+            <p>
+              {['left', 'right', 'top', 'bottom'].map((i, index) => (<span
+                key={index} style={{ marginRight: 10 }}
+              >
+                <input type="radio" value={i} id={`pos-${index}`}
+                  checked={this.state.position === i}
+                  onChange={elem => { this.setState({ position: elem.target.value }); }}
+                /> <label htmlFor={`pos-${index}`}>{i}</label>
+              </span>))}
+            </p>
+          </div>
+        </Drawer>
       </div>
     );
   }
 }
+
+
+export default DrawerWrapper;
