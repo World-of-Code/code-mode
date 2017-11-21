@@ -3,9 +3,9 @@
 import React from 'react'
 import App from './example'
 
-const Repl = () => (
+const Repl = (props) => (
   <div>
-    <App />
+    <App question={props.question} boilerplate={props.boilerplate} />
   </div>
 )
 export default Repl

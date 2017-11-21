@@ -6,16 +6,15 @@ const Location = require('./location')
 const Question = require('./question')
 
 
-Location.belongsTo(User)
-User.hasMany(Location)
+// Location.belongsTo(User)
+// User.hasMany(Location)
 
-Location.hasMany(Question, { as: 'Challenges' })
+Location.hasMany(Question)
 Question.belongsTo(Location)
 
 module.exports = {
   User,
   Input,
-
   Location,
   Question
 }
