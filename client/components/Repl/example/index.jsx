@@ -101,6 +101,7 @@ class AppClass extends Component {
   
   constructor(props) {
     super(props);
+    // Maybe useful for later 
     // const defaultValue = props.questions && 
     //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
     // const defaultValue = 
@@ -134,9 +135,12 @@ class AppClass extends Component {
   }
   handleClick(event){
     event.preventDefault()
-    let value = this.state.value
-    this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
+    if (this.state.value.includes('console.log')) {
+      let newValue = this.state.value.replace(/console.log/g, 'return')
+      let value = newValue
+      this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
   }
+}
   handlePopulate(event){
     event.preventDefault()
     this.setState({
@@ -234,7 +238,7 @@ const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppClass))
 export default App
 
 
-
+// Potentially useful for later styling
 
 // `<AceEditor
 // mode="${this.state.mode}"
