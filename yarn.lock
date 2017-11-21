@@ -4618,7 +4618,7 @@ passport-oauth1@1.x.x:
     passport-strategy "1.x.x"
     utils-merge "1.x.x"
 
-passport-oauth2@1.x.x:
+passport-oauth2@1.4.0, passport-oauth2@1.x.x:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/passport-oauth2/-/passport-oauth2-1.4.0.tgz#f62f81583cbe12609be7ce6f160b9395a27b86ad"
   dependencies:
@@ -4630,6 +4630,12 @@ passport-oauth2@1.x.x:
 passport-strategy@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
+
+passport-youtube-v3@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/passport-youtube-v3/-/passport-youtube-v3-2.1.0.tgz#b08976d255b8e6d5e2e0d8b15500b212462c7e50"
+  dependencies:
+    passport-oauth2 "1.4.0"
 
 passport@^0.3.2:
   version "0.3.2"
