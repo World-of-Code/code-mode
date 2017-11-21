@@ -1,13 +1,12 @@
-import Drawer from 'rc-drawer';
-import React, { Component } from 'react';
-import '../../../public/style/drawer.less';
-import ReactDOM from 'react-dom';
+import Drawer from 'rc-drawer'
+import React, { Component } from 'react'
+import '../../../public/style/drawer.less'
+import ReactDOM from 'react-dom'
 import DrawerContents from '../DrawerContents'
 
 class DrawerWrapper extends Component {
   constructor(props) {
-    super(props);
-
+    super(props)
     this.state = {
       docked: false,
       open: false,
@@ -16,21 +15,23 @@ class DrawerWrapper extends Component {
       enableDragHandle: true,
       position: 'bottom',
       dragToggleDistance: 100,
-    };
-  }
-  onOpenChange = (open) => {
-    console.log('onOpenChange', open);
-    this.setState({ open });
-  }
-  onDock = () => {
-    const docked = !this.state.docked;
-    this.setState({
-      docked,
-    });
-    if (!docked) {
-      this.onOpenChange(false);
     }
   }
+
+  onOpenChange = open => {
+    this.setState({ open })
+  }
+
+  onDock = () => {
+    const docked = !this.state.docked
+    this.setState({
+      docked,
+    })
+    if (!docked) {
+      this.onOpenChange(false)
+    }
+  }
+
   render() {
     const drawer = (
       <div>
@@ -42,8 +43,8 @@ class DrawerWrapper extends Component {
         </h3>
         <DrawerContents />
       </div>
-    );
-    //<p>this is where the repl will go!</p>
+    )
+
     const drawerProps = {
       docked: this.state.docked,
       open: this.state.open,
@@ -53,7 +54,7 @@ class DrawerWrapper extends Component {
       dragToggleDistance: this.state.dragToggleDistance,
       transitions: this.state.transitions,
       onOpenChange: this.onOpenChange,
-    };
+    }
 
     return (
       <div className="drawer-container">
@@ -61,10 +62,10 @@ class DrawerWrapper extends Component {
           sidebar={drawer} {...drawerProps}
           style={{ overflow: 'auto' }}>
           <div className="main">
-            <button onClick={() => { this.setState({ open: !this.state.open }); }}>
+            <button onClick={() => { this.setState({ open: !this.state.open }) }}>
               switch-open
             </button>
-            <button onClick={() => { this.setState({ open: this.state.open }); }}>
+            <button onClick={() => { this.setState({ open: this.state.open }) }}>
               switch-closed
             </button>
             <p>
@@ -73,16 +74,16 @@ class DrawerWrapper extends Component {
               >
                 <input type="radio" value={i} id={`pos-${index}`}
                   checked={this.state.position === i}
-                  onChange={elem => { this.setState({ position: elem.target.value }); }}
+                  onChange={elem => { this.setState({ position: elem.target.value }) }}
                 /> <label htmlFor={`pos-${index}`}>{i}</label>
               </span>))}
             </p>
           </div>
         </Drawer>
       </div>
-    );
+    )
   }
 }
 
 
-export default DrawerWrapper;
+export default DrawerWrapper

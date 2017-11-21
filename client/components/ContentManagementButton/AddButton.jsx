@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-// import react-semantic-ui?
+// import { button } from 'semantic-ui-react'
 
 
 // render add view
