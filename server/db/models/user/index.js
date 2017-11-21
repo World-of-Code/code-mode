@@ -13,7 +13,7 @@ const User = db.define('user', {
   },
   password: Sequelize.STRING,
   salt: Sequelize.STRING,
-  googleId: Sequelize.STRING
+  youtubeId: Sequelize.STRING
 })
 
 

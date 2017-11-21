@@ -12,13 +12,13 @@ const Main = props => {
 
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>CodeMode</h1>
       <nav>
         {
           isLoggedIn
             ? <div>
                 <Link to="/home">Home</Link>
-                <a href="#" onClick={ handleClick }>Logout</a>
+                <a href="/logout" onClick={ handleClick }>Logout</a>
               </div>
             : <div>
                 <Link to="/login">Login</Link>
