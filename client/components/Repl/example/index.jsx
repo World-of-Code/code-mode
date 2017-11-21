@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchInput, postInput } from '../../../store'
+import { fetchInput, postInput, fetchQuestions } from '../../../store'
 import { render } from 'react-dom';
 import AceEditor from '../src/ace.jsx';
 import 'brace/mode/jsx';
@@ -101,15 +101,16 @@ class AppClass extends Component {
   
   constructor(props) {
     super(props);
-    
-    const defaultValue = ''
+    // Maybe useful for later 
+    // const defaultValue = props.questions && 
+    //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
     // const defaultValue = 
     // `function onLoad(editor) {
     //   console.log(\"i\'ve loaded\");
     // }`;
     //const inputValue = props.input[0] ? props.input[0].text : ''
     this.state = {
-      value: defaultValue,
+      value: '',
       theme: 'monokai',
       mode: 'javascript',
       enableBasicAutocompletion: false,
@@ -134,9 +135,12 @@ class AppClass extends Component {
   }
   handleClick(event){
     event.preventDefault()
-    let value = this.state.value
-    this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
+    if (this.state.value.includes('console.log')) {
+      let newValue = this.state.value.replace(/console.log/g, 'return')
+      let value = newValue
+      this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
   }
+}
   handlePopulate(event){
     event.preventDefault()
     this.setState({
@@ -155,106 +159,15 @@ class AppClass extends Component {
   }
   componentDidMount () {
     this.props.handleInputFetch()
+    this.props.getQuestions()
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
   }
   render() {
     return (
       <div className="columns">
-        <div className="column">
-           <div className="field">
-             <label>
-               Mode:
-             </label>
-               <p className="control">
-                 <span className="select">
-                   <select name="mode" onChange={this.setMode} value={this.state.mode}>
-                     {languages.map((lang) => <option  key={lang} value={lang}>{lang}</option>)}
-                   </select>
-                  </span>
-               </p>
-           </div>
-
-           <div className="field">
-             <label>
-               Theme:
-             </label>
-               <p className="control">
-                 <span  className="select">
-                   <select name="Theme" onChange={this.setTheme} value={this.state.theme}>
-                    {themes.map((lang) => <option key={lang} value={lang}>{lang}</option>)}
-                   </select></span>
-               </p>
-           </div>
-
-           <div className="field">
-             <label>
-               Font Size:
-             </label>
-               <p className="control">
-                 <span  className="select">
-                   <select name="Font Size" onChange={this.setFontSize} value={this.state.fontSize}>
-                    {[14,16,18,20,24,28,32,40].map((lang) => <option  key={lang} value={lang}>{lang}</option>)}
-                   </select></span>
-               </p>
-           </div>
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.enableBasicAutocompletion} onChange={(e) => this.setBoolean('enableBasicAutocompletion', e.target.checked)} />
-                 Enable Basic Autocomplete
-              </label>
-            </p>
-          </div>
-           <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.enableLiveAutocompletion} onChange={(e) => this.setBoolean('enableLiveAutocompletion', e.target.checked)} />
-                 Enable Live Autocomplete
-              </label>
-            </p>
-          </div>
-           <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.showGutter} onChange={(e) => this.setBoolean('showGutter', e.target.checked)} />
-                 Show Gutter
-              </label>
-            </p>
-          </div>
-           <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.showPrintMargin} onChange={(e) => this.setBoolean('showPrintMargin', e.target.checked)} />
-                 Show Print Margin
-              </label>
-            </p>
-          </div>
-           <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.highlightActiveLine} onChange={(e) => this.setBoolean('highlightActiveLine', e.target.checked)} />
-                 Highlight Active Line
-              </label>
-            </p>
-          </div>
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.enableSnippets} onChange={(e) => this.setBoolean('enableSnippets', e.target.checked)} />
-                 Enable Snippets
-              </label>
-            </p>
-          </div>
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input type="checkbox" checked={this.state.showLineNumbers} onChange={(e) => this.setBoolean('showLineNumbers', e.target.checked)} />
-                 Show Line Numbers
-              </label>
-            </p>
-          </div>
-
-
-      </div>
+ 
         <div className="examples column">
           <button onClick={this.handleClick}>Run</button>
           <button onClick={this.handlePopulate}>Populate</button>
@@ -268,7 +181,7 @@ class AppClass extends Component {
           onLoad={this.onLoad}
           onChange={this.onChange}
           onSelectionChange={this.onSelectionChange}
-          //onCursorChange={this.onCursorChange}
+          onCursorChange={this.onCursorChange}
           onValidate={this.onValidate}
           value={this.state.value}
           fontSize={this.state.fontSize}
@@ -307,7 +220,8 @@ class AppClass extends Component {
 }
 
 const mapStateToProps = state => ({
-  input: state.input
+  input: state.input,
+  questions: state.questions
 })
 const mapDispatchToProps = dispatch => ({
   handleInputFetch () {
@@ -315,13 +229,16 @@ const mapDispatchToProps = dispatch => ({
   }, 
   saveInput (text) {
     dispatch(postInput({text}))
+  },
+  getQuestions () {
+    dispatch(fetchQuestions())
   }
 })
 const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppClass))
 export default App
 
 
-
+// Potentially useful for later styling
 
 // `<AceEditor
 // mode="${this.state.mode}"
@@ -343,6 +260,103 @@ export default App
 // }}/>
 //           `
 
+
+// <div className="column">
+// <div className="field">
+//   <label>
+//     Mode:
+//   </label>
+//     <p className="control">
+//       <span className="select">
+//         <select name="mode" onChange={this.setMode} value={this.state.mode}>
+//           {languages.map((lang) => <option  key={lang} value={lang}>{lang}</option>)}
+//         </select>
+//        </span>
+//     </p>
+// </div>
+
+// <div className="field">
+//   <label>
+//     Theme:
+//   </label>
+//     <p className="control">
+//       <span  className="select">
+//         <select name="Theme" onChange={this.setTheme} value={this.state.theme}>
+//          {themes.map((lang) => <option key={lang} value={lang}>{lang}</option>)}
+//         </select></span>
+//     </p>
+// </div>
+
+// <div className="field">
+//   <label>
+//     Font Size:
+//   </label>
+//     <p className="control">
+//       <span  className="select">
+//         <select name="Font Size" onChange={this.setFontSize} value={this.state.fontSize}>
+//          {[14,16,18,20,24,28,32,40].map((lang) => <option  key={lang} value={lang}>{lang}</option>)}
+//         </select></span>
+//     </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.enableBasicAutocompletion} onChange={(e) => this.setBoolean('enableBasicAutocompletion', e.target.checked)} />
+//       Enable Basic Autocomplete
+//    </label>
+//  </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.enableLiveAutocompletion} onChange={(e) => this.setBoolean('enableLiveAutocompletion', e.target.checked)} />
+//       Enable Live Autocomplete
+//    </label>
+//  </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.showGutter} onChange={(e) => this.setBoolean('showGutter', e.target.checked)} />
+//       Show Gutter
+//    </label>
+//  </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.showPrintMargin} onChange={(e) => this.setBoolean('showPrintMargin', e.target.checked)} />
+//       Show Print Margin
+//    </label>
+//  </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.highlightActiveLine} onChange={(e) => this.setBoolean('highlightActiveLine', e.target.checked)} />
+//       Highlight Active Line
+//    </label>
+//  </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.enableSnippets} onChange={(e) => this.setBoolean('enableSnippets', e.target.checked)} />
+//       Enable Snippets
+//    </label>
+//  </p>
+// </div>
+// <div className="field">
+//  <p className="control">
+//    <label className="checkbox">
+//      <input type="checkbox" checked={this.state.showLineNumbers} onChange={(e) => this.setBoolean('showLineNumbers', e.target.checked)} />
+//       Show Line Numbers
+//    </label>
+//  </p>
+// </div>
+
+
+// </div>
 
 
 

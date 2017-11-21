@@ -19,7 +19,7 @@ export const getQuestions = questions => ({ type: GET_QUESTIONS, questions })
 export const fetchQuestions = url =>
   dispatch =>
     axios.get('/api/questions/', url)
-      .then(res => dispatch(getQuestions(res.data)))
+      .then(res => dispatch(getQuestions(res.data.filter(question => question.url === url))))
       .catch(err => console.log(err))
 
 /**

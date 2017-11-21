@@ -4,12 +4,17 @@ import React from 'react'
 import MapQuestions from './MapQuestions'
 
 
-const QuestionMenu = props => (
-  <div>
-    {/* container for mapped questions */}
-    <MapQuestions />
-  </div>
-)
+const QuestionMenu = props => {
+  return (
+    <div>
+    <MapQuestions handleClick={props.handleClick} />
+    </div>
+  )
+}
 
 
 export default QuestionMenu
+
+  
+  
+    
