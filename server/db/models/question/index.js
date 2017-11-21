@@ -13,8 +13,8 @@ const Question = db.define('question', {
   answer: {
     type: Sequelize.TEXT,
     allowNull: false
-  }
+  },
+  boilerplate: Sequelize.TEXT
 })
-
 
 module.exports = Question

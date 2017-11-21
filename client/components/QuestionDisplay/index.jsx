@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReadQuestion from './ReadQuestion'
+import QuestionForm from './QuestionForm'
 import { fetchQuestion, makeQuestion, changeQuestion } from '../../store'
 
 
@@ -12,9 +13,10 @@ class QuestionDisplay extends Component {
     super(props)
   }
 
-  componentDidMount () {
-    this.props.fetchQuestion(this.props.question.id)
-  }
+  // componentDidMount () {
+  //   this.props.fetchQuestion(this.props.question.id)
+    
+  // }
 
   render () {
     return (
@@ -23,18 +25,18 @@ class QuestionDisplay extends Component {
 
         {/* Read Question */}
         <ReadQuestion
-          question={ props.question }
+          question={ this.props.question }
         />
 
         {/* Add Question */}
         <QuestionForm
-          action={ props.makeQuestion }
+          action={ this.props.makeQuestion }
         />
 
         {/* Edit Question */}
         <QuestionForm
-          question={ props.question }
-          action={ changeQuestion }
+          question={ this.props.question }
+          action={ this.props.changeQuestion }
         />
 
       </div>
@@ -43,9 +45,9 @@ class QuestionDisplay extends Component {
 
 }
 
-const mapStateToProps = state => ({
-  question: state.question
-})
+// const mapStateToProps = state => ({
+//   question: state.question
+// })
 
 const mapDispatchToProps = dispatch => ({
   fetchQuestion: id => dispatch(fetchQuestion(id)),
@@ -54,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionDisplay)
+export default connect(null, mapDispatchToProps)(QuestionDisplay)
