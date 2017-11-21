@@ -153,12 +153,6 @@ class AppClass extends Component {
       value: ''
     })
   }
-  // handleQuestion1(event){
-  //   event.preventDefault()
-  //   this.setState({
-
-  //   })
-  // }
   componentDidMount () {
     this.props.handleInputFetch()
     this.props.getQuestions()

@@ -13,11 +13,6 @@ class QuestionDisplay extends Component {
     super(props)
   }
 
-  // componentDidMount () {
-  //   this.props.fetchQuestion(this.props.question.id)
-    
-  // }
-
   render () {
     return (
       <div>
@@ -45,9 +40,6 @@ class QuestionDisplay extends Component {
 
 }
 
-// const mapStateToProps = state => ({
-//   question: state.question
-// })
 
 const mapDispatchToProps = dispatch => ({
   fetchQuestion: id => dispatch(fetchQuestion(id)),
