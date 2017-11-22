@@ -1,6 +1,5 @@
 import Drawer from 'rc-drawer';
 import React, { Component } from 'react';
-import '../../../public/style/drawer.less';
 import ReactDOM from 'react-dom';
 import DrawerContents from '../DrawerContents'
 

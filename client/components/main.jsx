@@ -12,17 +12,18 @@ const Main = props => {
 
   return (
     <div>
-      <h1>CodeMode</h1>
       <nav>
         {
           isLoggedIn
             ? <div>
-                <Link to="/home">Home</Link>
+                {/* <Link to="/home">Home</Link> */}
                 <a href="/logout" onClick={ handleClick }>Logout</a>
               </div>
             : <div>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
+              <button onClick={ handleClick }>login</button>
+              <button onClick={ handleClick }>signup</button>
+                {/* <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link> */}
               </div>
         }
       </nav>
