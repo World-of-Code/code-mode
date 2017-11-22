@@ -33,6 +33,6 @@ require('./background/contextMenus')
 require('./background/inject')
 require('./background/badge')
 
-/**
- * BOILERPLATE EXTENSION CODE
- */
+// /**
+//  * BOILERPLATE EXTENSION CODE
+//  */

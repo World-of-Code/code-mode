@@ -42,6 +42,6 @@ chrome.contextMenus.onClicked.addListener((event) => {
   }
 })
 
-/**
- * BOILERPLATE EXTENSION CODE
- */
+// /**
+//  * BOILERPLATE EXTENSION CODE
+//  */

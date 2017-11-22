@@ -18,6 +18,13 @@
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "contextMenus", "management", "tabs", "storage", "https://github.com/*" ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/"],
+      //"css": ["../public/style/drawer.less"],
+      "js": ["../public/bundle.js"]
+    }
+  ],
+  "permissions": [ "contextMenus", "management", "tabs", "storage", "https://google.com/*" ],
   "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

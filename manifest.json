@@ -21,16 +21,17 @@
   "content_scripts": [
     {
       "css": [
-        "public/style/main.css"
+        "public/style/drawer.less"
       ],
       "js": [
         "public/bundle.js"
       ],
       "matches": [
-        "<all_urls>"
+        "http://*/*", "https://*/*"
       ]
     }
   ],
   "permissions": [ "contextMenus", "management", "tabs", "storage", "https://github.com/*" ],
   "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }
+

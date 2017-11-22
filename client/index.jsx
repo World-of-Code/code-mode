@@ -12,20 +12,31 @@ import '../public/style/main.css'
 import registerServiceWorker from './registerServiceWorker'
 
 // Get the element to prepend our app to. This could be any element on a specific website or even just `document.body`.
-const viewport = document.getElementById('viewport');
 
-if (viewport) viewport.prepend(document.getElementById('app'));
+const viewport = document.getElementById('viewport');
+const app = document.createElement('div')
+app.id = 'app' 
+if (viewport) viewport.prepend(app)
 
 ReactDOM.render(
   <Provider store={ store }>
-  <DrawerWrapper />
-  </Provider>,
-  document.getElementById('app')
+  <h1>hello</h1>
+</Provider>,
+document.getElementById('app')
 )
+
+
+// window.addEventListener('load', () => {
+//   const injectDOM = document.createElement('div')
+//   injectDOM.className = 'inject-react-example'
+//   injectDOM.style.textAlign = 'center'
+//   document.body.appendChild(injectDOM)
+//   render(<DrawerWrapper />, injectDOM)
+// })
 
 registerServiceWorker();
 
-// if (viewport) viewport.prepend(document.getElementById('app'));
+//if (viewport) viewport.prepend(document.getElementById('app'));
 
 
 // Create a div to render the <App /> component to.

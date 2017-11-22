@@ -135,11 +135,13 @@ class AppClass extends Component {
   }
   handleClick(event){
     event.preventDefault()
-    if (this.state.value.includes('console.log')) {
-      let newValue = this.state.value.replace(/console.log/g, 'return')
-      let value = newValue
-      this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
-  }
+    let value = this.state.value 
+    this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
+  //   if (this.state.value.includes('console.log')) {
+  //     let newValue = this.state.value.replace(/console.log/g, 'return')
+  //     let value = newValue
+  //     this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
+  // }
 }
   handlePopulate(event){
     event.preventDefault()

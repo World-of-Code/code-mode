@@ -14,6 +14,6 @@ chrome.storage.local.get('todos', obj => {
   }
 })
 
-/**
- * BOILERPLATE EXTENSION CODE
- */
+// /**
+//  * BOILERPLATE EXTENSION CODE
+//  */

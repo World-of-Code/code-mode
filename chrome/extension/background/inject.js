@@ -43,6 +43,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   loadScript('inject', tabId, () => console.log('load inject bundle success!'))
 })
 
-/**
- * BOILERPLATE EXTENSION CODE
- */
+// /**
+//  * BOILERPLATE EXTENSION CODE
+//  */

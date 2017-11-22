@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dock from 'react-dock'
-
+//import DrawerWrapper from '../../client/components/Drawer'
 class InjectApp extends Component {
   constructor(props) {
     super(props)
@@ -41,10 +41,10 @@ class InjectApp extends Component {
 
 window.addEventListener('load', () => {
   const injectDOM = document.createElement('div')
-  injectDOM.className = 'inject-react-example'
+  injectDOM.id = 'app'
   injectDOM.style.textAlign = 'center'
   document.body.appendChild(injectDOM)
-  render(<InjectApp />, injectDOM)
+  render(<h4>hello</h4>, injectDOM)
 })
 
 /**
