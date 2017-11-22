@@ -13,14 +13,14 @@ import registerServiceWorker from './registerServiceWorker'
 
 // Get the element to prepend our app to. This could be any element on a specific website or even just `document.body`.
 
-const viewport = document.getElementById('viewport');
+const body = document.body;
 const app = document.createElement('div')
-app.id = 'app' 
-if (viewport) viewport.prepend(app)
+app.id = 'app'
+if (body) body.prepend(app)
 
 ReactDOM.render(
   <Provider store={ store }>
-  <h1>hello</h1>
+    <div><h1>hello</h1><br /><h1>hello</h1><br /><h1>hello</h1><br /><h1>hello</h1><br /><h1>hello</h1></div>
 </Provider>,
 document.getElementById('app')
 )
