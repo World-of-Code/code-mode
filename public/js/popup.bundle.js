@@ -32535,6 +32535,7 @@ var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+console.log('hi ', _authForm.Login);
 _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
     { store: _store2.default },
