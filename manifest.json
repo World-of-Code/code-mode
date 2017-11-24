@@ -4,8 +4,8 @@
   "manifest_version": 2,
   "description": "turn your youtube channel into a learning platform",
   "browser_action": {
-    "default_title": "World Of Code",
-    "default_popup": "popup.html"
+    "default_popup": "/public/popup.html",
+    "default_title": "Login/Signup"
   },
   "icons": {
     "16": "chrome/assets/img/icon-16.png",
@@ -21,17 +21,17 @@
   "content_scripts": [
     {
       "css": [
-        "public/style/drawer.less"
+        "public/style/drawer.less",
+        "public/style/index.scss"
       ],
       "js": [
-        "public/bundle.js"
+        "public/js/app.bundle.js"
       ],
       "matches": [
         "http://*/*", "https://*/*"
       ]
     }
   ],
-  "permissions": [ "contextMenus", "management", "tabs", "storage", "https://github.com/*" ],
-  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+  "permissions": [ "contextMenus", "management", "tabs", "storage", "https://*/*" ],
+  "content_security_policy": "default-src 'self'; script-src 'self' http://*/* http://*/* 'unsafe-eval'; connect-src  http://*/* http://*/* ; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }
-

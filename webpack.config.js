@@ -5,12 +5,15 @@ const isDev = process.env.NODE_ENV === 'development'
 const path = require('path')
 
 module.exports = {
-  entry: './client/index.jsx',
-  output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+  entry: {
+    'app': './client/index.jsx',
+    'popup': './client/popup.jsx'
   },
-  devtool: 'eval',
+  output: {
+    path: path.join(__dirname,'./public/js'),
+    filename: '[name].bundle.js'
+  },
+  devtool: 'source-map',
   module: {
     rules: [
       {

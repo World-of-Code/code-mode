@@ -1,38 +1,38 @@
-'use strict'
+// 'use strict'
 
-const bluebird = require('bluebird')
+// const bluebird = require('bluebird')
 
 
-global.Promise = bluebird
+// global.Promise = bluebird
 
-function promisifier(method) {
-  return function promisified(...args) {
-    return new Promise((resolve) => {
-      args.push(resolve)
-      method.apply(this, args)
-    })
-  }
-}
+// function promisifier(method) {
+//   return function promisified(...args) {
+//     return new Promise((resolve) => {
+//       args.push(resolve)
+//       method.apply(this, args)
+//     })
+//   }
+// }
 
-function promisifyAll(obj, list) {
-  list.forEach(api => bluebird.promisifyAll(obj[api], { promisifier }))
-}
+// function promisifyAll(obj, list) {
+//   list.forEach(api => bluebird.promisifyAll(obj[api], { promisifier }))
+// }
 
-// let chrome extension api support Promise
-promisifyAll(chrome, [
-  'tabs',
-  'windows',
-  'browserAction',
-  'contextMenus'
-])
-promisifyAll(chrome.storage, [
-  'local',
-])
+// // let chrome extension api support Promise
+// promisifyAll(chrome, [
+//   'tabs',
+//   'windows',
+//   'browserAction',
+//   'contextMenus'
+// ])
+// promisifyAll(chrome.storage, [
+//   'local',
+// ])
 
-require('./background/contextMenus')
-require('./background/inject')
-require('./background/badge')
+// require('./background/contextMenus')
+// require('./background/inject')
+// require('./background/badge')
 
-// /**
-//  * BOILERPLATE EXTENSION CODE
-//  */
+// // /**
+// //  * BOILERPLATE EXTENSION CODE
+// //  */
