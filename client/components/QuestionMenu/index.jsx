@@ -7,14 +7,11 @@ import MapQuestions from './MapQuestions'
 const QuestionMenu = props => {
   return (
     <div>
-    <MapQuestions handleClick={props.handleClick} />
+      {/* container to format mapped questions */}
+      <MapQuestions location={ props.location } />
     </div>
   )
 }
 
 
 export default QuestionMenu
-
-  
-  
-    

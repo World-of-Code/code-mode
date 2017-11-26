@@ -1,7 +1,12 @@
 'use strict'
 
 import React from 'react'
+<<<<<<< Updated upstream
 // import { button } from 'semantic-ui-react'
+=======
+import { setMode } from '../../store'
+// import react-semantic-ui?
+>>>>>>> Stashed changes
 
 
 // render add view
@@ -23,6 +28,10 @@ const AddButton = props => {
     </button>
   )
 }
+
+mapDispatchToProps = dispatch => ({
+  setMode: () => dispatch(setMode)
+})
 
 
 export default AddButton

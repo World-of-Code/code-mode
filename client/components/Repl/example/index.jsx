@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { fetchInput, postInput, fetchQuestions } from '../../../store'
-import { render } from 'react-dom';
-import AceEditor from '../src/ace.jsx';
-import 'brace/mode/jsx';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { fetchInput, addInput } from '../../../store'
+import { render } from 'react-dom'
+import AceEditor from '../src/ace.jsx'
+import 'brace/mode/jsx'
 
 const languages = [
   'javascript',
@@ -47,8 +47,8 @@ themes.forEach((theme) => {
   require(`brace/theme/${theme}`)
 })
 /*eslint-disable no-alert, no-console */
-import 'brace/ext/language_tools';
-import 'brace/ext/searchbox';
+import 'brace/ext/language_tools'
+import 'brace/ext/searchbox'
 //import { JSDOM } from '../../../../../Library/Caches/typescript/2.6/node_modules/@types/jsdom';
 
 
@@ -65,17 +65,17 @@ class AppClass extends Component {
   }
 
   onSelectionChange(newValue, event) {
-    console.log('select-change', newValue);
-    console.log('select-change-event', event);
+    console.log('select-change', newValue)
+    console.log('select-change-event', event)
   }
 
   onCursorChange(newValue, event) {
-    console.log('cursor-change', newValue);
-    console.log('cursor-change-event', event);
+    console.log('cursor-change', newValue)
+    console.log('cursor-change-event', event)
   }
 
   onValidate(annotations) {
-    console.log('onValidate', annotations);
+    console.log('onValidate', annotations)
   }
 
   setTheme(e) {
@@ -98,13 +98,13 @@ class AppClass extends Component {
       fontSize: parseInt(e.target.value,10)
     })
   }
-  
+
   constructor(props) {
-    super(props);
-    // Maybe useful for later 
-    // const defaultValue = props.questions && 
+    super(props)
+    // Maybe useful for later
+    // const defaultValue = props.questions &&
     //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
-    // const defaultValue = 
+    // const defaultValue =
     // `function onLoad(editor) {
     //   console.log(\"i\'ve loaded\");
     // }`;
@@ -122,13 +122,13 @@ class AppClass extends Component {
       enableSnippets: false,
       showLineNumbers: true,
       result: ''
-    };
-    this.setTheme = this.setTheme.bind(this);
-    this.setMode = this.setMode.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.setFontSize = this.setFontSize.bind(this);
-    this.setBoolean = this.setBoolean.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    }
+    this.setTheme = this.setTheme.bind(this)
+    this.setMode = this.setMode.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.setFontSize = this.setFontSize.bind(this)
+    this.setBoolean = this.setBoolean.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.handlePopulate = this.handlePopulate.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleClear = this.handleClear.bind(this)
@@ -136,8 +136,8 @@ class AppClass extends Component {
   handleClick(event){
     event.preventDefault()
     let value = this.state.value
-    this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
-    // console.log code 
+    this.setState({ result: !eval(value) ? "undefined" : eval(value).toString() })
+    // console.log code
   //   if (this.state.value.includes('console.log')) {
   //     let newValue = this.state.value.replace(/console.log/g, 'return')
   //     let value = newValue
@@ -162,22 +162,22 @@ class AppClass extends Component {
   }
   componentDidMount () {
     this.props.handleInputFetch()
-    this.props.getQuestions()
+    this.props.getQuestion()
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
+    if (this.props.question && this.props.question.boilerplate !== nextProps.question.boilerplate) this.setState({ value: nextProps.question.boilerplate })
   }
   render() {
     return (
       <div className="columns">
- 
+
         <div className="examples column">
           <button onClick={this.handleClick}>Run</button>
           <button onClick={this.handlePopulate}>Populate</button>
           <button onClick={this.handleSave}>Save</button>
           <button onClick={this.handleClear}>Clear</button>
           <h2>Editor</h2>
-          <AceEditor 
+          <AceEditor
           mode={this.state.mode}
           theme={this.state.theme}
           name="blah2"
@@ -224,17 +224,14 @@ class AppClass extends Component {
 
 const mapStateToProps = state => ({
   input: state.input,
-  questions: state.questions
+  question: state.question
 })
 const mapDispatchToProps = dispatch => ({
   handleInputFetch () {
     dispatch(fetchInput())
-  }, 
-  saveInput (text) {
-    dispatch(postInput({text}))
   },
-  getQuestions () {
-    dispatch(fetchQuestions())
+  saveInput (text) {
+    dispatch(addInput({text}))
   }
 })
 const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppClass))
@@ -469,7 +466,7 @@ export default App
 //       fontSize: parseInt(e.target.value,10)
 //     })
 //   }
-  
+
 //   constructor(props) {
 //     super(props);
 //     this.state = {
@@ -500,7 +497,7 @@ export default App
 //   }
 //   render() {
 //     // let old = console.log;
-//     // let logger;  
+//     // let logger;
 //     //   console.log = ()=>{
 //     //     for(let i =0; i<arguments.length; i++){
 //     //       if(typeof arguments[i] === 'object'){
@@ -611,7 +608,7 @@ export default App
 //         <div className="examples column">
 //           <button onClick={this.handleClick}>Run</button>
 //           <h2>Editor</h2>
-//           <AceEditor 
+//           <AceEditor
 //           mode={this.state.mode}
 //           theme={this.state.theme}
 //           name="blah2"

@@ -1,7 +1,6 @@
 'use strict'
 
 import React from 'react'
-import { fetchQuestion } from '../../store'
 
 
 const ReadQuestion = props => (
@@ -13,7 +12,6 @@ const ReadQuestion = props => (
     { /*{ props.content }*/}
   </div>
 )
-
 
 
 export default ReadQuestion

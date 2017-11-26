@@ -7,15 +7,17 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import user from './user'
 import question from './question'
-import questions from './questions'
+import allQuestions from './allQuestions'
 import input from './input'
+import mode from './mode'
 
 
 const reducer = combineReducers({
   user,
   question,
-  questions,
-  input
+  allQuestions,
+  input,
+  mode
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -28,6 +30,7 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
-export * from './questions'
+export * from './allQuestions'
 export * from './question'
 export * from './input'
+export * from './mode'

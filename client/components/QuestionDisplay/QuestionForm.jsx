@@ -31,12 +31,13 @@ class QuestionForm extends Component {
           name="content"
           onChange={ this.handleChange }
         />
+        {/* swap out button with cmd??? */}
         <button
           type="submit"
           className="ui blue labeled submit icon button"
           style={{ margin: '0.5em' }}
         >
-          Edit Review
+          { this.props.content ? 'Edit' : 'Add' }
         </button>
       </form>
     )

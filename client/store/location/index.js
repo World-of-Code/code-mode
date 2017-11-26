@@ -8,42 +8,42 @@ import axios from 'axios'
  */
 const GET_LOCATION = 'GET_LOCATION'
 const CREATE_LOCATION = 'CREATE_LOCATION'
-const EDIT_LOCATION = 'EDIT_LOCATION'
-const DELETE_LOCATION = 'DELETE_LOCATION'
+const CHANGE_LOCATION = 'CHANGE_LOCATION'
+const REMOVE_LOCATION = 'REMOVE_LOCATION'
 
 /**
  * ACTION CREATORS
  */
 const getLocation = location => ({ type: GET_LOCATION, location })
 const createLocation = location => ({ type: CREATE_LOCATION, location })
-const editLocation = location => ({ type: EDIT_LOCATION, location })
-const deleteLocation = () => ({ type: DELETE_LOCATION })
+const changeLocation = location => ({ type: CHANGE_LOCATION, location })
+const removeLocation = () => ({ type: REMOVE_LOCATION })
 
 /**
  * THUNK CREATORS
  */
-export const fetchLocation = locationId =>
+export const fetchLocation = url =>
   dispatch =>
-    axios.get(`/api/locations/${locationId}`)
+    axios.get('/api/locations', url)
       .then(res => dispatch(getQuestion(res.data)))
       .catch(err => console.log(err))
 
-export const makeLocation = location =>
+export const addLocation = location =>
   dispatch =>
     axios.post('/api/locations/', location)
       .then(res => dispatch(createLocation(res.data)))
       .catch(err => console.log(err))
 
-export const changeLocation = location =>
+export const editLocation = location =>
   dispatch =>
     axios.put(`/api/locations/${location.id}`, location)
-      .then(res => dispatch(editLocation(res.data)))
+      .then(res => dispatch(changeLocation(res.data)))
       .catch(err => console.log(err))
 
-export const removeLocation = locationId =>
+export const deleteLocation = locationId =>
   dispatch =>
     axios.delete(`/api/locations/${locationId}`)
-      .then(() => dispatch(deleteLocation()))
+      .then(() => dispatch(removeLocation()))
       .catch(err => console.log(err))
 
 /**
@@ -53,11 +53,11 @@ export default (state = {}, action) => {
   switch (action.type) {
 
     case GET_LOCATION:
-    case CREATE_LOCATION:
-    case EDIT_LOCATION:
+    case ADD_LOCATION:
+    case CHANGE_LOCATION:
       return action.location
 
-    case DELETE_LOCATION:
+    case REMOVE_LOCATION:
     default:
       return state
   }

@@ -4,15 +4,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReadQuestion from './ReadQuestion'
 import QuestionForm from './QuestionForm'
-import { fetchQuestion, makeQuestion, changeQuestion } from '../../store'
+import { fetchQuestion, addQuestion, editQuestion } from '../../store'
 
 
 // ContentManagementButton should choose view here
 class QuestionDisplay extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     return (
       <div>
@@ -25,13 +21,13 @@ class QuestionDisplay extends Component {
 
         {/* Add Question */}
         <QuestionForm
-          action={ this.props.makeQuestion }
+          action={ this.props.addQuestion }
         />
 
         {/* Edit Question */}
         <QuestionForm
           question={ this.props.question }
-          action={ this.props.changeQuestion }
+          action={ this.props.editQuestion }
         />
 
       </div>
@@ -43,9 +39,15 @@ class QuestionDisplay extends Component {
 
 const mapDispatchToProps = dispatch => ({
   fetchQuestion: id => dispatch(fetchQuestion(id)),
-  makeQuestion: question => dispatch(makeQuestion(question)),
-  changeQuestion: question => dispatch(changeQuestion(question))
+  addQuestion: question => dispatch(addQuestion(question)),
+  editQuestion: question => dispatch(editQuestion(question))
 })
 
 
 export default connect(null, mapDispatchToProps)(QuestionDisplay)
+
+
+
+// if (this.props.whatever) {
+//   <QuestionForm props={props.somekindofprops} />
+// }

@@ -3,7 +3,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+<<<<<<< Updated upstream
 import { fetchLocation } from '../../store'
+=======
+import { me, fetchLocation } from '../../store'
+>>>>>>> Stashed changes
 import {
   Repl,
   QuestionDisplay,
@@ -15,6 +19,7 @@ import {
 
 
 class DrawerContents extends Component{
+<<<<<<< Updated upstream
   constructor( props) {
     super(props)
     this.state = {
@@ -31,6 +36,11 @@ class DrawerContents extends Component{
 
   handleClick (question, boilerplate) {
     this.setState({ question, boilerplate })
+=======
+  componentDidMount () {
+    this.props.me()
+    this.props.fetchLocation(window.location.href)
+>>>>>>> Stashed changes
   }
 
   render () {
@@ -39,6 +49,7 @@ class DrawerContents extends Component{
         <AddButton />
 
         {  user.id === location.userId &&
+<<<<<<< Updated upstream
           <EditButton />
           <DeleteButton />
         }
@@ -46,6 +57,17 @@ class DrawerContents extends Component{
         <QuestionMenu handleClick={ this.handleClick } />
         <QuestionDisplay question={ this.state.question } />
         <Repl question={ this.state.question } boilerplate={ this.state.boilerplate } />
+=======
+          <div>
+            <EditButton />
+            <DeleteButton />
+          </div>
+        }
+
+        <QuestionMenu location={ this.props.location } />
+        <QuestionDisplay />
+        <Repl />
+>>>>>>> Stashed changes
       </div>
     )
   }
@@ -57,8 +79,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+<<<<<<< Updated upstream
   user: state.user,
   fetchLocation: locationId => dispatch(fetchLocation(locationId))
+=======
+  me: () => dispatch(me()),
+  fetchLocation: url => dispatch(fetchLocation(url))
+>>>>>>> Stashed changes
 })
 
 

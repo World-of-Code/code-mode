@@ -6,42 +6,43 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
+const SET_QUESTION = 'SET_QUESTION'
 const GET_QUESTION = 'GET_QUESTION'
-const CREATE_QUESTION = 'CREATE_QUESTION'
-const EDIT_QUESTION = 'EDIT_QUESTION'
+const NEW_QUESTION = 'NEW_QUESTION'
+const CHANGE_QUESTION = 'CHANGE_QUESTION'
 const CLEAR_QUESTION = 'CLEAR_QUESTION'
+const CREATE_QUESTION = 'CREATE_QUESTION'
 
 /**
  * ACTION CREATORS
  */
+export const setQuestion = question => ({ type: SET_QUESTION, question })
 const getQuestion = question => ({ type: GET_QUESTION, question })
+const newQuestion = () => ({ type: NEW_QUESTION })
+const changeQuestion = question => ({ type: CHANGE_QUESTION, question })
+export const clearQuestion = () => ({ type: CLEAR_QUESTION })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
-const editQuestion = question => ({ type: EDIT_QUESTION, question })
-const clearQuestion = () => ({ type: CLEAR_QUESTION })
 
 /**
  * THUNK CREATORS
  */
-export const fetchQuestion = questionId =>
+export const fetchQuestion = question =>
   dispatch =>
-    axios.get(`/api/questions/${questionId}`)
+    axios.get(`/api/questions/${question.id}`)
       .then(res => dispatch(getQuestion(res.data)))
       .catch(err => console.log(err))
 
-export const makeQuestion = question =>
-  dispatch =>
-    axios.post('/api/questions/', question)
-      .then(res => dispatch(createQuestion(res.data)))
-      .catch(err => console.log(err))
+export const addQuestion = () =>
+  dispatch => dispatch(newQuestion())// ???
 
-export const changeQuestion = question =>
+export const editQuestion = question =>
   dispatch =>
     axios.put(`/api/questions/${question.id}`, question)
-      .then(res => dispatch(editQuestion(res.data)))
+      .then(res => dispatch(changeQuestion(res.data)))
       .catch(err => console.log(err))
 
 // find next question, delete previous, switch the state to the next
-export const removeQuestion = question =>
+export const deleteQuestion = question =>
   dispatch =>
     axios.get('/api/questions/')
       .then(questions => {
@@ -57,10 +58,17 @@ export const removeQuestion = question =>
       })
       .catch(err => console.log(err))
 
-export const eraseQuestion = () =>
-  dispatch => {
-      dispatch(clearQuestion())
-      .catch(err => console.log(err)) }
+export const cancelQuestion = question =>
+  dispatch =>
+    axios.get(`/api/questions/${question.id}`)
+      .then(res => dispatch(getQuestion(res.data)))
+      .catch(err => console.log(err))
+
+export const submitQuestion = question =>
+  dispatch =>
+    axios.post('/api/questions/', question)
+      .then(res => dispatch(createQuestion(res.data)))
+      .catch(err => console.log(err))
 
 /**
  * REDUCER
@@ -68,6 +76,7 @@ export const eraseQuestion = () =>
 export default (state = {}, action) => {
   switch (action.type) {
 
+    case SET_QUESTION:
     case GET_QUESTION:
     case CREATE_QUESTION:
     case EDIT_QUESTION:
