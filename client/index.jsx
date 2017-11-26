@@ -26,7 +26,7 @@ ReactDOM.render(
   <Provider store={ store }>
     <DrawerWrapper />
   </Provider>,
-  app
+  document.getElementById('app')
 )
 
 registerServiceWorker();
