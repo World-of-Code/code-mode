@@ -1,7 +1,7 @@
 // import React, { Component } from 'react'
 // import { render } from 'react-dom'
 // import Dock from 'react-dock'
-// //import DrawerWrapper from '../../client/components/Drawer'
+// import DrawerWrapper from '../../client/components/Drawer'
 // class InjectApp extends Component {
 //   constructor(props) {
 //     super(props)
@@ -47,6 +47,6 @@
 //   render(<h4>hello</h4>, injectDOM)
 // })
 
-/**
- * BOILERPLATE EXTENSION CODE
- */
+// /**
+//  * BOILERPLATE EXTENSION CODE
+//  */

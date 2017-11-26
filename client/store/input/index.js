@@ -3,7 +3,6 @@
 import axios from 'axios'
 import history from '../../history'
 
-
 /**
  * ACTION TYPES
  */
@@ -26,7 +25,7 @@ export const fetchInput = () =>
 export const postInput = input => 
   dispatch => axios.post('/api/input', input)
     .then(res => dispatch(postNewInput(res.data)))
-    .catch(err => console.log('Error getting input', err))
+    .catch(err => console.log('Error saving input', err))
     /**
  * REDUCER
  */
@@ -34,7 +33,7 @@ export default function (state = [], action) {
   switch (action.type) {
 
     case GET_INPUT:
-    case POST_INPUT: 
+    case POST_INPUT:
       return action.input
 
     default:

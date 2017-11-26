@@ -6,10 +6,11 @@
   right: 0;
   bottom: 0;
   overflow: hidden;
+  clear: both;
 
   &-sidebar {
     z-index: 2;
-    position: absolute;
+    position: sticky;
     transition: transform .3s ease-out;
     will-change: transform;
     overflow-y: auto;
@@ -21,7 +22,7 @@
   }
   &-overlay {
     z-index: 1;
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -32,7 +33,7 @@
     background-color: rgba(0, 0, 0, 0.3);
   }
   &-content {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -119,11 +120,15 @@
 }
 
 .drawer-container {
-  position: relative;
+  margin-top: 10%;
+  position: sticky;
   height: 500px;
   width: 854;
+  z-index: 10;
+  clear :both;
+  padding-top: 10%;
   .main {
-    position: relative;
+    position: sticky;
     padding: 10px;
     box-sizing: border-box;
     height: 100%;

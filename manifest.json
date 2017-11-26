@@ -16,7 +16,7 @@
     "inject.html"
   ],
   "background": {
-    "page": "chrome/views/background.html"
+    "page": "./chrome/views/background.html"
   },
   "content_scripts": [
     {
@@ -25,13 +25,14 @@
         "public/style/index.scss"
       ],
       "js": [
-        "public/js/app.bundle.js"
+        "public/js/app.bundle.js",
+        "public/js/popup.bundle.js"
       ],
       "matches": [
         "http://*/*", "https://*/*"
       ]
     }
   ],
-  "permissions": [ "contextMenus", "management", "tabs", "storage", "https://*/*" ],
-  "content_security_policy": "default-src 'self'; script-src 'self' http://*/* http://*/* 'unsafe-eval'; connect-src  http://*/* http://*/* ; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+  "permissions": [ "contextMenus", "management", "tabs", "storage" ],
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval'; connect-src * ; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

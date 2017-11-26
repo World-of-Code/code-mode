@@ -12,12 +12,14 @@ class MapQuestions extends Component {
     super(props)
   }
   componentDidMount () {
-    this.props.fetchQuestions(this.props.location[0]) // whatever the url is here
+    this.props.fetchQuestions() // whatever the url is here
+
   }
 
   render() {
     const sortedQuestions = this.props.questions.sort((q1, q2) => q1.id - q2.id)
     return (
+      
       <div>
       { this.props.questions &&
         sortedQuestions.map(question => (
@@ -39,11 +41,12 @@ class MapQuestions extends Component {
       }
       </div>
       
-      
     )
   }
 
 }
+
+
 
 const mapStateToProps = state => ({
   questions: state.questions,
@@ -51,7 +54,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchQuestions: url => dispatch(fetchQuestions(url))
+  fetchQuestions: () => dispatch(fetchQuestions())
 })
 
 

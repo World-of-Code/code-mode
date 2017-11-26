@@ -152,6 +152,9 @@ class AppClass extends Component {
   handleSave(event){
     event.preventDefault()
     this.props.saveInput(this.state.value)
+    this.setState({
+      value: ''
+    })
   }
   handleClear(event){
     event.preventDefault()
@@ -160,7 +163,6 @@ class AppClass extends Component {
     })
   }
   componentDidMount () {
-    this.props.handleInputFetch()
     this.props.getQuestions()
   }
   componentWillReceiveProps(nextProps) {
@@ -223,7 +225,8 @@ class AppClass extends Component {
 
 const mapStateToProps = state => ({
   input: state.input,
-  questions: state.questions
+  questions: state.questions,
+  users: state.users
 })
 const mapDispatchToProps = dispatch => ({
   handleInputFetch () {

@@ -7,7 +7,7 @@ import './socket'
 import {Login, Signup} from './components/auth-form.jsx'
 import { Provider } from 'react-redux'
 import store from './store'
-console.log('hi ', Login)
+
 ReactDOM.render(
     <Provider store={store}>
         <div>
