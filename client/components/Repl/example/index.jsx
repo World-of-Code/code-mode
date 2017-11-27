@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 import AceEditor from '../src/ace.jsx';
 import 'brace/mode/jsx';
 
+
 const languages=['javascript']
 const themes = ['monokai']
 languages.forEach((lang) => {
@@ -29,6 +30,7 @@ class AppClass extends Component {
     this.setState({
       value: newValue
     })
+    this.setChromeStorage()
   }
 
   onSelectionChange(newValue, event) {
@@ -76,8 +78,10 @@ class AppClass extends Component {
     //   console.log(\"i\'ve loaded\");
     // }`;
     //const inputValue = props.input[0] ? props.input[0].text : ''
+    //
+   // console.log('hello ', this.chromeStorage())
     this.state = {
-      value: '',
+      value: '',//this.chromeStorage() ? this.chromeStorage() : '',
       theme: 'monokai',
       mode: 'javascript',
       enableBasicAutocompletion: false,
@@ -99,6 +103,8 @@ class AppClass extends Component {
     this.handlePopulate = this.handlePopulate.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleClear = this.handleClear.bind(this)
+    this.setChromeStorage = this.setChromeStorage.bind(this)
+    this.getChromeStorage = this.getChromeStorage.bind(this)
   }
   handleClick(event){
     event.preventDefault()
@@ -131,9 +137,23 @@ class AppClass extends Component {
       value: ''
     })
   }
+  getChromeStorage(){
+      chrome.storage.local.get("userInput",(obj)=>{
+        this.setState({
+          value: obj.userInput
+      })
+      console.log('saved')
+      });
+  }
+
+setChromeStorage(){
+    chrome.storage.local.set({'userInput': this.state.value}, function() {    
+      console.log('saved')
+  })}
   componentDidMount () {
     this.props.getQuestions()
     this.props.handleInputFetch()
+    this.getChromeStorage()
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
@@ -157,7 +177,7 @@ class AppClass extends Component {
           onSelectionChange={this.onSelectionChange}
           onCursorChange={this.onCursorChange}
           onValidate={this.onValidate}
-          value={this.state.value}
+          value = {this.state.value}
           fontSize={this.state.fontSize}
           showPrintMargin={this.state.showPrintMargin}
           showGutter={this.state.showGutter}
@@ -176,7 +196,8 @@ class AppClass extends Component {
             mode="jsx"
             theme="monokai"
             readOnly={true}
-            value = {this.state.result}
+            value = {
+              this.state.result}
           />
       </div>
       <div className="column">
