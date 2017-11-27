@@ -98,13 +98,13 @@ class AppClass extends Component {
       fontSize: parseInt(e.target.value,10)
     })
   }
-  
+
   constructor(props) {
     super(props);
-    // Maybe useful for later 
-    // const defaultValue = props.questions && 
+    // Maybe useful for later
+    // const defaultValue = props.questions &&
     //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
-    // const defaultValue = 
+    // const defaultValue =
     // `function onLoad(editor) {
     //   console.log(\"i\'ve loaded\");
     // }`;
@@ -137,22 +137,24 @@ class AppClass extends Component {
     event.preventDefault()
     let value = this.state.value
     this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
-    // console.log code 
-  //   if (this.state.value.includes('console.log')) {
-  //     let newValue = this.state.value.replace(/console.log/g, 'return')
-  //     let value = newValue
-  //     this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
-  // }
+    if (this.state.value.includes('console.log')) {
+      let newValue = this.state.value.replace(/console.log/g, 'return')
+      let value = newValue
+      this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
+  }
 }
   handlePopulate(event){
     event.preventDefault()
     this.setState({
-      value: this.props.input[5].text
+      value: this.props.input[0].text
     })
   }
   handleSave(event){
     event.preventDefault()
     this.props.saveInput(this.state.value)
+    this.setState({
+      value: ''
+    })
   }
   handleClear(event){
     event.preventDefault()
@@ -161,8 +163,8 @@ class AppClass extends Component {
     })
   }
   componentDidMount () {
-    this.props.handleInputFetch()
     this.props.getQuestions()
+    this.props.handleInputFetch()
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
@@ -170,14 +172,14 @@ class AppClass extends Component {
   render() {
     return (
       <div className="columns">
- 
+
         <div className="examples column">
           <button onClick={this.handleClick}>Run</button>
           <button onClick={this.handlePopulate}>Populate</button>
           <button onClick={this.handleSave}>Save</button>
           <button onClick={this.handleClear}>Clear</button>
           <h2>Editor</h2>
-          <AceEditor 
+          <AceEditor
           mode={this.state.mode}
           theme={this.state.theme}
           name="blah2"
@@ -224,12 +226,13 @@ class AppClass extends Component {
 
 const mapStateToProps = state => ({
   input: state.input,
-  questions: state.questions
+  questions: state.questions,
+  users: state.users
 })
 const mapDispatchToProps = dispatch => ({
   handleInputFetch () {
     dispatch(fetchInput())
-  }, 
+  },
   saveInput (text) {
     dispatch(postInput({text}))
   },
@@ -237,7 +240,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchQuestions())
   }
 })
-const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppClass))
+const App = connect(mapStateToProps, mapDispatchToProps)(AppClass)
 export default App
 
 
@@ -469,7 +472,7 @@ export default App
 //       fontSize: parseInt(e.target.value,10)
 //     })
 //   }
-  
+
 //   constructor(props) {
 //     super(props);
 //     this.state = {
@@ -500,7 +503,7 @@ export default App
 //   }
 //   render() {
 //     // let old = console.log;
-//     // let logger;  
+//     // let logger;
 //     //   console.log = ()=>{
 //     //     for(let i =0; i<arguments.length; i++){
 //     //       if(typeof arguments[i] === 'object'){
@@ -611,7 +614,7 @@ export default App
 //         <div className="examples column">
 //           <button onClick={this.handleClick}>Run</button>
 //           <h2>Editor</h2>
-//           <AceEditor 
+//           <AceEditor
 //           mode={this.state.mode}
 //           theme={this.state.theme}
 //           name="blah2"

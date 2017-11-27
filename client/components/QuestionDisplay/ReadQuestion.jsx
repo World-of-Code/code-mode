@@ -14,6 +14,4 @@ const ReadQuestion = props => (
   </div>
 )
 
-
-
 export default ReadQuestion

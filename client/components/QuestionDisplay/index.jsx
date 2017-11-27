@@ -40,12 +40,10 @@ class QuestionDisplay extends Component {
 
 }
 
-
 const mapDispatchToProps = dispatch => ({
   fetchQuestion: id => dispatch(fetchQuestion(id)),
   makeQuestion: question => dispatch(makeQuestion(question)),
   changeQuestion: question => dispatch(changeQuestion(question))
 })
-
 
 export default connect(null, mapDispatchToProps)(QuestionDisplay)
