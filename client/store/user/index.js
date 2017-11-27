@@ -32,7 +32,7 @@ export const me = () =>
 
 export const auth = (email, password, method) =>
   dispatch =>
-    axios.post(`/auth/${method}`, { email, password })
+    axios.post(`https://code-mode.herokuapp.com/auth/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
@@ -41,7 +41,7 @@ export const auth = (email, password, method) =>
 
 export const logout = () =>
   dispatch =>
-    axios.post('/auth/logout')
+    axios.post('https://code-mode.herokuapp.com/auth/logout')
       .then(_ => {
         dispatch(removeUser())
         history.push('/login')

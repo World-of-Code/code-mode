@@ -146,7 +146,7 @@ class AppClass extends Component {
   handlePopulate(event){
     event.preventDefault()
     this.setState({
-      value: this.props.input[5].text
+      value: this.props.input[0].text
     })
   }
   handleSave(event){

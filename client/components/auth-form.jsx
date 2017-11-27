@@ -51,6 +51,23 @@ const mapDispatch = dispatch => ({
   }
 })
 
+// fetch('https://code-mode-herokuapp.com/api/users')
+// .then(
+//   function(response) {
+//     if (response.status !== 200) {
+//       console.log('Looks like there was a problem. Status Code: ' +
+//         response.status);
+//       return;
+//     }
+//     response.json().then(function(data) {
+//       console.log(data);
+//     });
+//   }
+// )
+// .catch(function(err) {
+//   console.log('Fetch Error :-S', err);
+// });
+
 /**
  * PROP TYPES
  */
@@ -64,3 +81,8 @@ AuthForm.propTypes = {
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+
+
+// const request = new XMLHttpRequest()
+// request.open('GET', 'https://code-mode-herokuapp.com/api/users')  // sync
+// request.send()

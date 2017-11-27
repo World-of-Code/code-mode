@@ -23,7 +23,7 @@ export const fetchInput = () =>
     .catch(err => console.log('Error getting input', err))
 
 export const postInput = input => 
-  dispatch => axios.post('/api/input', input)
+  dispatch => axios.post('http://localhost:8080/api/input', input)
     .then(res => dispatch(postNewInput(res.data)))
     .catch(err => console.log('Error saving input', err))
     /**
