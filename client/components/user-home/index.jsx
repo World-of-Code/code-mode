@@ -1,36 +1,51 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Repl, QuestionMenu, DrawerContents } from '../'
-
+import ReactDOM from 'react-dom'
+import PopupMain from '../PopupMain'
+import { Provider } from 'react-redux'
+import store, { logout } from '../../store'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const { email } = props
-
-  return (
-    <div>
-      <h3>Welcome, { email }</h3>
+class UserHome extends Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    const { email } = this.props
+    return (
       <div>
-        <DrawerContents />
+        <h3>Welcome, {email}</h3>
+        <button onClick={this.props.handleClick}>Logout</button>
       </div>
-    </div>
-  )
-
+    )
+  }
 }
 
-// <QuestionMenu />
-// <Repl />
 /**
  * CONTAINER
  */
 const mapState = state => ({
   email: state.user.email
 })
+
+const mapDispatch = dispatch => ({
+  handleClick: () => {
+    return dispatch(logout())
+  }
+})
+
+// may use later 
+
+// ReactDOM.render(
+//   <Provider store={store} >
+//     <PopupMain />
+//   </Provider>,
+// document.getElementById('popup'))
 
 /**
  * PROP TYPES
@@ -39,5 +54,4 @@ UserHome.propTypes = {
   email: PropTypes.string
 }
 
-
-export default connect(mapState)(UserHome)
+export default connect(mapState, mapDispatch)(UserHome)

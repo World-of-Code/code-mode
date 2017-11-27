@@ -1,6 +1,6 @@
 import Drawer from 'rc-drawer';
 import React, { Component } from 'react';
-import '../../../public/style/drawer.less';
+import '../../../chrome/style/drawer.less';
 import ReactDOM from 'react-dom';
 import DrawerContents from '../DrawerContents'
 
@@ -31,6 +31,10 @@ class DrawerWrapper extends Component {
       this.onOpenChange(false);
     }
   }
+  handleClick = event => {
+    this.setState({ open: !this.state.open });
+    console.log('hi')
+  }
   render() {
     const drawer = (
       <div>
@@ -57,28 +61,25 @@ class DrawerWrapper extends Component {
 
     return (
       <div className="drawer-container">
-        <Drawer
-          sidebar={drawer} {...drawerProps}
-          style={{ overflow: 'auto' }}>
-          <div className="main">
-            <button onClick={() => { this.setState({ open: !this.state.open }); }}>
-              switch-open
-            </button>
-            <button onClick={() => { this.setState({ open: this.state.open }); }}>
-              switch-closed
-            </button>
-            <p>
+
+        <Drawer sidebar={drawer} {...drawerProps}>
+        <div className="main">
+        <button onClick={this.handleClick}>
+            switch-open
+          </button>
+             <p>
+
               {['left', 'right', 'top', 'bottom'].map((i, index) => (<span
-                key={index} style={{ marginRight: 10 }}
-              >
-                <input type="radio" value={i} id={`pos-${index}`}
-                  checked={this.state.position === i}
-                  onChange={elem => { this.setState({ position: elem.target.value }); }}
-                /> <label htmlFor={`pos-${index}`}>{i}</label>
-              </span>))}
-            </p>
-          </div>
-        </Drawer>
+                 key={index} style={{ marginRight: 10 }}
+               >
+                 <input type="radio" value={i} id={`pos-${index}`}
+                   checked={this.state.position === i}
+                   onChange={elem => { this.setState({ position: elem.target.value }); }}
+                 /> <label htmlFor={`pos-${index}`}>{i}</label>
+               </span>))}
+             </p>
+           </div>
+         </Drawer>
       </div>
     );
   }

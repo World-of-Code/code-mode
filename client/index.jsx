@@ -1,17 +1,22 @@
 'use strict'
 
-import '../public/style/index.scss'
+import '../chrome/style/index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import store from './store'
-import Routes from './routes'
+import store, {fetchQuestions} from './store'
+import DrawerWrapper from './components/Drawer'
 import './socket'
 
+const body = document.body
+const app = document.createElement('div')
+app.id = 'app'
+body.prepend(app)
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Routes />
+    <DrawerWrapper />
   </Provider>,
   document.getElementById('app')
 )
+

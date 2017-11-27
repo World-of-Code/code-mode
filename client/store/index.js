@@ -10,7 +10,6 @@ import question from './question'
 import questions from './questions'
 import input from './input'
 
-
 const reducer = combineReducers({
   user,
   question,
@@ -24,7 +23,6 @@ const middleware = composeWithDevTools(applyMiddleware(
 ))
 
 const store = createStore(reducer, middleware)
-
 
 export default store
 export * from './user'
