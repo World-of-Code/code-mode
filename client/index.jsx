@@ -8,7 +8,7 @@ import store, {fetchQuestions} from './store'
 //import Routes from './routes'
 import DrawerContainer from './components/Drawer'
 import './socket'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 import { Store } from 'react-chrome-redux'
 
 // window.addEventListener('load', () => {

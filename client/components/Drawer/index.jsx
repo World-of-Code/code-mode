@@ -8,10 +8,6 @@ import DrawerBar from './DrawerBar'
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../../public/style/drawer.css';
 
-// delete
-import { lorem } from './lorem.js'
-// end delete
-
 export default class DrawerContainer extends Component {
   constructor(props) {
     super(props);
@@ -20,9 +16,6 @@ export default class DrawerContainer extends Component {
   render() {
     return (
       <div className="drawer-bar-all">
-        { /* delete */
-          lorem
-        /* end delete */}
           <DrawerBar />
       </div>
     );
