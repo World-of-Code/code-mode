@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../../../chrome/style/drawer.less';
 import ReactDOM from 'react-dom';
 import DrawerContents from '../DrawerContents'
+
 class DrawerWrapper extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class DrawerWrapper extends Component {
         <DrawerContents />
       </div>
     );
-
+    //<p>this is where the repl will go!</p>
     const drawerProps = {
       docked: this.state.docked,
       open: this.state.open,
@@ -60,12 +61,14 @@ class DrawerWrapper extends Component {
 
     return (
       <div className="drawer-container">
+
         <Drawer sidebar={drawer} {...drawerProps}>
         <div className="main">
         <button onClick={this.handleClick}>
             switch-open
           </button>
              <p>
+
               {['left', 'right', 'top', 'bottom'].map((i, index) => (<span
                  key={index} style={{ marginRight: 10 }}
                >

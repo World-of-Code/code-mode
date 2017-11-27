@@ -102,6 +102,7 @@ class AppClass extends Component {
   }
   handleClick(event){
     event.preventDefault()
+
     let value = this.state.value 
     this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
     if (this.state.value.includes('console.log')) {
@@ -109,6 +110,7 @@ class AppClass extends Component {
       let value = newValue
       this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
   }
+
 }
   handlePopulate(event){
     event.preventDefault()
