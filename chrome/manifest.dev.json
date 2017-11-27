@@ -21,12 +21,12 @@
 //   "content_scripts": [
 //     {
 //       "matches": ["<all_urls>"],
-//       //"css": ["../public/style/drawer.less"],
+//       //"css": ["../public/style/rc-drawer.css"],
 //       "js": ["../public/bundle.js"]
 //     }
 //   ],
 //   "permissions": [ "contextMenus", "management", "tabs", "storage", "https://google.com/*" ]
-  
+
 // }
 
 // //"content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"

@@ -1,7 +1,7 @@
 // import React, { Component } from 'react'
 // import { render } from 'react-dom'
 // import Dock from 'react-dock'
-// import DrawerWrapper from '../../client/components/Drawer'
+// import DrawerContainer from '../../client/components/Drawer'
 // class InjectApp extends Component {
 //   constructor(props) {
 //     super(props)

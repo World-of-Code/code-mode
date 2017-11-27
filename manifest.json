@@ -21,7 +21,7 @@
   "content_scripts": [
     {
       "css": [
-        "public/style/drawer.less",
+        "public/style/rc-drawer.css",
         "public/style/index.scss"
       ],
       "js": [
