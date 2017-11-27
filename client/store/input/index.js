@@ -18,7 +18,7 @@ const postNewInput = input => ({ type: POST_INPUT, input})
  * THUNK CREATORS
  */
 export const fetchInput = () =>
-  dispatch => axios.get('/api/input')
+  dispatch => axios.get('http://localhost:8080/api/input')
     .then(res => dispatch(getInput(res.data)))
     .catch(err => console.log('Error getting input', err))
 

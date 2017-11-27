@@ -164,6 +164,7 @@ class AppClass extends Component {
   }
   componentDidMount () {
     this.props.getQuestions()
+    this.props.handleInputFetch()
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
