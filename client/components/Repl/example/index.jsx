@@ -35,7 +35,7 @@ class AppClass extends Component {
   }
 
   onSelectionChange(newValue, event) {
-    //console.log('select-change', newValue);
+    //console.log('select-change', newValue)
     //console.log('select-change-event', event);
   }
 
