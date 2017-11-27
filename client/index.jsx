@@ -1,6 +1,6 @@
 'use strict'
 
-import '../public/style/index.scss'
+import '../chrome/style/index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
@@ -10,8 +10,6 @@ import DrawerContainer from './components/Drawer'
 import './socket'
 import registerServiceWorker from './registerServiceWorker'
 import { Store } from 'react-chrome-redux'
-
-
 
 // window.addEventListener('load', () => {
 //const request = new XMLHttpRequest()
@@ -31,4 +29,3 @@ ReactDOM.render(
   document.getElementById('app')
 )
 
-registerServiceWorker();

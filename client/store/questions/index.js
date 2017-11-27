@@ -17,18 +17,21 @@ export const getQuestions = questions => ({ type: GET_QUESTIONS, questions })
  * THUNK CREATORS
  */
 
- 
-// export const fetchQuestions = url =>
-//   dispatch =>
-//     axios.get('/api/questions/', url)
-//       .then(res => dispatch(getQuestions(res.data.filter(question => question.url === url))))
-//       .catch(err => console.log(err))
 
 export const fetchQuestions = () => 
   dispatch => 
     axios.get('http://localhost:8080/api/questions')
       .then(res => dispatch(getQuestions(res.data)))
       .catch(err => console.log(err))
+
+// fetch questions by url  -- incorporate later 
+
+// export const fetchQuestions = url =>
+//   dispatch =>
+//     axios.get('/api/questions/', url)
+//       .then(res => dispatch(getQuestions(res.data.filter(question => question.url === url))))
+//       .catch(err => console.log(err))
+
 /**
  * REDUCER
  */

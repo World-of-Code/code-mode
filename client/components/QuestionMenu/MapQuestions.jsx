@@ -11,6 +11,7 @@ class MapQuestions extends Component {
   constructor(props) {
     super(props)
   }
+
   componentDidMount () {
     this.props.fetchQuestions() // whatever the url is here
 

@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "description": "turn your youtube channel into a learning platform",
   "browser_action": {
-    "default_popup": "/public/popup.html",
+    "default_popup": "/chrome/views/popup.html",
     "default_title": "Login/Signup"
   },
   "icons": {
@@ -15,18 +15,15 @@
   "web_accessible_resources": [
     "inject.html"
   ],
-  "background": {
-    "page": "./chrome/views/background.html"
-  },
   "content_scripts": [
     {
       "css": [
-        "public/style/rc-drawer.css",
-        "public/style/index.scss"
+        "chrome/style/rc-drawer.css",
+        "chrome/style/index.scss"
       ],
       "js": [
-        "public/js/app.bundle.js",
-        "public/js/popup.bundle.js"
+        "chrome/js/app.bundle.js",
+        "chrome/js/popup.bundle.js"
       ],
       "matches": [
         "http://*/*", "https://*/*"

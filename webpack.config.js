@@ -10,7 +10,7 @@ module.exports = {
     'popup': './client/popup.jsx'
   },
   output: {
-    path: path.join(__dirname,'./public/js'),
+    path: path.join(__dirname,'./chrome/js'),
     filename: '[name].bundle.js'
   },
   devtool: 'source-map',

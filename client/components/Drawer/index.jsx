@@ -12,7 +12,7 @@ import '../../../public/style/drawer.css';
 import { lorem } from './lorem.js'
 // end delete
 
-class DrawerContainer extends Component {
+export default class DrawerContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -28,5 +28,3 @@ class DrawerContainer extends Component {
     );
   }
 }
-
-export default DrawerContainer;
