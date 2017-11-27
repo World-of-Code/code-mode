@@ -1,6 +1,4 @@
 import ace from './ace.js'
-import split from './split.js';
-export {
-  split
-}
+import split from './split.js'
+export { split }
 export default ace

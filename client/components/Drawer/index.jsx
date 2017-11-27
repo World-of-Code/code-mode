@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import DrawerContents from '../DrawerContents'
 
 class DrawerWrapper extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       docked: false,
@@ -22,19 +22,23 @@ class DrawerWrapper extends Component {
     this.setState({ open })
   }
 
-  onDock = () => {
+  onDock () {
     const docked = !this.state.docked
     this.setState({ docked })
     if (!docked) this.onOpenChange(false)
   }
 
-  render() {
+  handleClick (event) {
+    this.setState({ open: !this.state.open })
+  }
+
+  render () {
     const drawer = (
       <div>
         <h3>
           CodeMode Drawer
-          <button onClick={this.onDock}>
-            {this.state.docked ? 'unpin' : 'pin'}
+          <button onClick={ this.onDock }>
+            { this.state.docked ? 'unpin' : 'pin' }
           </button>
         </h3>
         <DrawerContents />
@@ -54,27 +58,28 @@ class DrawerWrapper extends Component {
 
     return (
       <div className="drawer-container">
-        <Drawer
-          sidebar={ drawer } { ...drawerProps }
-          style={{ overflow: 'auto' }}>
-          <div className="main">
-            <button onClick={() => { this.setState({ open: !this.state.open }) }}>
-              switch-open
-            </button>
-            <button onClick={() => { this.setState({ open: this.state.open }) }}>
-              switch-closed
-            </button>
-            <p>
-              {['left', 'right', 'top', 'bottom'].map((i, index) => (<span
-                key={ index } style={{ marginRight: 10 }}
-              >
-                <input type="radio" value={i} id={`pos-${index}`}
-                  checked={this.state.position === i}
-                  onChange={elem => { this.setState({ position: elem.target.value }) }}
-                /> <label htmlFor={`pos-${index}`}>{i}</label>
-              </span>))}
-            </p>
-          </div>
+
+        <Drawer sidebar={ drawer } { ...drawerProps }>
+        <div className="main">
+        <button onClick={ this.handleClick }>
+          switch-open
+        </button>
+          <p>
+            {
+              ['left', 'right', 'top', 'bottom'].map((i, index) =>
+                (
+                  <span key={ index } style={{ marginRight: 10 }}>
+                    <input type="radio" value={ i } id={`pos-${ index }`}
+                      checked={ this.state.position === i }
+                      onChange={ elem => { this.setState({ position: elem.target.value }) } }
+                    />
+                    <label htmlFor={ `pos-${index}` }>{ i }</label>
+                  </span>
+                )
+              )
+            }
+          </p>
+        </div>
         </Drawer>
       </div>
     )

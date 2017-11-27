@@ -42,7 +42,7 @@ describe('thunk creators', () => {
 
   describe('logout', () => {
     it('logout: eventually dispatches the REMOVE_USER action', () => {
-      mockAxios.onPost('/auth/logout').replyOnce(204)
+      mockAxios.onPost('https://code-mode.herokuapp.com/auth/logout').replyOnce(204)
       return store.dispatch(logout())
         .then(() => {
           const actions = store.getActions()

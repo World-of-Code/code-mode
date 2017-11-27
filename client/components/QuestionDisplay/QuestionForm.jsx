@@ -12,18 +12,13 @@ class QuestionForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(event) {
+  handleChange (event) {
     this.setState({ content: event.target.value })
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-    this.props.action(this.state.content)
   }
 
   render () {
     return (
-      <form onSubmit={ this.handleSubmit } className="ui reply form">
+      <form className="ui reply form">
         <textarea
           type="text"
           className="field"
@@ -31,14 +26,6 @@ class QuestionForm extends Component {
           name="content"
           onChange={ this.handleChange }
         />
-        {/* swap out button with cmd??? */}
-        <button
-          type="submit"
-          className="ui blue labeled submit icon button"
-          style={{ margin: '0.5em' }}
-        >
-          { this.props.content ? 'Edit' : 'Add' }
-        </button>
       </form>
     )
   }

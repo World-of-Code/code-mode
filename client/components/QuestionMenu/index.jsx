@@ -12,6 +12,4 @@ const QuestionMenu = props => {
     </div>
   )
 }
-
-
 export default QuestionMenu
