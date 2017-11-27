@@ -1,6 +1,5 @@
 node_modules
-chrome/js/bundle.js
-chrome/js/bundle.js.map
+chrome/js/*
 secrets.js
 .DS_Store
 npm-debug.log
