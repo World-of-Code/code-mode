@@ -1,6 +1,6 @@
 import Drawer from 'rc-drawer';
 import React, { Component } from 'react';
-import '../../../public/style/drawer.less';
+import '../../../chrome/style/drawer.less';
 import ReactDOM from 'react-dom';
 import DrawerContents from '../DrawerContents'
 class DrawerWrapper extends Component {
@@ -84,21 +84,3 @@ class DrawerWrapper extends Component {
 
 
 export default DrawerWrapper;
-
-// sidebar={drawer} {...drawerProps}
-// style={{ overflow: 'auto' }}>
-// <div className="main">
-//   <button onClick={() => { this.setState({ open: !this.state.open }); }}>
-//     switch-open
-//   </button>
-//   <p>
-//     {['left', 'right', 'top', 'bottom'].map((i, index) => (<span
-//       key={index} style={{ marginRight: 10 }}
-//     >
-//       <input type="radio" value={i} id={`pos-${index}`}
-//         checked={this.state.position === i}
-//         onChange={elem => { this.setState({ position: elem.target.value }); }}
-//       /> <label htmlFor={`pos-${index}`}>{i}</label>
-//     </span>))}
-//   </p>
-// </div>

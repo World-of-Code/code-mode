@@ -12,41 +12,40 @@ import store, { logout } from '../../store'
  * COMPONENT
  */
 class UserHome extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
   }
-  render (){
-  const { email } = this.props
-  return (
-    <div>
-      <h3>Welcome, { email }</h3>
-      <button onClick={this.props.handleClick}>Logout</button>
-    </div>
-  )
-
+  render() {
+    const { email } = this.props
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
+        <button onClick={this.props.handleClick}>Logout</button>
+      </div>
+    )
+  }
 }
-}
-
 
 /**
  * CONTAINER
  */
 const mapState = state => ({
-  //user: state.user,
   email: state.user.email
 })
 
 const mapDispatch = dispatch => ({
   handleClick: () => {
-    console.log('hi')
     return dispatch(logout())
-}})
+  }
+})
+
+// may use later 
 
 // ReactDOM.render(
-    //   <Provider store={store} >
-    //     <PopupMain />
-    //   </Provider>,
-    // document.getElementById('popup'))
+//   <Provider store={store} >
+//     <PopupMain />
+//   </Provider>,
+// document.getElementById('popup'))
 
 /**
  * PROP TYPES
@@ -54,6 +53,5 @@ const mapDispatch = dispatch => ({
 UserHome.propTypes = {
   email: PropTypes.string
 }
-
 
 export default connect(mapState, mapDispatch)(UserHome)

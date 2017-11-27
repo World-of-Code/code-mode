@@ -1,21 +1,12 @@
 'use strict'
 
-import '../public/style/index.scss'
+import '../chrome/style/index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store, {fetchQuestions} from './store'
-//import Routes from './routes'
 import DrawerWrapper from './components/Drawer'
 import './socket'
-import registerServiceWorker from './registerServiceWorker'
-import { Store } from 'react-chrome-redux'
-
-// window.addEventListener('load', () => {
-//const request = new XMLHttpRequest()
-//request.open('GET', 'http://localhost:8080/api/questions')  // sync
-//request.send()
-//})
 
 const body = document.body
 const app = document.createElement('div')
@@ -29,4 +20,3 @@ ReactDOM.render(
   document.getElementById('app')
 )
 
-registerServiceWorker();
