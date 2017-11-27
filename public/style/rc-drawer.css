@@ -107,7 +107,7 @@
 .drawer-container {
   margin-top: 10%;
   position: sticky;
-  height: 500px;
+  height: 450px;
   width: 854;
   z-index: 10;
   clear: both;
@@ -121,7 +121,7 @@
 }
 .rc-drawer-sidebar {
   padding: 16px;
-  background-color: teal;
+  /* background-color: teal; */
 }
 .rc-drawer-left .rc-drawer-sidebar,
 .rc-drawer-right .rc-drawer-sidebar {

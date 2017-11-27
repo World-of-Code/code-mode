@@ -26,7 +26,7 @@ export default class DrawerBar extends Component {
           <NavbarToggler onClick={this.handleClick} className="mr-2" />
           <NavbarBrand href="/" className="mr-auto">CodeMode</NavbarBrand>
           <Collapse isOpen={this.state.open} navbar>
-            <DrawerContainer open={this.state.open} />
+            <DrawerContainer /> {/* open={this.state.open} */}
           </Collapse>
         </Navbar>
       </div>

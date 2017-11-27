@@ -1,3 +1,7 @@
+.drawer-bar-all {
+  background: #fff;
+}
+
 .drawer-bar-closed {
   /* Set the navbar to fixed position */
   position: fixed;
@@ -16,3 +20,7 @@
   width: 100%;
 }
 
+.contents {
+  height: 425px;
+  overflow: auto;
+}
