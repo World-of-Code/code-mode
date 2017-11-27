@@ -5,6 +5,7 @@ import { fetchInput, postInput, fetchQuestions } from '../../../store'
 import { render } from 'react-dom';
 import AceEditor from '../src/ace.jsx';
 import 'brace/mode/jsx';
+const debounce = require('lodash.debounce');
 
 
 const languages=['javascript']
@@ -30,7 +31,7 @@ class AppClass extends Component {
     this.setState({
       value: newValue
     })
-    this.setChromeStorage()
+    _.debounce(this.setChromeStorage(),5000)
   }
 
   onSelectionChange(newValue, event) {
