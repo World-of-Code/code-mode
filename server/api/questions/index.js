@@ -50,7 +50,7 @@ router.put('/:questionId', (req, res, next) =>{
 
 // delete question by id
 router.delete('/:questionId', (req, res, next) =>{
-  req.product.destroy()
+  req.question.destroy()
     .then(() => res.sendStatus(204))
     .catch(next)
 })

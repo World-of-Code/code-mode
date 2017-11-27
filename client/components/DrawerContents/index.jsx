@@ -3,89 +3,57 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-<<<<<<< Updated upstream
-import { fetchLocation } from '../../store'
-=======
-import { me, fetchLocation } from '../../store'
->>>>>>> Stashed changes
+import { me, fetchLocation, fetchAllQuestions, getMode } from '../../store'
 import {
   Repl,
   QuestionDisplay,
   QuestionMenu,
-  AddButton,
-  EditButton,
-  DeleteButton
+  ButtonContainer
 } from '../'
 
 
 class DrawerContents extends Component{
-<<<<<<< Updated upstream
-  constructor( props) {
-    super(props)
-    this.state = {
-      question: {},
-      boilerplate: ''
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  componentDidMount () {
-    //get user
-    this.props.fetchLocation() // id or url
-  }
-
-  handleClick (question, boilerplate) {
-    this.setState({ question, boilerplate })
-=======
   componentDidMount () {
     this.props.me()
     this.props.fetchLocation(window.location.href)
->>>>>>> Stashed changes
+      .then(url => { if (url) this.props.fetchAllQuestions(url.id) })
+      .catch(err => console.log(err))
+    this.props.getMode()
   }
 
   render () {
     return (
       <div>
-        <AddButton />
-
-        {  user.id === location.userId &&
-<<<<<<< Updated upstream
-          <EditButton />
-          <DeleteButton />
+        {
+          this.props.location &&
+          <ButtonContainer />
         }
-
-        <QuestionMenu handleClick={ this.handleClick } />
-        <QuestionDisplay question={ this.state.question } />
-        <Repl question={ this.state.question } boilerplate={ this.state.boilerplate } />
-=======
+        {
+          this.props.allQuestions &&
           <div>
-            <EditButton />
-            <DeleteButton />
+            <QuestionMenu questions={ this.props.allQuestions } />
+            <QuestionDisplay />
           </div>
         }
-
-        <QuestionMenu location={ this.props.location } />
-        <QuestionDisplay />
         <Repl />
->>>>>>> Stashed changes
       </div>
     )
   }
+
 }
 
 const mapStateToProps = state => ({
   user: state.user,
-  location: state.location
+  location: state.location,
+  allQuestions: state.allQuestions,
+  mode: state.mode
 })
 
 const mapDispatchToProps = dispatch => ({
-<<<<<<< Updated upstream
-  user: state.user,
-  fetchLocation: locationId => dispatch(fetchLocation(locationId))
-=======
   me: () => dispatch(me()),
-  fetchLocation: url => dispatch(fetchLocation(url))
->>>>>>> Stashed changes
+  fetchLocation: url => dispatch(fetchLocation(url)),
+  fetchAllQuestions: url => dispatch(fetchAllQuestions(url)),
+  getMode: () => dispatch(getmode())
 })
 
 

@@ -1,6 +1,7 @@
 'use strict'
 
 import axios from 'axios'
+import { BACK_END } from '../store'
 
 
 /**
@@ -18,8 +19,8 @@ export const getAllQuestions = questions => ({ type: GET_QUESTIONS, questions })
  */
 export const fetchAllQuestions = url =>
   dispatch =>
-    axios.get('/api/questions/', url)
-      .then(res => dispatch(getAllQuestions(res.data.filter(question => question.url === url))))
+    axios.get(`/${BACK_END}/api/questions/${url.id}`, url)
+      .then(res => dispatch(getAllQuestions(res.data)))
       .catch(err => console.log(err))
 
 /**

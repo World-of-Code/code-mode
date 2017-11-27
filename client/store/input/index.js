@@ -1,6 +1,7 @@
 'use strict'
 
 import axios from 'axios'
+import { BACK_END } from '../store'
 
 
 /**
@@ -22,19 +23,19 @@ const changeInput = input => ({ type: CHANGE_INPUT, input})
  */
 export const fetchInput = (questionId, userId) =>
   dispatch =>
-    axios.get(`/api/questions/${questionId}/users/${userId}`)
+    axios.get(`/${BACK_END}/api/questions/${questionId}/users/${userId}`)
       .then(res => dispatch(getInput(res.data)))
       .catch(err => console.log(err))
 
 export const addInput = (questionId, input) =>
   dispatch =>
-    axios.post(`/api/questions/${questionId}`, input)
+    axios.post(`/${BACK_END}/api/questions/${questionId}`, input)
       .then(res => dispatch(createInput(res.data)))
       .catch(err => console.log(err))
 
 export const editInput = (questionId, userId, input) =>
   dispatch =>
-    axios.post(`/api/questions/${questionId}/users/${userId}`, input)
+    axios.post(`/${BACK_END}/api/questions/${questionId}/users/${userId}`, input)
       .then(res => dispatch(changeInput(res.data)))
       .catch(err => console.log(err))
 

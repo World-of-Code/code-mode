@@ -12,11 +12,4 @@ export { default as QuestionMenu } from './QuestionMenu'
 export { default as DrawerWrapper} from './Drawer'
 export { default as DrawerContents } from './DrawerContents'
 
-export {
-  AddButton,
-  CancelButton,
-  ClearButton,
-  DeleteButton,
-  EditButton,
-  SubmitButton
-} from './ContentManagementButtons'
+export { default as ButtonContainer } from './ButtonContainer'

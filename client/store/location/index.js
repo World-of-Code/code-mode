@@ -1,6 +1,7 @@
 'use strict'
 
 import axios from 'axios'
+import { BACK_END } from '../store'
 
 
 /**
@@ -22,27 +23,27 @@ const removeLocation = () => ({ type: REMOVE_LOCATION })
 /**
  * THUNK CREATORS
  */
-export const fetchLocation = url =>
+export const fetchLocation = locationId =>
   dispatch =>
-    axios.get('/api/locations', url)
+    axios.get(`/${BACK_END}/api/locations/${locationId}`)
       .then(res => dispatch(getQuestion(res.data)))
       .catch(err => console.log(err))
 
 export const addLocation = location =>
   dispatch =>
-    axios.post('/api/locations/', location)
+    axios.post(`/${BACK_END}/api/locations/`, location)
       .then(res => dispatch(createLocation(res.data)))
       .catch(err => console.log(err))
 
 export const editLocation = location =>
   dispatch =>
-    axios.put(`/api/locations/${location.id}`, location)
+    axios.put(`/${BACK_END}/api/locations/${location.id}`, location)
       .then(res => dispatch(changeLocation(res.data)))
       .catch(err => console.log(err))
 
 export const deleteLocation = locationId =>
   dispatch =>
-    axios.delete(`/api/locations/${locationId}`)
+    axios.delete(`/${BACK_END}/api/locations/${locationId}`)
       .then(() => dispatch(removeLocation()))
       .catch(err => console.log(err))
 
@@ -53,7 +54,7 @@ export default (state = {}, action) => {
   switch (action.type) {
 
     case GET_LOCATION:
-    case ADD_LOCATION:
+    case CREATE_LOCATION:
     case CHANGE_LOCATION:
       return action.location
 

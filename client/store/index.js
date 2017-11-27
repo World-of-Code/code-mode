@@ -34,3 +34,6 @@ export * from './allQuestions'
 export * from './question'
 export * from './input'
 export * from './mode'
+
+// backend api route
+export const BACK_END = 'https://code-mode.herokuapp.com'

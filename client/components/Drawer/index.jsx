@@ -19,27 +19,13 @@ class DrawerWrapper extends Component {
   }
 
   onOpenChange = open => {
-<<<<<<< Updated upstream
-=======
-    console.log('onOpenChange', open);
->>>>>>> Stashed changes
     this.setState({ open })
   }
 
   onDock = () => {
-<<<<<<< Updated upstream
     const docked = !this.state.docked
-    this.setState({
-      docked,
-    })
-    if (!docked) {
-      this.onOpenChange(false)
-    }
-=======
-    const docked = !this.state.docked;
     this.setState({ docked })
     if (!docked) this.onOpenChange(false)
->>>>>>> Stashed changes
   }
 
   render() {
@@ -72,36 +58,21 @@ class DrawerWrapper extends Component {
           sidebar={ drawer } { ...drawerProps }
           style={{ overflow: 'auto' }}>
           <div className="main">
-<<<<<<< Updated upstream
             <button onClick={() => { this.setState({ open: !this.state.open }) }}>
               switch-open
             </button>
             <button onClick={() => { this.setState({ open: this.state.open }) }}>
-=======
-            <button onClick={ () => this.setState({ open: !this.state.open }) }>
-              switch-open
-            </button>
-            <button onClick={ () => this.setState({ open: this.state.open }) }>
->>>>>>> Stashed changes
               switch-closed
             </button>
             <p>
               {['left', 'right', 'top', 'bottom'].map((i, index) => (<span
                 key={ index } style={{ marginRight: 10 }}
               >
-<<<<<<< Updated upstream
                 <input type="radio" value={i} id={`pos-${index}`}
                   checked={this.state.position === i}
                   onChange={elem => { this.setState({ position: elem.target.value }) }}
                 /> <label htmlFor={`pos-${index}`}>{i}</label>
               </span>))}
-=======
-                <input type="radio" value={ i } id={ `pos-${index}` }
-                  checked={ this.state.position === i }
-                  onChange={ elem => this.setState({ position: elem.target.value }) }
-                /> <label htmlFor={ `pos-${index}` }>{ i }</label>
-              </span>)) }
->>>>>>> Stashed changes
             </p>
           </div>
         </Drawer>

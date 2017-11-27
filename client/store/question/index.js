@@ -1,6 +1,7 @@
 'use strict'
 
 import axios from 'axios'
+import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../store'
 
 
 /**
@@ -17,34 +18,44 @@ const CREATE_QUESTION = 'CREATE_QUESTION'
  * ACTION CREATORS
  */
 export const setQuestion = question => ({ type: SET_QUESTION, question })
-const getQuestion = question => ({ type: GET_QUESTION, question })
+export const getQuestion = question => ({ type: GET_QUESTION, question })
 const newQuestion = () => ({ type: NEW_QUESTION })
 const changeQuestion = question => ({ type: CHANGE_QUESTION, question })
-export const clearQuestion = () => ({ type: CLEAR_QUESTION })
+const clearQuestion = () => ({ type: CLEAR_QUESTION })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
 
 /**
  * THUNK CREATORS
  */
-export const fetchQuestion = question =>
-  dispatch =>
-    axios.get(`/api/questions/${question.id}`)
-      .then(res => dispatch(getQuestion(res.data)))
-      .catch(err => console.log(err))
-
-export const addQuestion = () =>
-  dispatch => dispatch(newQuestion())// ???
+export const addQuestion = question =>
+  dispatch => {
+    dispatch(newQuestion(question))
+    dispatch(setModeAdd())
+  }
 
 export const editQuestion = question =>
+  dispatch => {
+    dispatch(changeQuestion(question))
+    dispatch(setModeEdit())
+  }
+
+export const clearQuestion = question =>
+  dispatch => {
+    dispatch(getQuestion(question))
+    dispatch(setModeRead())
+  }
+
+export const saveQuestion = question =>
   dispatch =>
-    axios.put(`/api/questions/${question.id}`, question)
-      .then(res => dispatch(changeQuestion(res.data)))
+    axios.put(`/${BACK_END}/api/questions/${question.id}`, question)
+      .then(res => dispatch(editQuestion(res.data)))
+      .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
 // find next question, delete previous, switch the state to the next
 export const deleteQuestion = question =>
   dispatch =>
-    axios.get('/api/questions/')
+    axios.get(`/${BACK_END}/api/questions/`)
       .then(questions => {
         const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
         const questionIndex = sortedQuestions[sortedQuestions.indexOf(question.id)]
@@ -53,22 +64,29 @@ export const deleteQuestion = question =>
              : sortedQuestions[questionIndex - 1]
       })
       .then(nextQuestionId => {
-        axios.delete(`/api/questions/${question.id}`)
-        return nextQuestionId ? fetchQuestion(nextQuestionId) : null
+        axios.delete(`/${BACK_END}/api/questions/${question.id}`)
+        return nextQuestionId ? dispatch(fetchQuestion(nextQuestionId)) : null
       })
+      .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
 export const cancelQuestion = question =>
   dispatch =>
-    axios.get(`/api/questions/${question.id}`)
+    axios.get(`/${BACK_END}/api/questions/${question.id}`)
       .then(res => dispatch(getQuestion(res.data)))
+      .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
 export const submitQuestion = question =>
   dispatch =>
-    axios.post('/api/questions/', question)
+    axios.post(`/${BACK_END}/api/questions/`, question)
       .then(res => dispatch(createQuestion(res.data)))
+      .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
+
+export const sendQuestion = question =>
+  dispatch //=>
+    // send to content creator
 
 /**
  * REDUCER
@@ -79,9 +97,10 @@ export default (state = {}, action) => {
     case SET_QUESTION:
     case GET_QUESTION:
     case CREATE_QUESTION:
-    case EDIT_QUESTION:
+    case CHANGE_QUESTION:
       return action.question
 
+    case NEW_QUESTION:
     case CLEAR_QUESTION:
     default:
       return state
