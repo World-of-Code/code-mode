@@ -24,19 +24,16 @@ export default class DrawerComponents extends Component {
       let action = changes['action'];
       if(action.newValue === "hide") {
         this.setState({display: false})
-     //   console.log("hide statew", this.state.display)
          $( "#app" ).hide();
       }
       if(action.newValue === 'show') {
         this.setState({display: true})
-     //   console.log("show statew", this.state.display)
          $( "#app" ).show();
       } 
   });
 
   chrome.storage.local.get("action",(obj)=>{
     let foo = obj.userInput
-    console.log("foo", foo)
     if(foo === 'hide')
      this.setState({
        display: false
