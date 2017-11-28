@@ -18,7 +18,6 @@
   "content_scripts": [
     {
       "css": [
-        "chrome/style/drawer.less",
         "chrome/style/index.scss"
       ],
       "js": [

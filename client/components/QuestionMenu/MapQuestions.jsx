@@ -11,17 +11,16 @@ class MapQuestions extends Component {
   constructor(props) {
     super(props)
   }
-  
+
   componentDidMount () {
     this.props.fetchQuestions() // whatever the url is here
 
   }
 
-
   render() {
     const sortedQuestions = this.props.questions.sort((q1, q2) => q1.id - q2.id)
     return (
-      
+
       <div>
       { this.props.questions &&
         sortedQuestions.map(question => (
@@ -42,7 +41,7 @@ class MapQuestions extends Component {
         ))
       }
       </div>
-      
+
     )
   }
 
