@@ -22,17 +22,14 @@ constructor(){
   }
 
  handleClick () {
-   console.log("toggle state", this.state.buttonToggle)
   if(this.state.buttonToggle === true){
     this.setState({buttonToggle: false})
    chrome.storage.local.set({ action: 'hide' }); 
-    //console.log("buttonToggle state", this.state.buttonToggle)
   //  chrome.management.setEnabled("fbmlhcnipimamepnadolaoblelnadblo", false)
   }
   else{
     this.setState({buttonToggle: true})
-    chrome.storage.local.set({ action: 'show' }); 
-   //  console.log("buttonToggle state", this.state.buttonToggle)
+    chrome.storage.local.set({ action: 'show' });
     //chrome.management.setEnabled("fbmlhcnipimamepnadolaoblelnadblo", true);
   }
     
