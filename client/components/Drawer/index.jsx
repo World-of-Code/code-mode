@@ -32,6 +32,17 @@ class DrawerWrapper extends Component {
       this.onOpenChange(false);
     }
   }
+  componentDidMount () {
+  //   chrome.storage.onChanged.addListener(function(changes) {
+  //     let action = changes['action'];
+  //     if(action.newValue === 'hide') {
+  //       $( "#app" ).hide();
+  //     }
+  //     if(action.newValue === 'show') {
+  //       $( "#app" ).show();
+  //     } 
+  // });
+  }
   handleClick = event => {
     this.setState({ open: !this.state.open });
     console.log('hi')
@@ -59,15 +70,15 @@ class DrawerWrapper extends Component {
       transitions: this.state.transitions,
       onOpenChange: this.onOpenChange,
     };
-    chrome.storage.onChanged.addListener(function(changes) {
-      let action = changes['action'];
-      if(action.newValue === 'hide') {
-        $( "#app" ).hide();
-      }
-      if(action.newValue === 'show') {
-        $( "#app" ).show();
-      }
-  });
+  //   chrome.storage.onChanged.addListener(function(changes) {
+  //     let action = changes['action'];
+  //     if(action.newValue === 'hide') {
+  //       $( "#app" ).hide();
+  //     }
+  //     if(action.newValue === 'show') {
+  //       $( "#app" ).show();
+  //     }
+  // });
     return (
       <div className="drawer-container">
 

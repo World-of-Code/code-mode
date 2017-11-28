@@ -5,6 +5,7 @@ import { fetchInput, postInput, fetchQuestions } from '../../../store'
 import { render } from 'react-dom';
 import AceEditor from '../src/ace.jsx';
 import 'brace/mode/jsx';
+const debounce = require('lodash.debounce');
 
 
 const languages=['javascript']
@@ -30,7 +31,9 @@ class AppClass extends Component {
     this.setState({
       value: newValue
     })
-    this.setChromeStorage()
+    //this.setChromeStorage()
+     debounce(this.setChromeStorage,1000)() //1sec
+     
   }
 
   onSelectionChange(newValue, event) {
@@ -142,11 +145,12 @@ class AppClass extends Component {
         this.setState({
           value: obj.userInput
       })
-      console.log('saved')
+      console.log('getting')
       });
   }
 
 setChromeStorage(){
+  console.log("i am involked")
     chrome.storage.local.set({'userInput': this.state.value}, function() {    
       console.log('saved')
   })}
@@ -155,7 +159,7 @@ setChromeStorage(){
     this.props.handleInputFetch()
     this.getChromeStorage()
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { //minor t
     if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
   }
   render() {

@@ -2,7 +2,7 @@ import { UserHome, Login, Signup } from '../'
 import { me } from '../../store'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import $ from 'jquery'
+import $ from 'jquery'
 
 /**
  * COMPONENT
