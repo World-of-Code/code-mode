@@ -4,7 +4,7 @@ import '../../../chrome/style/drawer.less';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import DrawerContents from '../DrawerContents'
-// import $ from 'jquery'
+ import $ from 'jquery'
 
 class DrawerWrapper extends Component {
   constructor(props) {
@@ -39,13 +39,13 @@ class DrawerWrapper extends Component {
       let action = changes['action'];
       if(action.newValue === "hide") {
         this.setState({display: false})
-        console.log("hide statew", this.state.display)
-        // $( "#app" ).hide();
+     //   console.log("hide statew", this.state.display)
+         $( "#app" ).hide();
       }
       if(action.newValue === 'show') {
         this.setState({display: true})
-        console.log("show statew", this.state.display)
-        // $( "#app" ).show();
+     //   console.log("show statew", this.state.display)
+         $( "#app" ).show();
       } 
   });
 
@@ -61,11 +61,10 @@ class DrawerWrapper extends Component {
      display: true
  })
    });
-
   }
   handleClick = event => {
     this.setState({ open: !this.state.open });
-    console.log('hi')
+
   }
   render() {
 
@@ -91,10 +90,12 @@ class DrawerWrapper extends Component {
       transitions: this.state.transitions,
       onOpenChange: this.onOpenChange,
     };
-console.log("state",this.state.display)
+
     return ( 
+      <div>
+      {this.state.display  ?
       <div className="drawer-container">
-        {this.state.display  ?
+        
         <Drawer sidebar={drawer} {...drawerProps}>
         <div className="main">
         <button onClick={this.handleClick}>
@@ -113,6 +114,7 @@ console.log("state",this.state.display)
              </p>
            </div>
          </Drawer>
+         </div>
        : <div /> 
        }
       </div>

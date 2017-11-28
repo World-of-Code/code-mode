@@ -13,6 +13,7 @@ const app = document.createElement('div')
 app.id = 'app'
 body.prepend(app)
 
+
 ReactDOM.render(
   <Provider store={ store }>
     <DrawerWrapper />
