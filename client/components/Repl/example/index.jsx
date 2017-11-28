@@ -31,7 +31,8 @@ class AppClass extends Component {
     this.setState({
       value: newValue
     })
-    _.debounce(this.setChromeStorage(),5000)
+    this.setChromeStorage()
+    // debounce(this.setChromeStorage(),3000, { 'maxWait': 10000 })
   }
 
   onSelectionChange(newValue, event) {
@@ -160,6 +161,7 @@ setChromeStorage(){
     if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
   }
   render() {
+    console.log("test",this.state.value)
     return (
       <div className="columns">
  

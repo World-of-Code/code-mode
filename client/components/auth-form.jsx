@@ -18,11 +18,9 @@ class AuthForm extends Component{
         return
       }
       let request = new XMLHttpRequest()
-      request.open('GET', 'https://wwww.googleapis.com/outh2/v1/userinfo?alt=json&access_token='+token)
-      request.onload = ()=>{
-        alert(response.response)
-      }
-      response.send()
+      request.open('GET', 'https://accounts.google.com/o/oauth2/v2/auth?alt=json&access_token='+token)
+      console.log(request.send())
+      //request.close()
     })
   }
   

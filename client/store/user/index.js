@@ -9,7 +9,7 @@ import history from '../../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-
+const ADD_USER = 'ADD_USER'
 /**
  * INITIAL STATE
  */
@@ -19,6 +19,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({ type: GET_USER, user })
+const addUser = user => ({ type: ADD_USER, user})
 const removeUser = () => ({ type: REMOVE_USER })
 
 /**
@@ -32,7 +33,7 @@ export const me = () =>
 
 export const auth = (email, password, method) =>
   dispatch =>
-    axios.post(`https://code-mode.herokuapp.com/auth/${method}`, { email, password })
+    axios.post(`https://code-mode.herokuapp.com/auth${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
@@ -47,6 +48,14 @@ export const logout = () =>
         history.push('/login')
       })
       .catch(err => console.log(err))
+
+// export const signup = () =>
+//     dispatch =>
+//       axios.post(`https://code-mode.herokuapp.com/auth/signup`, req.body)
+//       .then(_ =>{
+//         dispatch(addUser(res.data))
+
+//       })
 
 /**
  * REDUCER
