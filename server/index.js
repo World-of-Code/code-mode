@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 8080
 const app = express()
 const http = require('http')
 const https = require('https')
-const socketio = require('socket.io')
 module.exports = app
 
 
@@ -84,9 +83,7 @@ const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () => console.log(`Mixing it up on port ${ PORT }`))
 
-  // set up our socket control center
-  const io = socketio(server)
-  require('./socket')(io)
+
 }
 
 const syncDb = () => db.sync()

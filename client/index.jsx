@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store, {fetchQuestions} from './store'
 import DrawerWrapper from './components/Drawer'
-import './socket'
+
 
 const body = document.body
 const app = document.createElement('div')
