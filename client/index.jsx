@@ -11,21 +11,28 @@ import './socket'
 // import registerServiceWorker from './registerServiceWorker'
 import { Store } from 'react-chrome-redux'
 
-// window.addEventListener('load', () => {
-//const request = new XMLHttpRequest()
-//request.open('GET', 'http://localhost:8080/api/questions')  // sync
-//request.send()
-//})
+const initApp = (event) => {
+  const youtube = document.getElementById('content')
+  const app = document.createElement('div')
+  app.id = 'app'
+  youtube.appendChild(app)
 
-const body = document.body
-const app = document.createElement('div')
-app.id = 'app'
-body.prepend(app)
+  ReactDOM.render(
+    <Provider store={store}>
+      <DrawerComponents />
+    </Provider>,
+    document.getElementById('app')
+  )
+};
 
-ReactDOM.render(
-  <Provider store={ store }>
-    <DrawerComponents />
-  </Provider>,
-  document.getElementById('app')
-)
-
+switch (document.readyState) {
+  case "loading":
+    document.addEventListener("DOMContentLoaded", initApp(event))
+    break;
+  case "interactive":
+    initApp(event)
+    break;
+  case "complete":
+    initApp(event)
+    break;
+}
