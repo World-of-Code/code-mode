@@ -1,16 +1,33 @@
 'use strict'
 
-import React from 'react'
+import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../store'
 
-/**
- * COMPONENT
- */
-const AuthForm = props => {
-  const { name, displayName, handleSubmit, error } = props
-
+class AuthForm extends Component{
+  constructor(props){
+    super(props)
+  }
+  handleSubmit(){
+    chrome.identity.getAuthToken({
+      interactive: true
+    },(token)=>{
+      if(chrome.runtime.lastError){
+        alert(chrome.runtime.lastError.message);
+        return
+      }
+      let request = new XMLHttpRequest()
+      request.open('GET', 'https://wwww.googleapis.com/outh2/v1/userinfo?alt=json&access_token='+token)
+      request.onload = ()=>{
+        alert(response.response)
+      }
+      response.send()
+    })
+  }
+  
+render(){
+  const { name, displayName, handleSubmit, error } = this.props
   return (
     <div>
       <form onSubmit={ handleSubmit } name={ name }>
@@ -27,10 +44,14 @@ const AuthForm = props => {
         </div>
         { error && error.response && <div> { error.response.data } </div> }
       </form>
-      <a href="/auth/youtube">{ displayName } with Youtube</a>
+      <button onClick ={this.handleSubmit}>{ displayName } with YouTube</button>
+      {/* <a href="http://background.html">{ displayName } with Youtube</a> */}
     </div>
   )
 }
+}
+
+
 
 const mapLogin = state => ({
   name: 'login',
@@ -51,23 +72,6 @@ const mapDispatch = dispatch => ({
   }
 })
 
-// fetch('https://code-mode-herokuapp.com/api/users')
-// .then(
-//   function(response) {
-//     if (response.status !== 200) {
-//       console.log('Looks like there was a problem. Status Code: ' +
-//         response.status);
-//       return;
-//     }
-//     response.json().then(function(data) {
-//       console.log(data);
-//     });
-//   }
-// )
-// .catch(function(err) {
-//   console.log('Fetch Error :-S', err);
-// });
-
 /**
  * PROP TYPES
  */
@@ -78,11 +82,5 @@ AuthForm.propTypes = {
   error: PropTypes.object
 }
 
-
 export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
-
-
-// const request = new XMLHttpRequest()
-// request.open('GET', 'https://code-mode-herokuapp.com/api/users')  // sync
-// request.send()
