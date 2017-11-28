@@ -1,5 +1,6 @@
 .drawer-bar-all {
   background: #fff;
+  z-index: 2147483647;
 }
 
 .drawer-bar-closed {

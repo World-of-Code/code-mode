@@ -8,19 +8,22 @@
   clear: both;
 }
 .rc-drawer-sidebar {
-  z-index: 2;
+  /* max z-index - 1 */
+  z-index: 2147483646;
   position: sticky;
   transition: transform 0.3s ease-out;
   will-change: transform;
   overflow-y: auto;
 }
 .rc-drawer-draghandle {
-  z-index: 1;
+  /* max z-index - 2 */
+  z-index: 2147483645;
   position: absolute;
   background-color: rgba(50, 50, 50, 0.1);
 }
 .rc-drawer-overlay {
-  z-index: 1;
+  /* max z-index - 2 */
+  z-index: 2147483645;
   position: sticky;
   top: 0;
   left: 0;
@@ -109,7 +112,8 @@
   position: sticky;
   height: 450px;
   width: 854;
-  z-index: 10;
+  /* max z-index */
+  z-index: 2147483647;
   clear: both;
   padding-top: 10%;
 }
