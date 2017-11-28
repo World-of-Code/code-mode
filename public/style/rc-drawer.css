@@ -9,7 +9,7 @@
 }
 .rc-drawer-sidebar {
   /* max z-index - 1 */
-  z-index: 2147483646;
+  z-index: 2147483646 !important;
   position: sticky;
   transition: transform 0.3s ease-out;
   will-change: transform;
@@ -17,13 +17,13 @@
 }
 .rc-drawer-draghandle {
   /* max z-index - 2 */
-  z-index: 2147483645;
+  z-index: 2147483645 !important;
   position: absolute;
   background-color: rgba(50, 50, 50, 0.1);
 }
 .rc-drawer-overlay {
   /* max z-index - 2 */
-  z-index: 2147483645;
+  z-index: 2147483645 !important;
   position: sticky;
   top: 0;
   left: 0;
@@ -113,7 +113,8 @@
   height: 450px;
   width: 854;
   /* max z-index */
-  z-index: 2147483647;
+  z-index: 2147483647 !important;
+
   clear: both;
   padding-top: 10%;
 }
