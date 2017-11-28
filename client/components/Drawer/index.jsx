@@ -8,7 +8,7 @@ import DrawerBar from './DrawerBar'
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../../public/style/drawer.css';
 
-export default class DrawerContainer extends Component {
+export default class DrawerComponents extends Component {
   constructor(props) {
     super(props);
   }
