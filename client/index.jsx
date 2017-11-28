@@ -27,12 +27,10 @@ const initApp = (event) => {
 
 switch (document.readyState) {
   case "loading":
+  case "complete":
     document.addEventListener("DOMContentLoaded", initApp(event))
     break;
   case "interactive":
-    initApp(event)
-    break;
-  case "complete":
     initApp(event)
     break;
 }
