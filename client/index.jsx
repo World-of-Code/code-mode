@@ -19,4 +19,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 )
-//component didm chrome.storage.get

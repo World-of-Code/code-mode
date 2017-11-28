@@ -11,8 +11,8 @@ class PopupMain extends Component {
 constructor(){
   super()
   this.state = {
-    toggle: true
-  }
+    buttonToggle: true
+  } 
 
   this.handleClick = this.handleClick.bind(this)
 }
@@ -22,17 +22,17 @@ constructor(){
   }
 
  handleClick () {
-   console.log("toggle state", this.state.toggle)
-  if(this.state.toggle === true){
-    this.setState({toggle: false})
+   console.log("toggle state", this.state.buttonToggle)
+  if(this.state.buttonToggle === true){
+    this.setState({buttonToggle: false})
    chrome.storage.local.set({ action: 'hide' }); 
-    //console.log("toggle state", this.state.toggle)
+    //console.log("buttonToggle state", this.state.buttonToggle)
   //  chrome.management.setEnabled("fbmlhcnipimamepnadolaoblelnadblo", false)
   }
   else{
-    this.setState({toggle: true})
+    this.setState({buttonToggle: true})
     chrome.storage.local.set({ action: 'show' }); 
-   //  console.log("toggle state", this.state.toggle)
+   //  console.log("buttonToggle state", this.state.buttonToggle)
     //chrome.management.setEnabled("fbmlhcnipimamepnadolaoblelnadblo", true);
   }
     

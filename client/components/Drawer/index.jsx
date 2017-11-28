@@ -2,8 +2,9 @@ import Drawer from 'rc-drawer';
 import React, { Component } from 'react';
 import '../../../chrome/style/drawer.less';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux'
 import DrawerContents from '../DrawerContents'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 class DrawerWrapper extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class DrawerWrapper extends Component {
 
     this.state = {
       docked: false,
+      display: false,
       open: false,
       transitions: true,
       touch: true,
@@ -33,21 +35,40 @@ class DrawerWrapper extends Component {
     }
   }
   componentDidMount () {
-  //   chrome.storage.onChanged.addListener(function(changes) {
-  //     let action = changes['action'];
-  //     if(action.newValue === 'hide') {
-  //       $( "#app" ).hide();
-  //     }
-  //     if(action.newValue === 'show') {
-  //       $( "#app" ).show();
-  //     } 
-  // });
+    chrome.storage.onChanged.addListener((changes) =>{
+      let action = changes['action'];
+      if(action.newValue === "hide") {
+        this.setState({display: false})
+        console.log("hide statew", this.state.display)
+        // $( "#app" ).hide();
+      }
+      if(action.newValue === 'show') {
+        this.setState({display: true})
+        console.log("show statew", this.state.display)
+        // $( "#app" ).show();
+      } 
+  });
+
+  chrome.storage.local.get("action",(obj)=>{
+    let foo = obj.userInput
+    console.log("foo", foo)
+    if(foo === 'hide')
+     this.setState({
+       display: false
+   })
+   if(foo === 'show')
+   this.setState({
+     display: true
+ })
+   });
+
   }
   handleClick = event => {
     this.setState({ open: !this.state.open });
     console.log('hi')
   }
   render() {
+
     const drawer = (
       <div>
         <h3>
@@ -70,18 +91,10 @@ class DrawerWrapper extends Component {
       transitions: this.state.transitions,
       onOpenChange: this.onOpenChange,
     };
-  //   chrome.storage.onChanged.addListener(function(changes) {
-  //     let action = changes['action'];
-  //     if(action.newValue === 'hide') {
-  //       $( "#app" ).hide();
-  //     }
-  //     if(action.newValue === 'show') {
-  //       $( "#app" ).show();
-  //     }
-  // });
-    return (
+console.log("state",this.state.display)
+    return ( 
       <div className="drawer-container">
-
+        {this.state.display  ?
         <Drawer sidebar={drawer} {...drawerProps}>
         <div className="main">
         <button onClick={this.handleClick}>
@@ -100,10 +113,12 @@ class DrawerWrapper extends Component {
              </p>
            </div>
          </Drawer>
+       : <div /> 
+       }
       </div>
     );
   }
 }
 
 
-export default DrawerWrapper;
+export default DrawerWrapper
