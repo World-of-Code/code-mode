@@ -9,7 +9,6 @@ class QuestionForm extends Component {
     super(props)
     this.state = this.props.content ? { content: this.props.content } : {}
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange (event) {

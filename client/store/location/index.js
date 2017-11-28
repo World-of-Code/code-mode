@@ -23,9 +23,9 @@ const removeLocation = () => ({ type: REMOVE_LOCATION })
 /**
  * THUNK CREATORS
  */
-export const fetchLocation = locationId =>
+export const fetchLocation = location =>
   dispatch =>
-    axios.get(`/${BACK_END}/api/locations/${locationId}`)
+    axios.get(`/${BACK_END}/api/locations`, location)
       .then(res => dispatch(getQuestion(res.data)))
       .catch(err => console.log(err))
 

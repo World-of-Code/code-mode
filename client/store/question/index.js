@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../store'
+import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../../store'
 
 
 /**
@@ -11,7 +11,6 @@ const SET_QUESTION = 'SET_QUESTION'
 const GET_QUESTION = 'GET_QUESTION'
 const NEW_QUESTION = 'NEW_QUESTION'
 const CHANGE_QUESTION = 'CHANGE_QUESTION'
-const CLEAR_QUESTION = 'CLEAR_QUESTION'
 const CREATE_QUESTION = 'CREATE_QUESTION'
 
 /**
@@ -21,15 +20,14 @@ export const setQuestion = question => ({ type: SET_QUESTION, question })
 export const getQuestion = question => ({ type: GET_QUESTION, question })
 const newQuestion = () => ({ type: NEW_QUESTION })
 const changeQuestion = question => ({ type: CHANGE_QUESTION, question })
-const clearQuestion = () => ({ type: CLEAR_QUESTION })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
 
 /**
  * THUNK CREATORS
  */
-export const addQuestion = question =>
+export const addQuestion = () =>
   dispatch => {
-    dispatch(newQuestion(question))
+    dispatch(newQuestion())
     dispatch(setModeAdd())
   }
 
@@ -53,9 +51,9 @@ export const saveQuestion = question =>
       .catch(err => console.log(err))
 
 // find next question, delete previous, switch the state to the next
-export const deleteQuestion = question =>
+export const deleteQuestion = (question, urlId) =>
   dispatch =>
-    axios.get(`/${BACK_END}/api/questions/`)
+    axios.get(`/${BACK_END}/api/questions/${urlId}`)
       .then(questions => {
         const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
         const questionIndex = sortedQuestions[sortedQuestions.indexOf(question.id)]
@@ -69,6 +67,25 @@ export const deleteQuestion = question =>
       })
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
+
+// export const nextQuestion = questionId =>
+//   dispatch =>
+//     axios.get(`/${BACK_END}/api/questions/`)
+//       .then(questions => {
+//         const sortedQuestions = questions.slice().sort((q1, q2) => q1.id - q2.id)
+//         const questionIndex = sortedQuestions[sortedQuestions.indexOf(questionId)]
+//         return sortedQuestions[questionIndex + 1]
+//              ? sortedQuestions[questionIndex + 1]
+//              : sortedQuestions[questionIndex - 1]
+//       })
+//       .catch(err => console.log(err))
+
+// export const deleteQuestion = questionId =>
+//   dispatch =>
+//     axios.delete(`/${BACK_END}/api/questions/${questionId}`)
+//       .then(nextQuestionId => dispatch(fetchQuestion(nextQuestionId)))
+//       .then(() => dispatch(setModeRead()))
+//       .catch(err => console.log(err))
 
 export const cancelQuestion = question =>
   dispatch =>
@@ -101,7 +118,8 @@ export default (state = {}, action) => {
       return action.question
 
     case NEW_QUESTION:
-    case CLEAR_QUESTION:
+      return {}
+
     default:
       return state
   }

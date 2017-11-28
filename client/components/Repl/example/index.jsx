@@ -115,7 +115,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.getQuestion()
+    // this.props.getQuestion()
     this.getChromeStorage()
   }
 
@@ -184,7 +184,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  question: () => dispatch(getQuestion())
+  getQuestion: () => dispatch(getQuestion())
   // thunks for populating repl
 })
 

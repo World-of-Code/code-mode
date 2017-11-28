@@ -16,7 +16,7 @@ class DrawerContents extends Component{
   componentDidMount () {
     this.props.me()
     this.props.fetchLocation(window.location.href)
-      .then(url => { if (url) this.props.fetchAllQuestions(url.id) })
+      .then(url => { if (url) this.props.fetchAllQuestions(url) })
       .catch(err => console.log(err))
     this.props.getMode()
   }

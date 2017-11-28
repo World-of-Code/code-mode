@@ -56,8 +56,14 @@ const createApp = () => {
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'chrome/js')))
 
+  // sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'chrome/views/index.html'))
+  })
+
   // any remaining requests with an extension (.js, .css, etc.) send 404
   .use((req, res, next) => {
+    console.log(req.path)
     if (path.extname(req.path).length) {
       const err = new Error('Not found')
       err.status = 404
@@ -65,11 +71,6 @@ const createApp = () => {
     } else {
       next()
     }
-  })
-
-  // sends index.html
-  app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'chrome/views/index.html'))
   })
 
   // error handling endware
@@ -82,7 +83,7 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${ PORT }`))
+  const server = app.listen(PORT, () => console.log(`Havin a party on port ${ PORT }`))
 
   // set up our socket control center
   const io = socketio(server)

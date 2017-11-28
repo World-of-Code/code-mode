@@ -4,6 +4,7 @@ const router = require('express').Router()
 const err = require('../utils')
 const { Location } = require('../../db/models')
 
+
 // find location by id
 router.param('/:id', (req, res, next, id) => {
   Location.findById(id, { include: [{ all: true }] })
@@ -19,26 +20,28 @@ router.param('/:id', (req, res, next, id) => {
 })
 
 // get location by id
-router.get('/:id', (req, res, next) =>{
-  res.json(req.location)
+router.get('/', (req, res, next) => {
+  Location.findOne({ where: { url: req.body.location } })
+    .then(location => res.send(location))
+    .catch(next)
 })
 
 // create a location
-router.post('/', (req, res, next) =>{
+router.post('/', (req, res, next) => {
   Location.create(req.body)
     .then(location => res.status(201).json(location))
     .catch(next)
 })
 
 // edit location by id
-router.put('/:id', (req, res, next) =>{
+router.put('/:id', (req, res, next) => {
   req.location.update(req.body)
     .then(location => res.status(201).json(location))
     .catch(next)
 })
 
 // delete location by id
-router.delete('/:id', (req, res, next) =>{
+router.delete('/:id', (req, res, next) => {
   req.location.destroy()
     .then(() => res.sendStatus(204))
     .catch(next)

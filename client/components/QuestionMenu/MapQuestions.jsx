@@ -7,11 +7,11 @@ import { setQuestion } from '../../store'
 
 
 const MapQuestions = props => {
-  const sortedQuestions = props.questions.sort((q1, q2) => q1.id - q2.id)
+  const sortedQuestions = props.questions && props.questions.sort((q1, q2) => q1.id - q2.id)
 
   return (
-    props.questions &&
-      sortedQuestions.map(question => (
+    props.questions
+      ? sortedQuestions.map(question => (
         <div key={ question.id }>
           <button onClick={ () =>
             this.props.setQuestion(question)}>
@@ -26,7 +26,7 @@ const MapQuestions = props => {
               </div>
           </button>
         </div>
-    ))
+    )) : ''
   )
 }
 

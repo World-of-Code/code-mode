@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END } from '../store'
+import { BACK_END } from '../../store'
 import history from '../../history'
 
 
