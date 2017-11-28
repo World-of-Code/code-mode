@@ -146,7 +146,7 @@ setChromeStorage(){
     this.props.handleInputFetch()
     this.getChromeStorage()
   }
-  componentWillReceiveProps(nextProps) { //minor t
+  componentWillReceiveProps(nextProps) {
     if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
   }
   render() {
