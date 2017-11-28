@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../../../chrome/style/drawer.less';
 import ReactDOM from 'react-dom';
 import DrawerContents from '../DrawerContents'
+import $ from 'jquery'
 
 class DrawerWrapper extends Component {
   constructor(props) {
@@ -58,7 +59,15 @@ class DrawerWrapper extends Component {
       transitions: this.state.transitions,
       onOpenChange: this.onOpenChange,
     };
-
+    chrome.storage.onChanged.addListener(function(changes) {
+      let action = changes['action'];
+      if(action.newValue === 'hide') {
+        $( "#app" ).hide();
+      }
+      if(action.newValue === 'show') {
+        $( "#app" ).show();
+      }
+  });
     return (
       <div className="drawer-container">
 
