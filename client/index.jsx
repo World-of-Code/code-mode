@@ -11,11 +11,18 @@ import './socket'
 // import registerServiceWorker from './registerServiceWorker'
 import { Store } from 'react-chrome-redux'
 
+
+// var newdiv = document.createElement('div');
+// newdiv.id = "alignToBottomDIV";
+// $(newdiv).html("Bottom Toolbar");
+// $("body").append(newdiv);
+
 const initApp = (event) => {
-  const youtube = document.getElementById('content')
+  // const youtube = document.getElementById('content')
+  const youtube = document.body
   const app = document.createElement('div')
   app.id = 'app'
-  youtube.appendChild(app)
+  youtube.append(app)
 
   ReactDOM.render(
     <Provider store={store}>

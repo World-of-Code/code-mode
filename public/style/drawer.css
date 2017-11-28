@@ -1,27 +1,24 @@
 .drawer-bar-all {
   background: #fff;
-  z-index: 2147483647;
-}
-
-.drawer-bar-closed {
-  /* Set the navbar to fixed position */
+  z-index: 2147483647 !important;
   position: fixed;
-  /* Position the navbar at the top of the page */
   bottom: 0;
-  /* Full width */
   width: 100%;
 }
 
+/* the following are unecessary for now but may come in handy later */
+.drawer-bar-closed {
+  /* position: fixed; */
+  /* bottom: 0; */
+  /* width: 100%; */
+}
 .drawer-bar-open {
-  /* Set the navbar to fixed position */
-  position: sticky;
-  /* Position the navbar at the top of the page */
-  bottom: 0;
-  /* Full width */
-  width: 100%;
+  /* position: sticky; */
+  /* bottom: 0; */
+  /* width: 100%; */
 }
 
 .contents {
-  height: 425px;
+  height: 400px;
   overflow: auto;
 }
