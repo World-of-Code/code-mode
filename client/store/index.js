@@ -8,14 +8,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import question from './question'
 import allQuestions from './allQuestions'
-import input from './input'
+import location from './location'
 import mode from './mode'
 
 const reducer = combineReducers({
   user,
   question,
   allQuestions,
-  input,
+  location,
   mode
 })
 
@@ -30,7 +30,7 @@ export default store
 export * from './user'
 export * from './allQuestions'
 export * from './question'
-export * from './input'
+export * from './location'
 export * from './mode'
 
 // backend api route

@@ -17,7 +17,7 @@ const CREATE_QUESTION = 'CREATE_QUESTION'
  * ACTION CREATORS
  */
 export const setQuestion = question => ({ type: SET_QUESTION, question })
-export const getQuestion = question => ({ type: GET_QUESTION, question })
+export const getQuestion = () => ({ type: GET_QUESTION })
 const newQuestion = () => ({ type: NEW_QUESTION })
 const changeQuestion = question => ({ type: CHANGE_QUESTION, question })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
@@ -25,6 +25,12 @@ const createQuestion = question => ({ type: CREATE_QUESTION, question })
 /**
  * THUNK CREATORS
  */
+export const fetchQuestion = questionId =>
+dispatch =>
+  axios.get(`/${BACK_END}/api/questions/${questionId}`)
+    .then(res => dispatch(getQuestion(res.data)))
+    .catch(err => console.log(err))
+
 export const addQuestion = () =>
   dispatch => {
     dispatch(newQuestion())
@@ -112,7 +118,6 @@ export default (state = {}, action) => {
   switch (action.type) {
 
     case SET_QUESTION:
-    case GET_QUESTION:
     case CREATE_QUESTION:
     case CHANGE_QUESTION:
       return action.question
@@ -120,6 +125,7 @@ export default (state = {}, action) => {
     case NEW_QUESTION:
       return {}
 
+    case GET_QUESTION:
     default:
       return state
   }

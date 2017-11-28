@@ -10,7 +10,7 @@ const ButtonContainer = props => (
   <div>
     {/* default: add, creator( edit, delete (only if exists) ) */}
 
-    <MapButtons questions={ props.questions } />
+    <MapButtons />
 
   </div>
 )

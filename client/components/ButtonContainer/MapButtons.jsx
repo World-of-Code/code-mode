@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import {
   me,
   fetchLocation,
+  getMode,
+  getQuestion,
   addQuestion,
   editQuestion,
   clearQuestion,
@@ -16,31 +18,37 @@ import {
 } from '../../store'
 
 
-const MapButtons = props => {
-  const pageAdmin = props.user.id === props.location.userId
-  const buttonsAvailable = props.mode && props.mode.buttons.filter(button => {
-    if (button.type === 'Add') return true
-    if (!question.id) return false
-    return pageAdmin ? true : false
-  })
-
-  const handleClick = type => {
-    const question = props.question
-    const action = `${type}Question`
-
-    props[action](question, props.location.id)
-
-    // if (type === 'delete') {
-    //   this.props.nextQuestion(question.id, props.location.id)
-    //     .then(props.deleteQuestion(question.id))
-    //     .catch(err => console.log(err))
-    // }
-    // else this.props[action](props.question)
+class MapButtons extends Component {
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  return (
-    buttonsAvailable.map(button =>
-      (
+  componentDidMount () {
+    this.props.me()
+    this.props.fetchLocation(window.location.href)
+    this.props.getMode()
+    this.props.getQuestion()
+  }
+
+  handleClick (type) {
+    const question = this.props.question
+    const action = `${type}Question`
+
+      if (type === 'delete') this.props[action](question, this.props.location.id)
+      else this.props[action](question)
+  }
+
+  render () {
+    const pageAdmin = this.props.user.id === this.props.location.userId
+    const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
+      if (button.type === 'Add') return true
+      if (!this.props.question.id) return false
+      return pageAdmin ? true : false
+    })
+
+    return (
+      buttonsAvailable.map(button => (
         <div key={ button.name }>
           <button
             type="submit"
@@ -50,9 +58,10 @@ const MapButtons = props => {
             { button.name }
           </button>
         </div>
-      )
+      ))
     )
-  )
+  }
+
 }
 
 const mapStateToProps = state => ({
@@ -63,15 +72,17 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  me,
-  fetchLocation,
-  addQuestion,
-  editQuestion,
-  clearQuestion,
-  saveQuestion,
-  deleteQuestion,
-  cancelQuestion,
-  submitQuestion,
+  me: () => dispatch(me()),
+  fetchLocation: url => dispatch(fetchLocation(url)),
+  getMode: () => dispatch(getMode()),
+  getQuestion: () => dispatch(getQuestion()),
+  addQuestion: () => dispatch(addQuestion()),
+  editQuestion: question => dispatch(editQuestion(question)),
+  clearQuestion: question => dispatch(clearQuestion(question)),
+  saveQuestion: question => dispatch(saveQuestion(question)),
+  deleteQuestion: (question, urlId) => dispatch(deleteQuestion(question, urlId)),
+  cancelQuestion: question => dispatch(cancelQuestion(question)),
+  submitQuestion: question => dispatch(submitQuestion(question)),
   sendQuestion: () => dispatch(sendQuestion())
 })
 
