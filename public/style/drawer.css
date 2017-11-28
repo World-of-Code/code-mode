@@ -1,0 +1,27 @@
+.drawer-bar-all {
+  background: #fff;
+  z-index: 2147483647;
+}
+
+.drawer-bar-closed {
+  /* Set the navbar to fixed position */
+  position: fixed;
+  /* Position the navbar at the top of the page */
+  bottom: 0;
+  /* Full width */
+  width: 100%;
+}
+
+.drawer-bar-open {
+  /* Set the navbar to fixed position */
+  position: sticky;
+  /* Position the navbar at the top of the page */
+  bottom: 0;
+  /* Full width */
+  width: 100%;
+}
+
+.contents {
+  height: 425px;
+  overflow: auto;
+}

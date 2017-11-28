@@ -67,13 +67,13 @@ class AppClass extends Component {
       fontSize: parseInt(e.target.value,10)
     })
   }
-  
+
   constructor(props) {
     super(props);
-    // Maybe useful for later 
-    // const defaultValue = props.questions && 
+    // Maybe useful for later
+    // const defaultValue = props.questions &&
     //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
-    // const defaultValue = 
+    // const defaultValue =
     // `function onLoad(editor) {
     //   console.log(\"i\'ve loaded\");
     // }`;
@@ -109,14 +109,13 @@ class AppClass extends Component {
   handleClick(event){
     event.preventDefault()
 
-    let value = this.state.value 
+    let value = this.state.value
     this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
     if (this.state.value.includes('console.log')) {
       let newValue = this.state.value.replace(/console.log/g, 'return')
       let value = newValue
       this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
   }
-
 }
   handlePopulate(event){
     event.preventDefault()
@@ -147,7 +146,7 @@ class AppClass extends Component {
   }
 
 setChromeStorage(){
-    chrome.storage.local.set({'userInput': this.state.value}, function() {    
+    chrome.storage.local.set({'userInput': this.state.value}, function() {
       console.log('saved')
   })}
   componentDidMount () {
@@ -161,14 +160,14 @@ setChromeStorage(){
   render() {
     return (
       <div className="columns">
- 
+
         <div className="examples column">
           <button onClick={this.handleClick}>Run</button>
           <button onClick={this.handlePopulate}>Populate</button>
           <button onClick={this.handleSave}>Save</button>
           <button onClick={this.handleClear}>Clear</button>
           <h2>Editor</h2>
-          <AceEditor 
+          <AceEditor
           mode={this.state.mode}
           theme={this.state.theme}
           name="blah2"
@@ -222,7 +221,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleInputFetch () {
     dispatch(fetchInput())
-  }, 
+  },
   saveInput (text) {
     dispatch(postInput({text}))
   },

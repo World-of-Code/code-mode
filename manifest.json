@@ -18,8 +18,9 @@
   "content_scripts": [
     {
       "css": [
-        "chrome/style/drawer.less",
-        "chrome/style/index.scss"
+        "chrome/style/index.scss",
+        "public/style/rc-drawer.css",
+        "public/style/drawer.css"
       ],
       "js": [
         "chrome/js/app.bundle.js",

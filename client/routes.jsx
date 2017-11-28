@@ -1,4 +1,4 @@
-// FOR REFERENCE 
+// FOR REFERENCE
 
 // 'use strict'
 
