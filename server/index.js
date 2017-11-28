@@ -56,6 +56,11 @@ const createApp = () => {
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'chrome/js')))
 
+  // sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'chrome/views/index.html'))
+  })
+
   // any remaining requests with an extension (.js, .css, etc.) send 404
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {
@@ -65,11 +70,6 @@ const createApp = () => {
     } else {
       next()
     }
-  })
-
-  // sends index.html
-  app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'chrome/views/index.html'))
   })
 
   // error handling endware
