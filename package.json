@@ -50,6 +50,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
     "morgan": "^1.8.1",
@@ -72,8 +73,7 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.2",
-    "sequelize": "^4.3.1",
-    "socket.io": "^2.0.3"
+    "sequelize": "^4.3.1"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.10.0",
@@ -94,6 +94,7 @@
     "eslint-config-fullstack": "^3.0.0",
     "eslint-plugin-react": "^6.5.0",
     "file-loader": "^1.1.5",
+    "jquery": "^3.2.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "mocha": "^4.0.1",

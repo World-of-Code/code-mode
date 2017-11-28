@@ -7,7 +7,6 @@ import { Provider } from 'react-redux'
 import store, {fetchQuestions} from './store'
 //import Routes from './routes'
 import DrawerComponents from './components/Drawer'
-import './socket'
 // import registerServiceWorker from './registerServiceWorker'
 import { Store } from 'react-chrome-redux'
 

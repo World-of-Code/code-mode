@@ -5,6 +5,7 @@ import { fetchInput, postInput, fetchQuestions } from '../../../store'
 import { render } from 'react-dom';
 import AceEditor from '../src/ace.jsx';
 import 'brace/mode/jsx';
+const debounce = require('lodash.debounce');
 
 
 const languages=['javascript']
@@ -23,28 +24,23 @@ import 'brace/ext/searchbox';
 
 class AppClass extends Component {
   onLoad() {
-    console.log('i\'ve loaded');
   }
   onChange(newValue) {
-    //console.log('change', newValue);
     this.setState({
       value: newValue
     })
-    this.setChromeStorage()
+    //this.setChromeStorage()
+     debounce(this.setChromeStorage,1000)() //1sec
+     
   }
 
   onSelectionChange(newValue, event) {
-    //console.log('select-change', newValue);
-    //console.log('select-change-event', event);
   }
 
   onCursorChange(newValue, event) {
-    // console.log('cursor-change', newValue);
-    // console.log('cursor-change-event', event);
   }
 
   onValidate(annotations) {
-    //console.log('onValidate', annotations);
   }
 
   setTheme(e) {
@@ -75,11 +71,9 @@ class AppClass extends Component {
     //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
     // const defaultValue =
     // `function onLoad(editor) {
-    //   console.log(\"i\'ve loaded\");
     // }`;
     //const inputValue = props.input[0] ? props.input[0].text : ''
     //
-   // console.log('hello ', this.chromeStorage())
     this.state = {
       value: '',//this.chromeStorage() ? this.chromeStorage() : '',
       theme: 'monokai',
@@ -141,14 +135,12 @@ class AppClass extends Component {
         this.setState({
           value: obj.userInput
       })
-      console.log('saved')
       });
   }
 
 setChromeStorage(){
-    chrome.storage.local.set({'userInput': this.state.value}, function() {
-      console.log('saved')
-  })}
+    chrome.storage.local.set({'userInput': this.state.value})}
+  
   componentDidMount () {
     this.props.getQuestions()
     this.props.handleInputFetch()
