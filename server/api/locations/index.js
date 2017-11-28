@@ -19,19 +19,20 @@ router.param('/:id', (req, res, next, id) => {
     .catch(next)
 })
 
-// get location by id
-router.get('/', (req, res, next) => {
+// get location by url
+router.post('/', (req, res, next) => {
+  console.log('req.body ', req.body)
   Location.findOne({ where: { url: req.body.location } })
     .then(location => res.send(location))
     .catch(next)
 })
 
 // create a location
-router.post('/', (req, res, next) => {
-  Location.create(req.body)
-    .then(location => res.status(201).json(location))
-    .catch(next)
-})
+// router.post('/', (req, res, next) => {
+//   Location.create(req.body)
+//     .then(location => res.status(201).json(location))
+//     .catch(next)
+// })
 
 // edit location by id
 router.put('/:id', (req, res, next) => {

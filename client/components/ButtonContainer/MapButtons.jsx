@@ -42,18 +42,18 @@ class MapButtons extends Component {
   render () {
     const pageAdmin = this.props.user.id === this.props.location.userId
     const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
-      if (button.type === 'Add') return true
-      if (!this.props.question.id) return false
+      if (button.name === 'add') return true
+      // if (!this.props.question.id ) return false
       return pageAdmin ? true : false
     })
-
     return (
+      this.props.question &&
       buttonsAvailable.map(button => (
         <div key={ button.name }>
           <button
             type="submit"
             className={ `button ${button.name}` }
-            onClick={ () => handleClick(button.name) }
+            onClick={ () => this.handleClick(button.name) }
           >
             { button.name }
           </button>
@@ -63,6 +63,7 @@ class MapButtons extends Component {
   }
 
 }
+
 
 const mapStateToProps = state => ({
   user: state.user,

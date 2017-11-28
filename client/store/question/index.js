@@ -27,7 +27,7 @@ const createQuestion = question => ({ type: CREATE_QUESTION, question })
  */
 export const fetchQuestion = questionId =>
 dispatch =>
-  axios.get(`/${BACK_END}/api/questions/${questionId}`)
+  axios.get(`http://localhost:8080/api/questions/${questionId}`)
     .then(res => dispatch(getQuestion(res.data)))
     .catch(err => console.log(err))
 
@@ -95,14 +95,14 @@ export const deleteQuestion = (question, urlId) =>
 
 export const cancelQuestion = question =>
   dispatch =>
-    axios.get(`/${BACK_END}/api/questions/${question.id}`)
+    axios.get(`http://localhost:8080/api/questions/${question.id}`)
       .then(res => dispatch(getQuestion(res.data)))
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
 export const submitQuestion = question =>
   dispatch =>
-    axios.post(`/${BACK_END}/api/questions/`, question)
+    axios.post(`http://localhost:8080/api/questions/`, question)
       .then(res => dispatch(createQuestion(res.data)))
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
@@ -126,6 +126,7 @@ export default (state = {}, action) => {
       return {}
 
     case GET_QUESTION:
+      return state
     default:
       return state
   }

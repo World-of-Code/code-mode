@@ -66,7 +66,6 @@ class App extends Component {
     this.setFontSize = this.setFontSize.bind(this)
     this.setBoolean = this.setBoolean.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.handlePopulate = this.handlePopulate.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleClear = this.handleClear.bind(this)
     this.setChromeStorage = this.setChromeStorage.bind(this)
@@ -83,11 +82,6 @@ class App extends Component {
       let value = newValue
       this.setState({ result: !eval(value) ? "undefined" : eval(value).toString() })
     }
-  }
-
-  handlePopulate (event) {
-    event.preventDefault()
-    // populate with user's code / boilerplate
   }
 
   handleSave (event) {
@@ -115,7 +109,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    // this.props.getQuestion()
+    this.props.getQuestion()
     this.getChromeStorage()
   }
 

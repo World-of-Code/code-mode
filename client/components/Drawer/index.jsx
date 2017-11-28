@@ -17,6 +17,7 @@ class DrawerWrapper extends Component {
       dragToggleDistance: 100,
     }
     this.handleClick = this.handleClick.bind(this)
+    this.onDock = this.onDock.bind(this)
   }
 
   onOpenChange = open => {

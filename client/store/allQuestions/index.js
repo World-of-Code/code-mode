@@ -12,17 +12,17 @@ const GET_ALL_QUESTIONS = 'GET_ALL_QUESTIONS'
 /**
  * ACTION CREATORS
  */
-export const getAllQuestions = questions => ({ type: GET_QUESTIONS, questions })
+export const getAllQuestions = questions => ({ type: GET_ALL_QUESTIONS, questions })
 
 /**
  * THUNK CREATORS
  */
-export const fetchAllQuestions = url =>
-  dispatch =>
-    axios.get(`/${BACK_END}/api/questions/${url.id}`, url)
+export const fetchAllQuestions = urlId =>
+  dispatch =>{
+    return axios.get(`http://localhost:8080/api/questions/locations/${urlId}`)
       .then(res => dispatch(getAllQuestions(res.data)))
       .catch(err => console.log(err))
-
+  }
 /**
  * REDUCER
  */

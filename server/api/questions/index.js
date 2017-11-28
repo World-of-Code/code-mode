@@ -20,7 +20,7 @@ router.param('/:questionId', (req, res, next, id) => {
 })
 
 // get all questions from a url
-router.get('/:urlId', (req, res, next) => {
+router.get('/locations/:urlId', (req, res, next) => {
   Question.findAll(
     { where: { locationId: req.params.urlId } },
     { include: [{ all: true }]
@@ -30,9 +30,9 @@ router.get('/:urlId', (req, res, next) => {
 })
 
 // get question by id
-router.get('/:questionId', (req, res, next) => {
-  res.json(req.question)
-})
+// router.get('/:questionId', (req, res, next) => {
+//   res.json(req.question)
+// })
 
 
 // create a question

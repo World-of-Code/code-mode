@@ -23,27 +23,28 @@ const removeLocation = () => ({ type: REMOVE_LOCATION })
 /**
  * THUNK CREATORS
  */
-export const fetchLocation = location =>
-  dispatch =>
-    axios.get(`/${BACK_END}/api/locations`, location)
-      .then(res => dispatch(getQuestion(res.data)))
+export const fetchLocation = location => 
+  dispatch => {
+    return axios.post(`http://localhost:8080/api/locations`, {location})
+      .then(res => dispatch(getLocation(res.data)))
       .catch(err => console.log(err))
+  }
 
 export const addLocation = location =>
   dispatch =>
-    axios.post(`/${BACK_END}/api/locations/`, location)
+    axios.post(`http://localhost:8080/api/locations/`, location)
       .then(res => dispatch(createLocation(res.data)))
       .catch(err => console.log(err))
 
 export const editLocation = location =>
   dispatch =>
-    axios.put(`/${BACK_END}/api/locations/${location.id}`, location)
+    axios.put(`http://localhost:8080/api/locations/${location.id}`, location)
       .then(res => dispatch(changeLocation(res.data)))
       .catch(err => console.log(err))
 
 export const deleteLocation = locationId =>
   dispatch =>
-    axios.delete(`/${BACK_END}/api/locations/${locationId}`)
+    axios.delete(`http://localhost:8080/api/locations/${locationId}`)
       .then(() => dispatch(removeLocation()))
       .catch(err => console.log(err))
 
