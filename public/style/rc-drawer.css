@@ -110,7 +110,7 @@
 .drawer-container {
   margin-top: 10%;
   position: sticky;
-  height: 450px;
+  height: 410px;
   width: 854;
   /* max z-index */
   z-index: 2147483647 !important;

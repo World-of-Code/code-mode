@@ -5,22 +5,11 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import Drawer from 'rc-drawer'
 import $ from 'jquery'
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from 'reactstrap'
 
 import DrawerContents from '../DrawerContents'
 import DrawerBar from './DrawerBar'
 
-import 'bootstrap/dist/css/bootstrap.css'
 import '../../../public/style/drawer.css'
-
 
 export default class DrawerComponents extends Component {
   constructor (props) {
@@ -52,13 +41,13 @@ export default class DrawerComponents extends Component {
 
   render () {
     return (
-      <div className="drawer-bar-all">
-        {
-          this.state.display
-          ? <DrawerBar />
-          : <div />
-        }
-      </div>
+        <div className="drawer-bar-all">
+          {
+            this.state.display
+            ? <DrawerBar />
+            : <div />
+          }
+        </div>
     )
   }
 

@@ -3,23 +3,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import store, { fetchQuestions } from './store'
-import '../chrome/style/index.scss'
-
-//import Routes from './routes'
-import DrawerComponents from './components/Drawer'
-
-// import registerServiceWorker from './registerServiceWorker'
 import { Store } from 'react-chrome-redux'
 
-
-// var newdiv = document.createElement('div');
-// newdiv.id = "alignToBottomDIV";
-// $(newdiv).html("Bottom Toolbar");
-// $("body").append(newdiv);
+import store, { fetchQuestions } from './store'
+import DrawerComponents from './components/Drawer'
 
 const initApp = event => {
-  // const youtube = document.getElementById('content')
   const youtube = document.body
   const app = document.createElement('div')
   app.id = 'app'
