@@ -12,8 +12,8 @@ async function seed () {
     User.create({ email: 'murphy@email.com', password: '123' })
   ])
   const locations = await Promise.all([
-    Location.create({id: 1, url: 'https://www.youtube.com/', userId: 1}),
-    Location.create({id: 2, url: 'http://www.google.com/', userId: 2}),
+    Location.create({id: 1, url: 'https://www.youtube.com/'}),
+    Location.create({id: 2, url: 'http://www.google.com/'}),
   ])
   const questions = await Promise.all([
     Question.create({content: 'make an array', description: 'Arrays', hints: ['const array...'], answer: 'const array=[1,2,3,4,5]', boilerplate: 'const array=[]', locationId: 1}),
