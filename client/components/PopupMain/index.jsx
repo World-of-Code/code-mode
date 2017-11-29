@@ -6,7 +6,7 @@ import { Login, Signup } from '../auth-form'
 import { me } from '../../store'
 import { UserHome } from '../'
 import $ from 'jquery'
-
+import Frame from 'react-frame-component'
 
 class PopupMain extends Component {
   constructor(){
@@ -37,19 +37,20 @@ class PopupMain extends Component {
     const { isLoggedIn } = this.props
 
     return (
-      <div>
+      <Frame>
+        <link rel="stylesheet" type="text/css" href="../../../chrome/style/index.scss" />
           <button id = "toggle" type="button" onClick={ this.handleClick }>
             toggle popup
           </button>
-        {
+          {
             isLoggedIn
             ? <UserHome />
             : <div>
                 <Login />
                 <Signup />
               </div>
-        }
-      </div>
+          }
+      </Frame>
     )
   }
 }
