@@ -3,26 +3,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-<<<<<<< HEAD
-// import { wrapStore } from 'react-chrome-redux'
-import store, { fetchQuestions } from './store'
-import '../chrome/style/index.scss'
-
-//import Routes from './routes'
-import DrawerComponents from './components/Drawer'
-
-// var newdiv = document.createElement('div');
-// newdiv.id = "alignToBottomDIV";
-// $(newdiv).html("Bottom Toolbar");
-// $("body").append(newdiv);
-=======
-import { Store } from 'react-chrome-redux'
-
 import store, { fetchQuestions } from './store'
 import DrawerComponents from './components/Drawer'
->>>>>>> master
 
-// wrapStore(store, { portName: 'code-mode' })
 
 const initApp = event => {
   const youtube = document.body
@@ -40,12 +23,11 @@ const initApp = event => {
 
 switch (document.readyState) {
   case "loading":
-    console.log('loading DOM...')
+  case "complete":
+  document.addEventListener("DOMContentLoaded", initApp(event))
     break
+
   case "interactive":
     initApp(event)
-    break
-  case "complete":
-    document.addEventListener("DOMContentLoaded", initApp(event))
     break
 }
