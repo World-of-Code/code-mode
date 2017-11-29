@@ -21,20 +21,19 @@ class MapButtons extends Component {
   }
 
   handleClick (type) {
-    const question = this.props.question
+    const { question, user, location } = this.props
     const action = `${type}Question`
 
-      if (type === 'delete') this.props[action](question, this.props.location.id)
-      else this.props[action](question)
+      if (type === 'delete') this.props[action](question, user, location.id)
+      else this.props[action](question, user)
   }
 
   render () {
-    // fix buttonsAvailable + user
     const pageAdmin = this.props.user.id === this.props.location.userId
     const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
       if (button.name === 'add') return true
-      if (!this.props.question.id ) return false
-      return pageAdmin ? true : false
+      if (this.props.mode.type === 'Add') return true
+      return pageAdmin && this.props.question.id
     })
 
     return (

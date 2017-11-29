@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../../store'
+import { BACK_END, setModeRead, setModeAdd, setModeEdit, setUser } from '../../store'
 
 
 /**
@@ -43,10 +43,11 @@ export const editQuestion = question =>
     dispatch(setModeEdit())
   }
 
-export const clearQuestion = question =>
+export const cancelQuestion = (question, user) =>
   dispatch => {
     dispatch(getQuestion(question))
     dispatch(setModeRead())
+    //dispatch(setUser(user))
   }
 
 export const saveQuestion = question =>
@@ -57,7 +58,7 @@ export const saveQuestion = question =>
       .catch(err => console.log(err))
 
 // find next question, delete previous, switch the state to the next
-export const deleteQuestion = (question, urlId) =>
+export const deleteQuestion = (question, user, urlId) =>
   dispatch =>
     axios.get(`/${BACK_END}/api/questions/${urlId}`)
       .then(questions => {
@@ -74,26 +75,7 @@ export const deleteQuestion = (question, urlId) =>
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
-// export const nextQuestion = questionId =>
-//   dispatch =>
-//     axios.get(`/${BACK_END}/api/questions/`)
-//       .then(questions => {
-//         const sortedQuestions = questions.slice().sort((q1, q2) => q1.id - q2.id)
-//         const questionIndex = sortedQuestions[sortedQuestions.indexOf(questionId)]
-//         return sortedQuestions[questionIndex + 1]
-//              ? sortedQuestions[questionIndex + 1]
-//              : sortedQuestions[questionIndex - 1]
-//       })
-//       .catch(err => console.log(err))
-
-// export const deleteQuestion = questionId =>
-//   dispatch =>
-//     axios.delete(`/${BACK_END}/api/questions/${questionId}`)
-//       .then(nextQuestionId => dispatch(fetchQuestion(nextQuestionId)))
-//       .then(() => dispatch(setModeRead()))
-//       .catch(err => console.log(err))
-
-export const cancelQuestion = question =>
+export const clearQuestion = question =>
   dispatch =>
     axios.get(`${BACK_END}/api/questions/${question.id}`)
       .then(res => dispatch(getQuestion(res.data)))

@@ -31,7 +31,7 @@ class DrawerContents extends Component{
           <ButtonContainer />
         }
         {
-          this.props.allQuestions &&
+          // this.props.allQuestions &&
           <div>
             <QuestionMenu questions={ this.props.allQuestions } />
             <QuestionDisplay question={ this.props.question } />

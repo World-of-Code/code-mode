@@ -15,8 +15,7 @@ export const add = {
   buttons: [
     { name: 'clear' },
     { name: 'cancel' },
-    { name: 'submit' },
-    { name: 'send' }
+    { name: 'submit' }
   ]
 }
 
