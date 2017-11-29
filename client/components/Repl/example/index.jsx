@@ -79,9 +79,9 @@ class App extends Component {
 
   handleClear (event) {
     event.preventDefault()
-    this.setState({ 
+    this.setState({
       value: '',
-      result: '' 
+      result: ''
     })
   }
 
@@ -127,7 +127,7 @@ class App extends Component {
             <AceEditor
               mode={ this.state.mode }
               theme={ this.state.theme }
-              name="blah2"
+              name="editor"
               onChange={ this.onChange }
               value = { this.state.value }
               fontSize={ this.state.fontSize }
@@ -146,10 +146,14 @@ class App extends Component {
           <div className="column">
           <h2 className="drawer-subheaders">Code</h2>
           <AceEditor
-            mode="jsx"
-            theme="monokai"
+            mode={this.state.mode}
+            theme={this.state.theme}
+            name="code"
             readOnly={ true }
-            value = { this.state.result }
+            value={this.state.result}
+            fontSize={this.state.fontSize}
+            showPrintMargin={this.state.showPrintMargin}
+            // showGutter={this.state.showGutter}
             />
           </div>
         { // temporarily hide this for F&F demo night
