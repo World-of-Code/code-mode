@@ -17,19 +17,19 @@ class QuestionForm extends Component {
 
   render () {
     return (
-      <form className="ui reply form">
-        <textarea
-          type="text"
-          className="field"
-          value={ this.state.content }
-          name="content"
-          onChange={ this.handleChange }
-        />
-      </form>
+      <div></div>
     )
   }
-
 }
+// <form className="ui reply form">
+// <textarea
+//   type="text"
+//   className="field"
+//   value={ this.state.content }
+//   name="content"
+//   onChange={ this.handleChange }
+// />
+// </form>
 
 
 export default QuestionForm
