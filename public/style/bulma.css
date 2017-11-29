@@ -5232,7 +5232,7 @@ a.tag:hover {
   margin-bottom: 1.5rem;
 }
 
-.delete {
+/* .delete {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -5318,7 +5318,7 @@ a.tag:hover {
   min-height: 32px;
   min-width: 32px;
   width: 32px;
-}
+} */
 
 .heading {
   display: block;
