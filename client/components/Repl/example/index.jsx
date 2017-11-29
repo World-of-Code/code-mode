@@ -1,81 +1,48 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { fetchInput, postInput, fetchQuestions } from '../../../store'
-import { render } from 'react-dom';
-import AceEditor from '../src/ace.jsx';
-import 'brace/mode/jsx';
-const debounce = require('lodash.debounce');
+'use strict'
 
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { render } from 'react-dom'
+import AceEditor from '../src/ace.jsx'
+import 'brace/mode/jsx'
+import { fetchInput, postInput, getQuestion } from '../../../store'
 
-const languages=['javascript']
+const debounce = require('lodash.debounce')
+const languages= ['javascript']
 const themes = ['monokai']
-languages.forEach((lang) => {
+
+languages.forEach(lang => {
   require(`brace/mode/${lang}`)
   require(`brace/snippets/${lang}`)
 })
 
-themes.forEach((theme) => {
-  require(`brace/theme/${theme}`)
-})
+themes.forEach(theme => require(`brace/theme/${theme}`))
+
 /*eslint-disable no-alert, no-console */
-import 'brace/ext/language_tools';
-import 'brace/ext/searchbox';
+import 'brace/ext/language_tools'
+import 'brace/ext/searchbox'
 
-class AppClass extends Component {
-  onLoad() {
-  }
-  onChange(newValue) {
-    this.setState({
-      value: newValue
-    })
+
+class App extends Component {
+  onChange (newValue) {
+    this.setState({ value: newValue })
     //this.setChromeStorage()
-     debounce(this.setChromeStorage,1000)() //1sec
-     
+    debounce(this.setChromeStorage,1000)() // 1sec
   }
 
-  onSelectionChange(newValue, event) {
+  setFontSize (e) {
+    this.setState({ fontSize: parseInt(e.target.value,10) })
   }
 
-  onCursorChange(newValue, event) {
-  }
-
-  onValidate(annotations) {
-  }
-
-  setTheme(e) {
-    this.setState({
-      theme: e.target.value
-    })
-  }
-  setMode(e) {
-    this.setState({
-      mode: e.target.value
-    })
-  }
-  setBoolean(name, value) {
-    this.setState({
-      [name]: value
-    })
-  }
-  setFontSize(e) {
-    this.setState({
-      fontSize: parseInt(e.target.value,10)
-    })
+  setFontSize (e) {
+    this.setState({ fontSize: parseInt(e.target.value,10) })
   }
 
   constructor(props) {
-    super(props);
-    // Maybe useful for later
-    // const defaultValue = props.questions &&
-    //                      props.questions.filter(question => question.url === props.match.pathname)[0].boilerplate
-    // const defaultValue =
-    // `function onLoad(editor) {
-    // }`;
-    //const inputValue = props.input[0] ? props.input[0].text : ''
-    //
+    super(props)
     this.state = {
-      value: '',//this.chromeStorage() ? this.chromeStorage() : '',
+      value: '',
       theme: 'monokai',
       mode: 'javascript',
       enableBasicAutocompletion: false,
@@ -87,142 +54,128 @@ class AppClass extends Component {
       enableSnippets: false,
       showLineNumbers: true,
       result: ''
-    };
-    this.setTheme = this.setTheme.bind(this);
-    this.setMode = this.setMode.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.setFontSize = this.setFontSize.bind(this);
-    this.setBoolean = this.setBoolean.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handlePopulate = this.handlePopulate.bind(this)
-    this.handleSave = this.handleSave.bind(this)
+    }
+    this.onChange = this.onChange.bind(this)
+    this.setFontSize = this.setFontSize.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.handleClear = this.handleClear.bind(this)
     this.setChromeStorage = this.setChromeStorage.bind(this)
     this.getChromeStorage = this.getChromeStorage.bind(this)
   }
-  handleClick(event){
-    event.preventDefault()
 
+  handleClick (event) {
+    event.preventDefault()
     let value = this.state.value
-    this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
+    this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
     if (this.state.value.includes('console.log')) {
       let newValue = this.state.value.replace(/console.log/g, 'return')
       let value = newValue
-      this.setState({result: !eval(value) ? "undefined" : eval(value).toString()})
-  }
-}
-  handlePopulate(event){
-    event.preventDefault()
-    this.setState({
-      value: this.props.input[0].text
-    })
-  }
-  handleSave(event){
-    event.preventDefault()
-    this.props.saveInput(this.state.value)
-    this.setState({
-      value: ''
-    })
-  }
-  handleClear(event){
-    event.preventDefault()
-    this.setState({
-      value: ''
-    })
-  }
-  getChromeStorage(){
-      chrome.storage.local.get("userInput",(obj)=>{
-        this.setState({
-          value: obj.userInput
-      })
-      });
+      this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
+    }
   }
 
-setChromeStorage(){
-    chrome.storage.local.set({'userInput': this.state.value})}
-  
+  handlePopulate (event) {
+    event.preventDefault()
+    // save input in repl (thunk)
+    this.setState({ value: '' })
+  }
+
+  handleClear (event) {
+    event.preventDefault()
+    this.setState({ value: '' })
+  }
+
+  getChromeStorage () {
+    chrome.storage.local.get('userInput', obj => {
+      this.setState({ value: obj.userInput })
+    })
+  }
+
+  getChromeStorage () {
+    chrome.storage.local.get('userInput', obj => {
+      this.setState({ value: obj.userInput })
+    })
+  }
+
+  setChromeStorage(){
+    chrome.storage.local.set({ 'userInput': this.state.value })
+  }
+
   componentDidMount () {
-    this.props.getQuestions()
-    this.props.handleInputFetch()
+    this.props.getQuestion()
     this.getChromeStorage()
   }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.boilerplate !== nextProps.boilerplate) this.setState({value: nextProps.boilerplate})
+
+  componentWillReceiveProps (nextProps) {
+    let question = this.props.question
+    if (question && question.boilerplate !== nextProps.question.boilerplate) {
+      this.setState({ value: nextProps.question.boilerplate })
+    }
   }
+
   render() {
     return (
       <div className="columns">
-
         <div className="examples column">
-          <button onClick={this.handleClick}>Run</button>
-          <button onClick={this.handlePopulate}>Populate</button>
-          <button onClick={this.handleSave}>Save</button>
-          <button onClick={this.handleClear}>Clear</button>
+          <button onClick={ this.handleClick }>Run</button>
+          <button onClick={ this.handlePopulate }>Populate</button>
+          <button onClick={ this.handleSave }>Save</button>
+          <button onClick={ this.handleClear }>Clear</button>
           <h2>Editor</h2>
           <AceEditor
-          mode={this.state.mode}
-          theme={this.state.theme}
-          name="blah2"
-          onLoad={this.onLoad}
-          onChange={this.onChange}
-          onSelectionChange={this.onSelectionChange}
-          onCursorChange={this.onCursorChange}
-          onValidate={this.onValidate}
-          value = {this.state.value}
-          fontSize={this.state.fontSize}
-          showPrintMargin={this.state.showPrintMargin}
-          showGutter={this.state.showGutter}
-          highlightActiveLine={this.state.highlightActiveLine}
-          setOptions={{
-            enableBasicAutocompletion: this.state.enableBasicAutocompletion,
-            enableLiveAutocompletion: this.state.enableLiveAutocompletion,
-            enableSnippets: this.state.enableSnippets,
-            showLineNumbers: this.state.showLineNumbers,
-            tabSize: 2,
-          }}/>
-      </div>
-      <div className="column">
+            mode={ this.state.mode }
+            theme={ this.state.theme }
+            name="blah2"
+            onChange={ this.onChange }
+            value = { this.state.value }
+            fontSize={ this.state.fontSize }
+            showPrintMargin={ this.state.showPrintMargin }
+            showGutter={ this.state.showGutter }
+            highlightActiveLine={ this.state.highlightActiveLine }
+            setOptions={{
+              enableBasicAutocompletion: this.state.enableBasicAutocompletion,
+              enableLiveAutocompletion: this.state.enableLiveAutocompletion,
+              enableSnippets: this.state.enableSnippets,
+              showLineNumbers: this.state.showLineNumbers,
+              tabSize: 2,
+            }}/>
+        </div>
+        <div className="column">
           <h2>Code</h2>
           <AceEditor
             mode="jsx"
             theme="monokai"
-            readOnly={true}
-            value = {
-              this.state.result}
+            readOnly={ true }
+            value = { this.state.result }
           />
+        </div>
+        <div className="column">
+          <h2>Tests</h2>
+          <AceEditor
+            mode="jsx"
+            theme="monokai"
+            readOnly={ true }
+            value = { this.state.result }
+          />
+        </div>
       </div>
-      <div className="column">
-      <h2>Tests</h2>
-      <AceEditor
-        mode="jsx"
-        theme="monokai"
-        readOnly={true}
-        value = {this.state.result}
-      />
-  </div>
-    </div>
-    );
+    )
   }
+
 }
 
 const mapStateToProps = state => ({
-  input: state.input,
-  questions: state.questions,
+  question: state.question,
   users: state.users
 })
+
 const mapDispatchToProps = dispatch => ({
-  handleInputFetch () {
-    dispatch(fetchInput())
-  },
-  saveInput (text) {
-    dispatch(postInput({text}))
-  },
-  getQuestions () {
-    dispatch(fetchQuestions())
-  }
+  getQuestion: () => dispatch(getQuestion())
+  // thunks for populating repl
 })
-const App = connect(mapStateToProps, mapDispatchToProps)(AppClass)
-export default App
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 
 // const languages = [

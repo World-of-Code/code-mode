@@ -1,49 +1,65 @@
 'use strict'
 
 import axios from 'axios'
+import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../../store'
 
 
 /**
  * ACTION TYPES
  */
+const SET_QUESTION = 'SET_QUESTION'
 const GET_QUESTION = 'GET_QUESTION'
+const NEW_QUESTION = 'NEW_QUESTION'
+const CHANGE_QUESTION = 'CHANGE_QUESTION'
 const CREATE_QUESTION = 'CREATE_QUESTION'
-const EDIT_QUESTION = 'EDIT_QUESTION'
-const CLEAR_QUESTION = 'CLEAR_QUESTION'
 
 /**
  * ACTION CREATORS
  */
-const getQuestion = question => ({ type: GET_QUESTION, question })
+export const setQuestion = question => ({ type: SET_QUESTION, question })
+export const getQuestion = () => ({ type: GET_QUESTION })
+const newQuestion = () => ({ type: NEW_QUESTION })
+const changeQuestion = question => ({ type: CHANGE_QUESTION, question })
 const createQuestion = question => ({ type: CREATE_QUESTION, question })
-const editQuestion = question => ({ type: EDIT_QUESTION, question })
-const clearQuestion = () => ({ type: CLEAR_QUESTION })
 
 /**
  * THUNK CREATORS
  */
 export const fetchQuestion = questionId =>
-  dispatch =>
-    axios.get(`/api/questions/${questionId}`)
-      .then(res => dispatch(getQuestion(res.data)))
-      .catch(err => console.log(err))
+dispatch =>
+  axios.get(`${BACK_END}/api/questions/${questionId}`)
+    .then(res => dispatch(getQuestion(res.data)))
+    .catch(err => console.log(err))
 
-export const makeQuestion = question =>
-  dispatch =>
-    axios.post('/api/questions/', question)
-      .then(res => dispatch(createQuestion(res.data)))
-      .catch(err => console.log(err))
+export const addQuestion = () =>
+  dispatch => {
+    dispatch(newQuestion())
+    dispatch(setModeAdd())
+  }
 
-export const changeQuestion = question =>
+export const editQuestion = question =>
+  dispatch => {
+    dispatch(changeQuestion(question))
+    dispatch(setModeEdit())
+  }
+
+export const clearQuestion = question =>
+  dispatch => {
+    dispatch(getQuestion(question))
+    dispatch(setModeRead())
+  }
+
+export const saveQuestion = question =>
   dispatch =>
-    axios.put(`/api/questions/${question.id}`, question)
+    axios.put(`/${BACK_END}/api/questions/${question.id}`, question)
       .then(res => dispatch(editQuestion(res.data)))
+      .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
 // find next question, delete previous, switch the state to the next
-export const removeQuestion = question =>
+export const deleteQuestion = (question, urlId) =>
   dispatch =>
-    axios.get('/api/questions/')
+    axios.get(`/${BACK_END}/api/questions/${urlId}`)
       .then(questions => {
         const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
         const questionIndex = sortedQuestions[sortedQuestions.indexOf(question.id)]
@@ -52,15 +68,48 @@ export const removeQuestion = question =>
              : sortedQuestions[questionIndex - 1]
       })
       .then(nextQuestionId => {
-        axios.delete(`/api/questions/${question.id}`)
-        return nextQuestionId ? fetchQuestion(nextQuestionId) : null
+        axios.delete(`/${BACK_END}/api/questions/${question.id}`)
+        return nextQuestionId ? dispatch(fetchQuestion(nextQuestionId)) : null
       })
+      .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
-export const eraseQuestion = () =>
-  dispatch => {
-      dispatch(clearQuestion())
-      .catch(err => console.log(err)) }
+// export const nextQuestion = questionId =>
+//   dispatch =>
+//     axios.get(`/${BACK_END}/api/questions/`)
+//       .then(questions => {
+//         const sortedQuestions = questions.slice().sort((q1, q2) => q1.id - q2.id)
+//         const questionIndex = sortedQuestions[sortedQuestions.indexOf(questionId)]
+//         return sortedQuestions[questionIndex + 1]
+//              ? sortedQuestions[questionIndex + 1]
+//              : sortedQuestions[questionIndex - 1]
+//       })
+//       .catch(err => console.log(err))
+
+// export const deleteQuestion = questionId =>
+//   dispatch =>
+//     axios.delete(`/${BACK_END}/api/questions/${questionId}`)
+//       .then(nextQuestionId => dispatch(fetchQuestion(nextQuestionId)))
+//       .then(() => dispatch(setModeRead()))
+//       .catch(err => console.log(err))
+
+export const cancelQuestion = question =>
+  dispatch =>
+    axios.get(`${BACK_END}/api/questions/${question.id}`)
+      .then(res => dispatch(getQuestion(res.data)))
+      .then(() => dispatch(setModeRead()))
+      .catch(err => console.log(err))
+
+export const submitQuestion = question =>
+  dispatch =>
+    axios.post(`${BACK_END}/api/questions/`, question)
+      .then(res => dispatch(createQuestion(res.data)))
+      .then(() => dispatch(setModeRead()))
+      .catch(err => console.log(err))
+
+export const sendQuestion = question =>
+  dispatch //=>
+    // send to content creator
 
 /**
  * REDUCER
@@ -68,12 +117,16 @@ export const eraseQuestion = () =>
 export default (state = {}, action) => {
   switch (action.type) {
 
-    case GET_QUESTION:
+    case SET_QUESTION:
     case CREATE_QUESTION:
-    case EDIT_QUESTION:
+    case CHANGE_QUESTION:
       return action.question
 
-    case CLEAR_QUESTION:
+    case NEW_QUESTION:
+      return {}
+
+    case GET_QUESTION:
+      return state
     default:
       return state
   }

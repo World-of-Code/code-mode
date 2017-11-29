@@ -1,6 +1,7 @@
 'use strict'
 
 import axios from 'axios'
+import { BACK_END } from '../../store'
 import history from '../../history'
 
 
@@ -26,13 +27,13 @@ const removeUser = () => ({ type: REMOVE_USER })
  */
 export const me = () =>
   dispatch =>
-    axios.get('/auth/me')
+    axios.get(`${BACK_END}/auth/me`)
       .then(res => dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
 
 export const auth = (email, password, method) =>
   dispatch =>
-    axios.post(`https://code-mode.herokuapp.com/auth/${method}`, { email, password })
+    axios.post(`${BACK_END}/auth/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
@@ -41,7 +42,7 @@ export const auth = (email, password, method) =>
 
 export const logout = () =>
   dispatch =>
-    axios.post('https://code-mode.herokuapp.com/auth/logout')
+    axios.post(`${BACK_END}/auth/logout`)
       .then(_ => {
         dispatch(removeUser())
         history.push('/login')

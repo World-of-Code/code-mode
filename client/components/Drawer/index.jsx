@@ -1,60 +1,65 @@
-import Drawer from 'rc-drawer';
-import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import ReactDOM from 'react-dom';
+'use strict'
+
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import DrawerContents from '../DrawerContents'
+import ReactDOM from 'react-dom'
+import Drawer from 'rc-drawer'
 import $ from 'jquery'
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink
+} from 'reactstrap'
+
+import DrawerContents from '../DrawerContents'
 import DrawerBar from './DrawerBar'
 
-import 'bootstrap/dist/css/bootstrap.css';
-import '../../../public/style/drawer.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import '../../../public/style/drawer.css'
+
 
 export default class DrawerComponents extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       display: true
     }
-
   }
 
   componentDidMount () {
-    chrome.storage.onChanged.addListener((changes) =>{
-      let action = changes['action'];
-      if(action.newValue === "hide") {
+    chrome.storage.onChanged.addListener(changes => {
+      let action = changes['action']
+      if(action.newValue === 'hide') {
         this.setState({display: false})
-         $( "#app" ).hide();
+         $( '#app' ).hide()
       }
       if(action.newValue === 'show') {
         this.setState({display: true})
-         $( "#app" ).show();
+         $( '#app' ).show()
       }
-  });
+    })
 
-  chrome.storage.local.get("action",(obj)=>{
-    let foo = obj.userInput
-    if(foo === 'hide')
-     this.setState({
-       display: false
-   })
-   if(foo === 'show')
-   this.setState({
-     display: true
- })
-   });
+    chrome.storage.local.get('action', obj => {
+      let visibility = obj.userInput
+      if(visibility === 'hide') this.setState({ display: false })
+      if(visibility === 'show') this.setState({ display: true })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div className="drawer-bar-all">
-          {this.state.display  ?
-          <DrawerBar />
+        {
+          this.state.display
+          ? <DrawerBar />
           : <div />
         }
       </div>
-    );
+    )
   }
+
 }
-
-

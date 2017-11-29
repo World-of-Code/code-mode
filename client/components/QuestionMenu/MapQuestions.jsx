@@ -1,64 +1,37 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import history from '../../history'
-import { fetchQuestions } from '../../store'
+import { setQuestion } from '../../store'
 //import react-semantic-ui?
 
 
-class MapQuestions extends Component {
-  constructor(props) {
-    super(props)
-  }
+const MapQuestions = props => {
+  const sortedQuestions = props.questions && props.questions.sort((q1, q2) => q1.id - q2.id)
 
-  componentDidMount () {
-    this.props.fetchQuestions() // whatever the url is here
-
-  }
-
-  render() {
-    const sortedQuestions = this.props.questions.sort((q1, q2) => q1.id - q2.id)
-    return (
-
-      <div>
-      { this.props.questions &&
-        sortedQuestions.map(question => (
-          <div key={ question.id }>
-          <button onClick={() => this.props.handleClick(question, question.boilerplate)}>Question { question.id }</button>
-            <div className="content">
+  return (
+    props.questions &&
+      sortedQuestions.map(question => (
+        <div key={ question.id }>
+          <button onClick={ () => props.setQuestion(question) }>
+              <div className="content">{ question.description }</div>
               <div className="metadata">
-                 {/* <Rating
-                  icon="star"
-                  defaultRating={ question.rating }
-                  maxRating={ 5 }
-                  disabled
-                 /> */}
+                {/* <Rating
+                      icon="star"
+                      defaultRating={ question.rating }
+                      maxRating={ 5 }
+                      disabled
+                /> */}
               </div>
-              <div className="text">{ /* virtual field for snippet */ }</div>
-            </div>
-          </div>
-        ))
-      }
-      </div>
-
-    )
-  }
-
+          </button>
+        </div>
+    ))
+  )
 }
 
-
-
-const mapStateToProps = state => ({
-  questions: state.questions,
-  location: state.location
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchQuestions: () => dispatch(fetchQuestions())
+const mapDispatch = dispatch => ({
+  setQuestion: question => dispatch(setQuestion(question))
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapQuestions)
-
-
+export default connect(null, mapDispatch)(MapQuestions)
