@@ -74,12 +74,6 @@ class App extends Component {
     }
   }
 
-  handlePopulate (event) {
-    event.preventDefault()
-    // save input in repl (thunk)
-    this.setState({ value: '' })
-  }
-
   handleClear (event) {
     event.preventDefault()
     this.setState({ value: '' })
@@ -118,7 +112,6 @@ class App extends Component {
       <div className="columns">
         <div className="examples column">
           <button onClick={ this.handleClick }>Run</button>
-          <button onClick={ this.handlePopulate }>Populate</button>
           <button onClick={ this.handleSave }>Save</button>
           <button onClick={ this.handleClear }>Clear</button>
           <h2>Editor</h2>
@@ -171,7 +164,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getQuestion: () => dispatch(getQuestion())
-  // thunks for populating repl
 })
 
 
