@@ -3,24 +3,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-<<<<<<< HEAD
-// import { wrapStore } from 'react-chrome-redux'
-import store, { fetchQuestions } from './store'
-import '../chrome/style/index.scss'
-
-//import Routes from './routes'
-import DrawerComponents from './components/Drawer'
-
-// var newdiv = document.createElement('div');
-// newdiv.id = "alignToBottomDIV";
-// $(newdiv).html("Bottom Toolbar");
-// $("body").append(newdiv);
-=======
 import { Store } from 'react-chrome-redux'
 
 import store, { fetchQuestions } from './store'
 import DrawerComponents from './components/Drawer'
->>>>>>> master
 
 // wrapStore(store, { portName: 'code-mode' })
 
