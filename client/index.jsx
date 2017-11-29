@@ -8,8 +8,6 @@ import { Store } from 'react-chrome-redux'
 import store, { fetchQuestions } from './store'
 import DrawerComponents from './components/Drawer'
 
-// wrapStore(store, { portName: 'code-mode' })
-
 const initApp = event => {
   const youtube = document.body
   const app = document.createElement('div')

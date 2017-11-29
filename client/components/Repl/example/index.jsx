@@ -12,6 +12,9 @@ const debounce = require('lodash.debounce')
 const languages= ['javascript']
 const themes = ['monokai']
 
+import '../../../../public/style/bulma.css';
+import '../../../../public/style/drawer-contents.css';
+
 languages.forEach(lang => {
   require(`brace/mode/${lang}`)
   require(`brace/snippets/${lang}`)
@@ -109,52 +112,58 @@ class App extends Component {
 
   render() {
     return (
-      <div className="columns">
-        <div className="examples column">
+      <div className="repl">
+        <div className="buttons-section">
           <button onClick={ this.handleClick }>Run</button>
           <button onClick={ this.handleSave }>Save</button>
-          <button onClick={ this.handleClear }>Clear</button>
-          <h2>Editor</h2>
-          <AceEditor
-            mode={ this.state.mode }
-            theme={ this.state.theme }
-            name="blah2"
-            onChange={ this.onChange }
-            value = { this.state.value }
-            fontSize={ this.state.fontSize }
-            showPrintMargin={ this.state.showPrintMargin }
-            showGutter={ this.state.showGutter }
-            highlightActiveLine={ this.state.highlightActiveLine }
-            setOptions={{
-              enableBasicAutocompletion: this.state.enableBasicAutocompletion,
-              enableLiveAutocompletion: this.state.enableLiveAutocompletion,
-              enableSnippets: this.state.enableSnippets,
-              showLineNumbers: this.state.showLineNumbers,
-              tabSize: 2,
-            }}/>
+          <button onClick={this.handleClear}>Clear</button>
         </div>
-        <div className="column">
-          <h2>Code</h2>
+        <div className="columns">
+          <div className="column">
+            <h2 className="drawer-subheaders">Editor</h2>
+            <AceEditor
+              mode={ this.state.mode }
+              theme={ this.state.theme }
+              name="blah2"
+              onChange={ this.onChange }
+              value = { this.state.value }
+              fontSize={ this.state.fontSize }
+              showPrintMargin={ this.state.showPrintMargin }
+              showGutter={ this.state.showGutter }
+              highlightActiveLine={ this.state.highlightActiveLine }
+              setOptions={{
+                enableBasicAutocompletion: this.state.enableBasicAutocompletion,
+                enableLiveAutocompletion: this.state.enableLiveAutocompletion,
+                enableSnippets: this.state.enableSnippets,
+                showLineNumbers: this.state.showLineNumbers,
+                tabSize: 2,
+              }}
+            />
+          </div>
+          <div className="column">
+          <h2 className="drawer-subheaders">Code</h2>
           <AceEditor
             mode="jsx"
             theme="monokai"
             readOnly={ true }
             value = { this.state.result }
-          />
-        </div>
-        <div className="column">
-          <h2>Tests</h2>
-          <AceEditor
-            mode="jsx"
-            theme="monokai"
-            readOnly={ true }
-            value = { this.state.result }
-          />
+            />
+          </div>
+        { // temporarily hide this for F&F demo night
+          // <div className="column">
+          //   <h2 className="drawer-subheaders">Tests</h2>
+          //   <AceEditor
+          //     mode="jsx"
+          //     theme="monokai"
+          //     readOnly={true}
+          //     value={this.state.result}
+          //   />
+          // </div>
+          }
         </div>
       </div>
     )
   }
-
 }
 
 const mapStateToProps = state => ({
