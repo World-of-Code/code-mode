@@ -3,6 +3,7 @@
   "name": "world-of-code",
   "manifest_version": 2,
   "description": "turn your youtube channel into a learning platform",
+  "options_page": "chrome/views/options.html",
   "browser_action": {
     "default_popup": "/chrome/views/popup.html",
     "default_title": "Login/Signup"
@@ -27,6 +28,7 @@
         "public/style/drawer.css"
       ],
       "js": [
+        "chrome/js/options.js",
         "chrome/js/app.bundle.js",
         "chrome/js/popup.bundle.js"
       ],
