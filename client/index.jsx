@@ -3,8 +3,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Store } from 'react-chrome-redux'
-
 import store, { fetchQuestions } from './store'
 import DrawerComponents from './components/Drawer'
 
@@ -24,12 +22,11 @@ const initApp = event => {
 
 switch (document.readyState) {
   case "loading":
-    console.log('loading DOM...')
+  case "complete":
+  document.addEventListener("DOMContentLoaded", initApp(event))
     break
+
   case "interactive":
     initApp(event)
-    break
-  case "complete":
-    document.addEventListener("DOMContentLoaded", initApp(event))
     break
 }
