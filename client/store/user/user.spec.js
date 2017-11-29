@@ -7,6 +7,8 @@ import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import history from '../../history'
+import { BACK_END } from '../../store'
+
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
@@ -30,7 +32,7 @@ describe('thunk creators', () => {
   describe('me', () => {
     it('eventually dispatches the GET USER action', () => {
       const fakeUser = {email: 'Cody'}
-      mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
+      mockAxios.onGet(`${BACK_END}/auth/me`).replyOnce(200, fakeUser)
       return store.dispatch(me())
         .then(() => {
           const actions = store.getActions()
@@ -42,7 +44,7 @@ describe('thunk creators', () => {
 
   describe('logout', () => {
     it('logout: eventually dispatches the REMOVE_USER action', () => {
-      mockAxios.onPost('https://code-mode.herokuapp.com/auth/logout').replyOnce(204)
+      mockAxios.onPost(`${BACK_END}/auth/logout`).replyOnce(204)
       return store.dispatch(logout())
         .then(() => {
           const actions = store.getActions()
