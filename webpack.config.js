@@ -13,7 +13,7 @@ module.exports = {
     path: path.join(__dirname,'./chrome/js'),
     filename: '[name].bundle.js'
   },
-  devtool: 'source-map',
+  devtool: 'eval',
   module: {
     rules: [
       {

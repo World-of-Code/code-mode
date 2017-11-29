@@ -3,13 +3,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { me, fetchLocation, fetchAllQuestions, setQuestion, getMode } from '../../store'
+import { fetchLocation, fetchAllQuestions, setQuestion, getMode } from '../../store'
 import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
 
 
 class DrawerContents extends Component{
   componentDidMount () {
-    this.props.me()
     this.props.fetchLocation(window.location.href)
       .then(url => {
         if (url) return this.props.fetchAllQuestions(url.location.id)
@@ -46,7 +45,6 @@ class DrawerContents extends Component{
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
   location: state.location,
   allQuestions: state.allQuestions,
   question: state.question,
@@ -54,7 +52,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  me: () => dispatch(me()),
   fetchLocation: url => dispatch(fetchLocation(url)),
   fetchAllQuestions: url => dispatch(fetchAllQuestions(url)),
   setQuestion: question => dispatch(setQuestion(question)),

@@ -25,11 +25,9 @@ class PopupMain extends Component {
     if(this.state.buttonToggle === true) {
       this.setState({buttonToggle: false})
       chrome.storage.local.set({ action: 'hide' })
-      // chrome.management.setEnabled("fbmlhcnipimamepnadolaoblelnadblo", false)
     } else {
       this.setState({buttonToggle: true})
       chrome.storage.local.set({ action: 'show' })
-      //chrome.management.setEnabled("fbmlhcnipimamepnadolaoblelnadblo", true)
     }
   }
 
