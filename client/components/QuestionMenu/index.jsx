@@ -8,8 +8,10 @@ const QuestionMenu = props => {
   return (
     <div>
       {/* container to format mapped questions */}
-      <MapQuestions questions={props.questions} location={ props.location } />
+      <MapQuestions questions={ props.questions } location={ props.location } />
     </div>
   )
 }
+
+
 export default QuestionMenu

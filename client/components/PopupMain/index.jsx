@@ -1,11 +1,11 @@
-import { UserHome, Login, Signup } from '../'
-import { me } from '../../store'
+'use strict'
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { me } from '../../store'
+import { UserHome, Login, Signup } from '../'
 
-/**
- * COMPONENT
- */
+
 class PopupMain extends Component {
   componentDidMount () {
     this.props.loadInitialData()
@@ -16,7 +16,7 @@ class PopupMain extends Component {
     return (
         <div>
         {
-            isLoggedIn ? <UserHome /> : 
+            isLoggedIn ? <UserHome /> :
             <div>
                 <Login />
                 <Signup />
@@ -27,10 +27,7 @@ class PopupMain extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
-const mapState = (state) => ({
+const mapState = state => ({
   isLoggedIn: !!state.user.id
 })
 

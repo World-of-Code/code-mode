@@ -13,9 +13,8 @@ const MapQuestions = props => {
     props.questions &&
       sortedQuestions.map(question => (
         <div key={ question.id }>
-          <button onClick={ () =>
-            props.setQuestion(question)}>
-              <div className="content" >{ question.description }</div>
+          <button onClick={ () => props.setQuestion(question) }>
+              <div className="content">{ question.description }</div>
               <div className="metadata">
                 {/* <Rating
                       icon="star"

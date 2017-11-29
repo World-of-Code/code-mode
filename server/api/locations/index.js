@@ -27,11 +27,11 @@ router.post('/', (req, res, next) => {
 })
 
 // create a location
-// router.post('/', (req, res, next) => {
-//   Location.create(req.body)
-//     .then(location => res.status(201).json(location))
-//     .catch(next)
-// })
+router.post('/register', (req, res, next) => {
+  Location.create(req.body)
+    .then(location => res.status(201).json(location))
+    .catch(next)
+})
 
 // edit location by id
 router.put('/:id', (req, res, next) => {

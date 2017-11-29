@@ -34,7 +34,6 @@ router.get('/locations/:urlId', (req, res, next) => {
 //   res.json(req.question)
 // })
 
-
 // create a question
 router.post('/', (req, res, next) => {
   Question.create(req.body)

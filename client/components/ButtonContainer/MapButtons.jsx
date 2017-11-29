@@ -3,10 +3,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  me,
-  fetchLocation,
-  getMode,
-  getQuestion,
   addQuestion,
   editQuestion,
   clearQuestion,
@@ -24,13 +20,6 @@ class MapButtons extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount () {
-    this.props.me()
-    this.props.fetchLocation(window.location.href)
-    this.props.getMode()
-    this.props.getQuestion()
-  }
-
   handleClick (type) {
     const question = this.props.question
     const action = `${type}Question`
@@ -40,12 +29,14 @@ class MapButtons extends Component {
   }
 
   render () {
+    // fix buttonsAvailable + user
     const pageAdmin = this.props.user.id === this.props.location.userId
     const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
       if (button.name === 'add') return true
-      // if (!this.props.question.id ) return false
+      if (!this.props.question.id ) return false
       return pageAdmin ? true : false
     })
+
     return (
       this.props.question &&
       buttonsAvailable.map(button => (
@@ -73,10 +64,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  me: () => dispatch(me()),
-  fetchLocation: url => dispatch(fetchLocation(url)),
-  getMode: () => dispatch(getMode()),
-  getQuestion: () => dispatch(getQuestion()),
   addQuestion: () => dispatch(addQuestion()),
   editQuestion: question => dispatch(editQuestion(question)),
   clearQuestion: question => dispatch(clearQuestion(question)),

@@ -5,7 +5,7 @@ import ReadQuestion from './ReadQuestion'
 import QuestionForm from './QuestionForm'
 
 
-// ContentManagementButton should choose view here
+// Mapped Button should choose view here
 class QuestionDisplay extends Component {
   render () {
     return (
