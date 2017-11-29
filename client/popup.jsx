@@ -3,12 +3,12 @@ console.log('popup loading...')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import '../chrome/style/index.scss'
 import PopupMain from './components/PopupMain'
 import { Provider } from 'react-redux'
 import store from './store'
 // import { Store } from 'react-chrome-redux'
 
+<<<<<<< HEAD
 // const store = new Store({
 //   portName: 'code-mode' // communication port name
 // });
@@ -44,3 +44,11 @@ switch (document.readyState) {
     document.addEventListener("DOMContentLoaded", initPopup(event))
     break
 }
+=======
+ReactDOM.render(
+  <Provider store={store}>
+    <PopupMain />
+  </Provider>,
+  document.getElementById('popup')
+)
+>>>>>>> master

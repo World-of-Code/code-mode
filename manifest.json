@@ -31,7 +31,7 @@
         "chrome/js/popup.bundle.js"
       ],
       "matches": [
-        "http://*/*", "https://*/*"
+        "http://*.youtube.com/*", "https://*.youtube.com/*"
       ]
     }
   ],
