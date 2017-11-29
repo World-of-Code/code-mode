@@ -11,7 +11,8 @@ import DrawerBar from './DrawerBar'
 
 import '../../../public/style/drawer.css'
 
-export default class DrawerComponents extends Component {
+
+class DrawerComponents extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -22,13 +23,16 @@ export default class DrawerComponents extends Component {
   componentDidMount () {
     chrome.storage.onChanged.addListener(changes => {
       let action = changes['action']
-      if(action.newValue === 'hide') {
+      let user = changes['user']
+
+      if (user) this.props.setUser(user.newValue)
+      if (action && action.newValue === 'hide') {
         this.setState({display: false})
-         $( '#app' ).hide()
+        $( '#app' ).hide()
       }
-      if(action.newValue === 'show') {
+      if (action && action.newValue === 'show') {
         this.setState({display: true})
-         $( '#app' ).show()
+        $( '#app' ).show()
       }
     })
 
@@ -52,3 +56,10 @@ export default class DrawerComponents extends Component {
   }
 
 }
+
+const mapDispatchToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+})
+
+
+export default connect(null, mapDispatchToProps)(DrawerComponents)
