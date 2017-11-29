@@ -26,7 +26,7 @@ export default class DrawerComponents extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      display: false
+      display: true
     }
   }
 
@@ -44,9 +44,9 @@ export default class DrawerComponents extends Component {
     })
 
     chrome.storage.local.get('action', obj => {
-      let foo = obj.userInput
-      if(foo === 'hide') this.setState({ display: false })
-      if(foo === 'show') this.setState({ display: true })
+      let visibility = obj.userInput
+      if(visibility === 'hide') this.setState({ display: false })
+      if(visibility === 'show') this.setState({ display: true })
     })
   }
 
