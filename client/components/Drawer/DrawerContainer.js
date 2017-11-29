@@ -19,7 +19,6 @@ export default class DrawerContainer extends Component {
       enableDragHandle: true,
       position: 'bottom',
       dragToggleDistance: 30,
-      // delete
       open: true
     };
 
@@ -48,7 +47,7 @@ export default class DrawerContainer extends Component {
 
     const drawerProps = {
       docked: this.state.docked,
-      open: this.state.open, // this is it i think
+      open: this.state.open,
       touch: this.state.touch,
       enableDragHandle: this.state.enableDragHandle,
       position: this.state.position,

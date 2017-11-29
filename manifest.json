@@ -24,7 +24,9 @@
       "css": [
         "chrome/style/index.scss",
         "public/style/rc-drawer.css",
-        "public/style/drawer.css"
+        "public/style/drawer.css",
+        "public/style/drawer-contents.css",
+        "public/style/bulma.css"
       ],
       "js": [
         "chrome/js/app.bundle.js",

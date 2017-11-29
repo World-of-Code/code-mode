@@ -108,10 +108,10 @@
   bottom: 0;
 }
 .drawer-container {
-  margin-top: 10%;
+  /* margin-top: 10%; */
   position: sticky;
-  height: 410px;
-  width: 854;
+  height: 400px;
+  width: 100%;
   /* max z-index */
   z-index: 2147483647 !important;
 
