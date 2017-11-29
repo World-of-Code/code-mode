@@ -9,7 +9,8 @@ class AuthForm extends Component{
   constructor(props){
     super(props)
   }
-  handleSubmit(){
+
+  handleOAuthSubmit() {
     chrome.identity.getAuthToken({
       interactive: true
     },(token)=>{
@@ -24,8 +25,9 @@ class AuthForm extends Component{
       }
       response.send()
     })
+
   }
-  
+
 render(){
   const { name, displayName, handleSubmit, error } = this.props
   return (

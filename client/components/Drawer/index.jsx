@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import Drawer from 'rc-drawer'
 import $ from 'jquery'
+import { setUser } from '../../store'
 import {
   Collapse,
   Navbar,
@@ -22,7 +23,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../../../public/style/drawer.css'
 
 
-export default class DrawerComponents extends Component {
+class DrawerComponents extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -33,20 +34,23 @@ export default class DrawerComponents extends Component {
   componentDidMount () {
     chrome.storage.onChanged.addListener(changes => {
       let action = changes['action']
-      if(action.newValue === 'hide') {
+      let user = changes['user']
+
+      if (user) this.props.setUser(user.newValue)
+      if (action && action.newValue === 'hide') {
         this.setState({display: false})
-         $( '#app' ).hide()
+        $( '#app' ).hide()
       }
-      if(action.newValue === 'show') {
+      if (action && action.newValue === 'show') {
         this.setState({display: true})
-         $( '#app' ).show()
+        $( '#app' ).show()
       }
     })
 
     chrome.storage.local.get('action', obj => {
       let foo = obj.userInput
-      if(foo === 'hide') this.setState({ display: false })
-      if(foo === 'show') this.setState({ display: true })
+      if (foo === 'hide') this.setState({ display: false })
+      if (foo === 'show') this.setState({ display: true })
     })
   }
 
@@ -63,3 +67,10 @@ export default class DrawerComponents extends Component {
   }
 
 }
+
+const mapDispatchToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+})
+
+
+export default connect(null, mapDispatchToProps)(DrawerComponents)

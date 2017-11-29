@@ -3,20 +3,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+// import { wrapStore } from 'react-chrome-redux'
 import store, { fetchQuestions } from './store'
 import '../chrome/style/index.scss'
 
 //import Routes from './routes'
 import DrawerComponents from './components/Drawer'
 
-// import registerServiceWorker from './registerServiceWorker'
-import { Store } from 'react-chrome-redux'
-
-
 // var newdiv = document.createElement('div');
 // newdiv.id = "alignToBottomDIV";
 // $(newdiv).html("Bottom Toolbar");
 // $("body").append(newdiv);
+
+// wrapStore(store, { portName: 'code-mode' })
 
 const initApp = event => {
   // const youtube = document.getElementById('content')
@@ -35,11 +34,12 @@ const initApp = event => {
 
 switch (document.readyState) {
   case "loading":
-  case "complete":
-    document.addEventListener("DOMContentLoaded", initApp(event))
+    console.log('loading DOM...')
     break
-
   case "interactive":
     initApp(event)
+    break
+  case "complete":
+    document.addEventListener("DOMContentLoaded", initApp(event))
     break
 }
