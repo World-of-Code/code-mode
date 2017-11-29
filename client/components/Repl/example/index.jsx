@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { render } from 'react-dom'
 import AceEditor from '../src/ace.jsx'
 import 'brace/mode/jsx'
-import { fetchInput, postInput, fetchQuestions } from '../../../store'
+import { fetchInput, postInput, getQuestion } from '../../../store'
 
 const debounce = require('lodash.debounce')
 const languages= ['javascript']
@@ -24,7 +24,7 @@ import 'brace/ext/language_tools'
 import 'brace/ext/searchbox'
 
 
-class AppClass extends Component {
+class App extends Component {
   onChange (newValue) {
     this.setState({ value: newValue })
     //this.setChromeStorage()
@@ -55,13 +55,9 @@ class AppClass extends Component {
       showLineNumbers: true,
       result: ''
     }
-    this.setTheme = this.setTheme.bind(this)
-    this.setMode = this.setMode.bind(this)
     this.onChange = this.onChange.bind(this)
     this.setFontSize = this.setFontSize.bind(this)
-    this.setBoolean = this.setBoolean.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.handleSave = this.handleSave.bind(this)
     this.handleClear = this.handleClear.bind(this)
     this.setChromeStorage = this.setChromeStorage.bind(this)
     this.getChromeStorage = this.getChromeStorage.bind(this)

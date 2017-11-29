@@ -28,17 +28,17 @@ passport.deserializeUser((id, done) =>
 
 const createApp = () => {
 
-  // logging middleware
+ // logging middleware
   app.use(morgan('dev'))
 
-  // body parsing middleware
+ // body parsing middleware
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
 
-  // compression middleware
+ // compression middleware
   app.use(compression())
 
-  // session middleware with passport
+ // session middleware with passport
   app.use(session({
     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
     store: sessionStore,
@@ -48,25 +48,21 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  // auth and api routes
+ // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
-  // static file-serving middleware
+ // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'chrome/js')))
 
-  // sends index.html
+ // sends index.html
   app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'chrome/views/index.html'))
   })
 
-  // any remaining requests with an extension (.js, .css, etc.) send 404
-<<<<<<< HEAD
+ // any remaining requests with an extension (.js, .css, etc.) send 404
   .use((req, res, next) => {
     console.log(req.path)
-=======
-  app.use((req, res, next) => {
->>>>>>> master
     if (path.extname(req.path).length) {
       const err = new Error('Not found')
       err.status = 404
@@ -76,7 +72,7 @@ const createApp = () => {
     }
   })
 
-  // error handling endware
+ // error handling endware
   app.use((err, req, res, next) => {
     console.error(err)
     console.error(err.stack)
@@ -87,8 +83,6 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () => console.log(`Havin a party on port ${ PORT }`))
-
-
 }
 
 const syncDb = () => db.sync()

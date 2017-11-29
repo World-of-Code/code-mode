@@ -2,16 +2,20 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Login, Signup } from '../auth-form'
+import { me } from '../../store'
+import { UserHome } from '../'
 import $ from 'jquery'
 
+
 class PopupMain extends Component {
-constructor(){
-  super()
-  this.state = {
-    buttonToggle: true
+  constructor(){
+    super()
+    this.state = {
+      buttonToggle: true
+    }
+    this.handleClick = this.handleClick.bind(this)
   }
-  this.handleClick = this.handleClick.bind(this)
-}
 
   componentDidMount () {
     this.props.loadInitialData()
@@ -34,7 +38,9 @@ constructor(){
 
     return (
       <div>
-          <button id = "toggle" type="button" onClick={ this.handleClick }>toggle popup</button>
+          <button id = "toggle" type="button" onClick={ this.handleClick }>
+            toggle popup
+          </button>
         {
             isLoggedIn
             ? <UserHome />
