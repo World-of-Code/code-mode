@@ -9,6 +9,7 @@ const Question = db.define('question', {
     type: Sequelize.TEXT,
     allowNull: false
   },
+  description: Sequelize.STRING,
   hints: Sequelize.ARRAY(Sequelize.TEXT),
   answer: {
     type: Sequelize.TEXT,

@@ -3,32 +3,63 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Repl, QuestionDisplay, QuestionMenu } from '../'
+import { me, fetchLocation, fetchAllQuestions, setQuestion, getMode } from '../../store'
+import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
+
 
 class DrawerContents extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            question: {},
-            boilerplate: ''
+  componentDidMount () {
+    this.props.me()
+    this.props.fetchLocation(window.location.href)
+      .then(url => {
+        if (url) return this.props.fetchAllQuestions(url.location.id)
+      })
+      .then(questions => {
+        if (questions) {
+          const sortedQuestions = questions.questions.slice().sort((q1, q2) => q1.id - q2.id)
+          return this.props.setQuestion(sortedQuestions[0])
         }
-        this.handleClick = this.handleClick.bind(this)
-    }
-    handleClick (question, boilerplate) {
-        this.setState({ question, boilerplate })
-    }
+      })
+      .catch(err => console.log(err))
+    this.props.getMode()
+  }
 
-    render () {
-        return (
-            <div>
-                <QuestionMenu handleClick={this.handleClick} />
-                <QuestionDisplay question={this.state.question} />
-                <Repl question={this.state.question} boilerplate={this.state.boilerplate} />
-            </div>
-        )
-    }
+  render () {
+    return (
+      <div>
+        {
+          this.props.location &&
+          <ButtonContainer />
+        }
+        {
+          this.props.allQuestions &&
+          <div>
+            <QuestionMenu questions={ this.props.allQuestions } />
+            <QuestionDisplay question={ this.props.question } />
+          </div>
+        }
+        <Repl />
+      </div>
+    )
+  }
+
 }
-export default DrawerContents
+
+const mapStateToProps = state => ({
+  user: state.user,
+  location: state.location,
+  allQuestions: state.allQuestions,
+  question: state.question,
+  mode: state.mode
+})
+
+const mapDispatchToProps = dispatch => ({
+  me: () => dispatch(me()),
+  fetchLocation: url => dispatch(fetchLocation(url)),
+  fetchAllQuestions: url => dispatch(fetchAllQuestions(url)),
+  setQuestion: question => dispatch(setQuestion(question)),
+  getMode: () => dispatch(getMode())
+})
 
 
-
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerContents)

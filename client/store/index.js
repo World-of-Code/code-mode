@@ -7,14 +7,16 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import user from './user'
 import question from './question'
-import questions from './questions'
-import input from './input'
+import allQuestions from './allQuestions'
+import location from './location'
+import mode from './mode'
 
 const reducer = combineReducers({
   user,
   question,
-  questions,
-  input
+  allQuestions,
+  location,
+  mode
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -26,6 +28,10 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
-export * from './questions'
+export * from './allQuestions'
 export * from './question'
-export * from './input'
+export * from './location'
+export * from './mode'
+
+// backend api route
+export const BACK_END = 'http://localhost:8080' // 'https://code-mode.herokuapp.com'
