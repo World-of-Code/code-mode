@@ -79,7 +79,10 @@ class App extends Component {
 
   handleClear (event) {
     event.preventDefault()
-    this.setState({ value: '' })
+    this.setState({ 
+      value: '',
+      result: '' 
+    })
   }
 
   getChromeStorage () {
