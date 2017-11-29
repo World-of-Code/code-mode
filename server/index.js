@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 8080
 const app = express()
 const http = require('http')
 const https = require('https')
-const socketio = require('socket.io')
 module.exports = app
 
 
@@ -62,8 +61,12 @@ const createApp = () => {
   })
 
   // any remaining requests with an extension (.js, .css, etc.) send 404
+<<<<<<< HEAD
   .use((req, res, next) => {
     console.log(req.path)
+=======
+  app.use((req, res, next) => {
+>>>>>>> master
     if (path.extname(req.path).length) {
       const err = new Error('Not found')
       err.status = 404
@@ -85,9 +88,7 @@ const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () => console.log(`Havin a party on port ${ PORT }`))
 
-  // set up our socket control center
-  const io = socketio(server)
-  require('./socket')(io)
+
 }
 
 const syncDb = () => db.sync()

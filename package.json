@@ -13,7 +13,7 @@
     "postinstall": "touch secrets.js",
     "seed": "node scripts/seed.js",
     "start": "node server",
-    "start-dev": "npm run build-client-watch & npm run start-server",
+    "start-dev": "yarn run build-client-watch & yarn run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
     "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/world-of-code-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js ./test/**/*.spec.js --compilers js:babel-register --exit"
   },
@@ -42,6 +42,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
+    "bootstrap": "4.0.0-beta.2",
     "brace": "^0.11.0",
     "classnames": "^2.2.5",
     "compression": "^1.7.1",
@@ -49,6 +50,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
     "morgan": "^1.8.1",
@@ -65,12 +67,13 @@
     "react-redux": "^5.0.2",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^4.8.0",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.2",
-    "sequelize": "^4.3.1",
-    "socket.io": "^2.0.3"
+    "sequelize": "^4.3.1"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.10.0",
@@ -91,6 +94,7 @@
     "eslint-config-fullstack": "^3.0.0",
     "eslint-plugin-react": "^6.5.0",
     "file-loader": "^1.1.5",
+    "jquery": "^3.2.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "mocha": "^4.0.1",

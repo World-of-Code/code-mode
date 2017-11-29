@@ -1,50 +1,45 @@
+'use strict'
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { render } from 'react-dom'
 import AceEditor from '../src/ace.jsx'
 import 'brace/mode/jsx'
-import { getQuestion } from '../../../store'
+import { fetchInput, postInput, fetchQuestions } from '../../../store'
 
+const debounce = require('lodash.debounce')
 const languages= ['javascript']
 const themes = ['monokai']
+
 languages.forEach(lang => {
   require(`brace/mode/${lang}`)
   require(`brace/snippets/${lang}`)
 })
 
-themes.forEach(theme => {
-  require(`brace/theme/${theme}`)
-})
+themes.forEach(theme => require(`brace/theme/${theme}`))
 
 /*eslint-disable no-alert, no-console */
 import 'brace/ext/language_tools'
 import 'brace/ext/searchbox'
 
 
-class App extends Component {
+class AppClass extends Component {
   onChange (newValue) {
     this.setState({ value: newValue })
-    this.setChromeStorage()
-  }
-
-  setTheme (e) {
-    this.setState({ theme: e.target.value })
-  }
-
-  setMode (e) {
-    this.setState({ mode: e.target.value })
-  }
-
-  setBoolean (name, value) {
-    this.setState({ [name]: value })
+    //this.setChromeStorage()
+    debounce(this.setChromeStorage,1000)() // 1sec
   }
 
   setFontSize (e) {
     this.setState({ fontSize: parseInt(e.target.value,10) })
   }
 
-  constructor (props) {
+  setFontSize (e) {
+    this.setState({ fontSize: parseInt(e.target.value,10) })
+  }
+
+  constructor(props) {
     super(props)
     this.state = {
       value: '',
@@ -75,16 +70,15 @@ class App extends Component {
   handleClick (event) {
     event.preventDefault()
     let value = this.state.value
-
-    this.setState({ result: !eval(value) ? "undefined" : eval(value).toString() })
+    this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
     if (this.state.value.includes('console.log')) {
       let newValue = this.state.value.replace(/console.log/g, 'return')
       let value = newValue
-      this.setState({ result: !eval(value) ? "undefined" : eval(value).toString() })
+      this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
     }
   }
 
-  handleSave (event) {
+  handlePopulate (event) {
     event.preventDefault()
     // save input in repl (thunk)
     this.setState({ value: '' })
@@ -96,16 +90,19 @@ class App extends Component {
   }
 
   getChromeStorage () {
-    chrome.storage.local.get("userInput", obj => {
+    chrome.storage.local.get('userInput', obj => {
       this.setState({ value: obj.userInput })
-      console.log('saved')
     })
   }
 
-  setChromeStorage () {
-    chrome.storage.local.set({ 'userInput': this.state.value }, () => {
-      console.log('saved')
+  getChromeStorage () {
+    chrome.storage.local.get('userInput', obj => {
+      this.setState({ value: obj.userInput })
     })
+  }
+
+  setChromeStorage(){
+    chrome.storage.local.set({ 'userInput': this.state.value })
   }
 
   componentDidMount () {
@@ -113,8 +110,11 @@ class App extends Component {
     this.getChromeStorage()
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.question && this.props.question.boilerplate !== nextProps.question.boilerplate) this.setState({ value: nextProps.question.boilerplate })
+  componentWillReceiveProps (nextProps) {
+    let question = this.props.question
+    if (question && question.boilerplate !== nextProps.question.boilerplate) {
+      this.setState({ value: nextProps.question.boilerplate })
+    }
   }
 
   render() {
@@ -131,10 +131,7 @@ class App extends Component {
             theme={ this.state.theme }
             name="blah2"
             onChange={ this.onChange }
-            onSelectionChange={ this.onSelectionChange }
-            onCursorChange={ this.onCursorChange }
-            onValidate={ this.onValidate }
-            value={ this.state.value }
+            value = { this.state.value }
             fontSize={ this.state.fontSize }
             showPrintMargin={ this.state.showPrintMargin }
             showGutter={ this.state.showGutter }
@@ -144,9 +141,8 @@ class App extends Component {
               enableLiveAutocompletion: this.state.enableLiveAutocompletion,
               enableSnippets: this.state.enableSnippets,
               showLineNumbers: this.state.showLineNumbers,
-              tabSize: 2
-            }}
-          />
+              tabSize: 2,
+            }}/>
         </div>
         <div className="column">
           <h2>Code</h2>

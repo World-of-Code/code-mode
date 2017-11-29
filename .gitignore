@@ -1,10 +1,11 @@
 node_modules
-chrome/js/*
+chrome/js/app.bundle.js
+chrome/js/app.bundle.js.map
+chrome/js/popup.bundle.js
+chrome/js/popup.bundle.js.map
 secrets.js
 .DS_Store
 npm-debug.log
 yarn-error.log
-
-
 build/
 dev/

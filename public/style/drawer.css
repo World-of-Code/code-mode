@@ -1,0 +1,24 @@
+.drawer-bar-all {
+  background: #fff;
+  z-index: 2147483647 !important;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* the following are unecessary for now but may come in handy later */
+.drawer-bar-closed {
+  /* position: fixed; */
+  /* bottom: 0; */
+  /* width: 100%; */
+}
+.drawer-bar-open {
+  /* position: sticky; */
+  /* bottom: 0; */
+  /* width: 100%; */
+}
+
+.contents {
+  height: 400px;
+  overflow: auto;
+}

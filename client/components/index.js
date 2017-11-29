@@ -9,7 +9,7 @@ export { default as QuestionDisplay } from './QuestionDisplay'
 export { default as QuestionMenu } from './QuestionMenu'
 export { default as ButtonContainer } from './ButtonContainer'
 
-export { default as DrawerWrapper} from './Drawer'
+export { default as DrawerContainer} from './Drawer'
 export { default as DrawerContents } from './DrawerContents'
 
 export { default as PopupMain } from './PopupMain'
