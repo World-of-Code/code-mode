@@ -31,6 +31,13 @@ const createApp = () => {
  // logging middleware
   app.use(morgan('dev'))
 
+ // allow CORS
+  app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
  // body parsing middleware
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
@@ -54,6 +61,8 @@ const createApp = () => {
 
  // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'chrome/js')))
+
+
 
  // sends index.html
   app.use('*', (req, res) => {

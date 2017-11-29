@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {
   Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
+  Navbar as DrawerHeader,
+  NavbarToggler as HeaderToggler,
+  NavbarBrand as HeaderText,
   Nav,
   NavItem,
   NavLink
@@ -32,13 +32,13 @@ export default class DrawerBar extends Component {
 
     return (
       <div className={getDrawerBarCSS()}>
-        <Navbar color="faded" light>
-          <NavbarToggler onClick={this.handleClick} className="mr-2" />
-          <NavbarBrand href="/" className="mr-auto">CodeMode</NavbarBrand>
+        <DrawerHeader color="faded" light>
+          <HeaderToggler onClick={this.handleClick} className="mr-2" />
+          <HeaderText href="/" className="mr-auto">CodeMode</HeaderText>
           <Collapse isOpen={this.state.open} navbar>
             <DrawerContainer />
           </Collapse>
-        </Navbar>
+        </DrawerHeader>
       </div>
     );
   }
