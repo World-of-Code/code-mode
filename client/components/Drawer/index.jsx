@@ -14,7 +14,7 @@ export default class DrawerComponents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: false
+      display: true
     }
 
   }
@@ -29,7 +29,7 @@ export default class DrawerComponents extends Component {
       if(action.newValue === 'show') {
         this.setState({display: true})
          $( "#app" ).show();
-      } 
+      }
   });
 
   chrome.storage.local.get("action",(obj)=>{
@@ -50,7 +50,7 @@ export default class DrawerComponents extends Component {
       <div className="drawer-bar-all">
           {this.state.display  ?
           <DrawerBar />
-          : <div /> 
+          : <div />
         }
       </div>
     );
