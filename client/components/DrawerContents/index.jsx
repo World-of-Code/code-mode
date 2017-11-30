@@ -8,10 +8,16 @@ import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
 
 
 class DrawerContents extends Component{
+  constructor(props){
+    super(props)
+  }
   componentDidMount () {
+
     this.props.fetchLocation(window.location.href)
       .then(url => {
-        if (url) return this.props.fetchAllQuestions(url.location.id)
+        if (url) {
+          return this.props.fetchAllQuestions(url.location.id)
+        }
       })
       .then(questions => {
         if (questions) {

@@ -66,6 +66,7 @@
     "react-dom": "^16.0.0",
     "react-frame-component": "^2.0.0",
     "react-redux": "^5.0.2",
+    "react-resizable": "^1.7.5",
     "react-resizable-component": "^1.1.0",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",

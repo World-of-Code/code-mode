@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import Drawer from 'rc-drawer'
 import $ from 'jquery'
-import Resizable from 'react-resizable-component'
+import {ResizableBox, Resizable} from 'react-resizable'
 import { setUser } from '../../store'
 import DrawerContents from '../DrawerContents'
 import DrawerBar from './DrawerBar'
@@ -50,10 +50,10 @@ class DrawerComponents extends Component {
             console.log("testing 123")}
             {this.state.display
             ? 
-         
+               <ResizableBox width={500} height={200}>
               <DrawerBar />
-
-            : <div />
+</ResizableBox>
+           : null
           }
         </div>
     )
