@@ -34,4 +34,4 @@ export * from './location'
 export * from './mode'
 
 // backend api route
-export const BACK_END = 'http://localhost:8080' // 'https://code-mode.herokuapp.com'
+export const BACK_END = 'https://code-mode.herokuapp.com' //'http://localhost:8080'
