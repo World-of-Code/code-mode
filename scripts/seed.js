@@ -12,7 +12,7 @@ async function seed () {
     User.create({ email: 'murphy@email.com', password: '123' })
   ])
   const locations = await Promise.all([
-    // Location.create({id: 1, url: 'https://www.youtube.com/'}),
+    Location.create({id: 1, url: 'https://www.youtube.com/'}),
     Location.create({ id: 2, url: 'http://www.google.com/' }),
     Location.create({ id: 3, url: 'https://www.youtube.com/watch?v=fGdd9qNwQdQ' }),
     Location.create({ id: 4, url: 'https://www.youtube.com/watch?v=k7-N8R0-KY4' }),
