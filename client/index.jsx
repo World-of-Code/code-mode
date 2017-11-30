@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store, { fetchQuestions } from './store'
 import DrawerComponents from './components/Drawer'
-import Resizable from 'react-resizable-component'
+
 
 const initApp = event => {
   const youtube = document.body
@@ -15,9 +15,7 @@ const initApp = event => {
 
   ReactDOM.render(
     <Provider store={ store }>
-    <Resizable>
       <DrawerComponents />
-      </Resizable>
     </Provider>,
     document.getElementById('app')
   )
