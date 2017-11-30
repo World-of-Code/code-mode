@@ -12,7 +12,7 @@ const GET_ALL_QUESTIONS = 'GET_ALL_QUESTIONS'
 /**
  * ACTION CREATORS
  */
-export const getAllQuestions = questions => ({ type: GET_ALL_QUESTIONS, questions })
+const getAllQuestions = questions => ({ type: GET_ALL_QUESTIONS, questions })
 
 /**
  * THUNK CREATORS

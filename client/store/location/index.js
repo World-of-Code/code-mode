@@ -30,9 +30,9 @@ export const fetchLocation = location =>
       .then(res => dispatch(getLocation(res.data)))
       .catch(err => console.log(err))
 
-export const addLocation = location =>
+export const registerLocation = location =>
   dispatch =>
-    axios.post(`${BACK_END}/api/locations/register`, location)
+    axios.post(`${BACK_END}/api/locations/register`, { url: location })
       .then(res => dispatch(createLocation(res.data)))
       .catch(err => console.log(err))
 

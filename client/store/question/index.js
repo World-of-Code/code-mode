@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END, setModeRead, setModeAdd, setModeEdit, setUser } from '../../store'
+import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../../store'
 
 
 /**
@@ -25,12 +25,6 @@ const createQuestion = question => ({ type: CREATE_QUESTION, question })
 /**
  * THUNK CREATORS
  */
-export const fetchQuestion = questionId =>
-dispatch =>
-  axios.get(`${BACK_END}/api/questions/${questionId}`)
-    .then(res => dispatch(getQuestion(res.data)))
-    .catch(err => console.log(err))
-
 export const addQuestion = () =>
   dispatch => {
     dispatch(newQuestion())
@@ -43,37 +37,34 @@ export const editQuestion = question =>
     dispatch(setModeEdit())
   }
 
-export const cancelQuestion = (question, user) =>
+export const cancelQuestion = question =>
   dispatch => {
     dispatch(getQuestion(question))
     dispatch(setModeRead())
-    //dispatch(setUser(user))
   }
 
 export const saveQuestion = question =>
   dispatch =>
-    axios.put(`/${BACK_END}/api/questions/${question.id}`, question)
+    axios.put(`${BACK_END}/api/questions/${question.id}`, question)
       .then(res => dispatch(editQuestion(res.data)))
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
-// find next question, delete previous, switch the state to the next
-export const deleteQuestion = (question, user, urlId) =>
-  dispatch =>
-    axios.get(`/${BACK_END}/api/questions/${urlId}`)
-      .then(questions => {
-        const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
-        const questionIndex = sortedQuestions[sortedQuestions.indexOf(question.id)]
-        return sortedQuestions[questionIndex + 1]
-             ? sortedQuestions[questionIndex + 1]
-             : sortedQuestions[questionIndex - 1]
-      })
-      .then(nextQuestionId => {
-        axios.delete(`/${BACK_END}/api/questions/${question.id}`)
-        return nextQuestionId ? dispatch(fetchQuestion(nextQuestionId)) : null
-      })
+// ready next question, delete previous, switch the state to the next
+export const deleteQuestion = (question, questions) =>
+  dispatch => {
+    const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
+    const questionIndex = sortedQuestions.indexOf(question)
+    const nextQuestion = sortedQuestions[questionIndex + 1]
+                       ? sortedQuestions[questionIndex + 1]
+                       : sortedQuestions[questionIndex - 1]
+    console.log('sorted', sortedQuestions, 'index', questionIndex, 'next', nextQuestion)
+    axios.delete(`${BACK_END}/api/questions/${question.id}`)
+      .then(() => nextQuestion ? dispatch(setQuestion(nextQuestion)) : dispatch(setQuestion({}))
+    )
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
+  }
 
 export const clearQuestion = question =>
   dispatch =>
@@ -109,6 +100,7 @@ export default (state = {}, action) => {
 
     case GET_QUESTION:
       return state
+
     default:
       return state
   }

@@ -6,11 +6,11 @@ const Question = require('./question')
 const UserQuestion = require('./userQuestion')
 
 
-Location.belongsTo(User)
-User.hasMany(Location)
-
 Location.hasMany(Question)
 Question.belongsTo(Location)
+
+Question.belongsTo(User)
+User.hasMany(Question)
 
 User.belongsToMany(Question, { through: UserQuestion })
 Question.belongsToMany(User, { through: UserQuestion })

@@ -10,7 +10,8 @@ import {
   deleteQuestion,
   cancelQuestion,
   submitQuestion,
-  sendQuestion
+  sendQuestion,
+  registerLocation
 } from '../../store'
 
 
@@ -21,19 +22,21 @@ class MapButtons extends Component {
   }
 
   handleClick (type) {
-    const { question, user, location } = this.props
-    const action = `${type}Question`
-
-      if (type === 'delete') this.props[action](question, user, location.id)
-      else this.props[action](question, user)
+    const { question, allQuestions, location, user } = this.props
+    const action = type === 'register' ? `${type}Location` : `${type}Question`
+    if (type === 'delete') this.props[action](question, allQuestions)
+    else if (type === 'register') this.props[action](window.location.href)
+    else this.props[action](question, user)
   }
 
   render () {
-    const pageAdmin = this.props.user.id === this.props.location.userId
+    console.log('mode ', this.props.mode)
+    const questionCreator = this.props.user.id === this.props.question.userId
     const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
       if (button.name === 'add') return true
       if (this.props.mode.type === 'Add') return true
-      return pageAdmin && this.props.question.id
+      if (this.props.mode.type === 'Register') return true
+      return questionCreator && this.props.question.id
     })
 
     return (
@@ -42,7 +45,7 @@ class MapButtons extends Component {
         <div key={ button.name }>
           <button
             type="submit"
-            className={ `button ${button.name}` }
+            className="button"
             onClick={ () => this.handleClick(button.name) }
           >
             { button.name }
@@ -58,8 +61,9 @@ class MapButtons extends Component {
 const mapStateToProps = state => ({
   user: state.user,
   location: state.location,
-  mode: state.mode,
-  question: state.question
+  question: state.question,
+  allQuestions: state.allQuestions,
+  mode: state.mode
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -70,7 +74,8 @@ const mapDispatchToProps = dispatch => ({
   deleteQuestion: (question, urlId) => dispatch(deleteQuestion(question, urlId)),
   cancelQuestion: question => dispatch(cancelQuestion(question)),
   submitQuestion: question => dispatch(submitQuestion(question)),
-  sendQuestion: () => dispatch(sendQuestion())
+  sendQuestion: () => dispatch(sendQuestion()),
+  registerLocation: url => dispatch(registerLocation(url))
 })
 
 

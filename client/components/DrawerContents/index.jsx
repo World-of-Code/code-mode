@@ -3,15 +3,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchLocation, fetchAllQuestions, setQuestion, getMode } from '../../store'
 import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
+import { fetchLocation, fetchAllQuestions, setQuestion, setModeRegister, getMode } from '../../store'
 
 
 class DrawerContents extends Component{
   componentDidMount () {
     this.props.fetchLocation(window.location.href)
       .then(url => {
-        if (url) return this.props.fetchAllQuestions(url.location.id)
+        if (url.location.id) return this.props.fetchAllQuestions(url.location.id)
+        else this.props.setModeRegister()
       })
       .then(questions => {
         if (questions) {
@@ -19,24 +20,16 @@ class DrawerContents extends Component{
           return this.props.setQuestion(sortedQuestions[0])
         }
       })
+      .then(this.props.getMode)
       .catch(err => console.log(err))
-    this.props.getMode()
   }
 
   render () {
     return (
       <div>
-        {
-          this.props.location &&
-          <ButtonContainer />
-        }
-        {
-          // this.props.allQuestions &&
-          <div>
-            <QuestionMenu questions={ this.props.allQuestions } />
-            <QuestionDisplay question={ this.props.question } />
-          </div>
-        }
+        <ButtonContainer />
+        <QuestionMenu questions={ this.props.allQuestions } />
+        <QuestionDisplay question={ this.props.question } />
         <Repl />
       </div>
     )
@@ -55,6 +48,7 @@ const mapDispatchToProps = dispatch => ({
   fetchLocation: url => dispatch(fetchLocation(url)),
   fetchAllQuestions: url => dispatch(fetchAllQuestions(url)),
   setQuestion: question => dispatch(setQuestion(question)),
+  setModeRegister: () => dispatch(setModeRegister()),
   getMode: () => dispatch(getMode())
 })
 
