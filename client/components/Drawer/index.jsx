@@ -8,7 +8,6 @@ import $ from 'jquery'
 import { setUser } from '../../store'
 import DrawerContents from '../DrawerContents'
 import DrawerBar from './DrawerBar'
-
 import '../../../public/style/drawer.css'
 
 
