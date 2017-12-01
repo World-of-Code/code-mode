@@ -33,20 +33,28 @@ render(){
   return (
     <div>
       <form onSubmit={ handleSubmit } name={ name }>
-        <div>
-          <label htmlFor="email"><small>Email</small></label>
-          <input name="email" type="email" required/>
+        <div className="field">
+          <label htmlFor="email" className="label">Email</label>
+          <div className="control">
+            <input name="email" type="email" className="input" placeholder="Email" required/>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password"><small>Password</small></label>
-          <input name="password" type="password" minLength="3" required/>
+        <div className="field">
+          <label htmlFor="password" className="label">Password</label>
+          <div className="control">
+            <input name="password" type="password" minLength="3" className="input" placeholder="Password" required/>
+          </div>
         </div>
-        <div>
-          <button type="submit">{ displayName }</button>
+        <div className="field is-grouped">
+          <div className="control">
+            <button type="submit" className="button is-primary animated bounceInLeft">{displayName}</button>
+          </div>
+          <div className="control">
+            <button onClick={this.handleSubmit} className="button is-text animated bounceInRight">{displayName} with YouTube</button>
+          </div>
         </div>
         { error && error.response && <div> { error.response.data } </div> }
       </form>
-      <button onClick ={this.handleSubmit}>{ displayName } with YouTube</button>
       {/* <a href="http://background.html">{ displayName } with Youtube</a> */}
     </div>
   )
