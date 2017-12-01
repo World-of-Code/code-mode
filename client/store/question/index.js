@@ -44,11 +44,22 @@ export const cancelQuestion = allQuestions =>
   }
 
 export const saveQuestion = question =>
-  dispatch =>
-    axios.put(`${BACK_END}/api/questions/${question.id}`, { question })
-      .then(res => dispatch(editQuestion(res.data)))
-      .then(() => dispatch(setModeRead()))
+  dispatch => {
+    axios.put(`${BACK_END}/api/questions/${question.id}`, {
+      content: question.content,
+      description: question.description,
+      answer: question.answer,
+      boilerplate: question.boilerplate,
+      userId: question.userId,
+      locationId: question.locationId
+    })
+      .then(res => {
+        dispatch(fetchAllQuestions(question.locationId))
+        dispatch(editQuestion(res.data))
+        dispatch(setModeRead())
+      })
       .catch(err => console.log(err))
+    }
 
 // ready next question, delete previous, switch the state to the next
 export const deleteQuestion = (question, allQuestions) =>
@@ -59,24 +70,27 @@ export const deleteQuestion = (question, allQuestions) =>
                        ? sortedQuestions[questionIndex + 1]
                        : sortedQuestions[questionIndex - 1]
     axios.delete(`${BACK_END}/api/questions/${question.id}`)
-      .then(() => nextQuestion
-                ? dispatch(setQuestion(nextQuestion))
-                : dispatch(setQuestion({})))
-      .then(() => dispatch(setModeRead()))
-      .then(() => dispatch(fetchAllQuestions(question.locationId)))
+      .then(response => {
+        console.log(response)
+        if (nextQuestion) {
+          dispatch(fetchAllQuestions(question.locationId))
+          dispatch(setQuestion(nextQuestion))
+        }
+        else dispatch(setQuestion({}))
+        dispatch(setModeRead())
+      })
       .catch(err => console.log(err))
   }
 
-export const clearQuestion = question =>
-  dispatch =>
-    axios.get(`${BACK_END}/api/questions/${question.id}`)
-      .then(res => dispatch(getQuestion(res.data)))
-      .then(() => dispatch(setModeRead()))
-      .catch(err => console.log(err))
+// export const clearQuestion = question =>
+//   dispatch =>
+//     axios.get(`${BACK_END}/api/questions/${question.id}`)
+//       .then(res => dispatch(getQuestion(res.data)))
+//       .then(() => dispatch(setModeRead()))
+//       .catch(err => console.log(err))
 
 export const submitQuestion = question =>
   dispatch => {
-    console.log('HIIIIITTTTT ', question)
     axios.post(`${BACK_END}/api/questions/`, {
       content: question.content,
       description: question.description,
@@ -85,8 +99,11 @@ export const submitQuestion = question =>
       userId: question.userId,
       locationId: question.locationId
     })
-      .then(res => dispatch(createQuestion(res.data)))
-      .then(() => dispatch(setModeRead()))
+      .then(res => {
+        dispatch(fetchAllQuestions(question.locationId))
+        dispatch(createQuestion(res.data))
+        dispatch(setModeRead())
+      })
       .catch(err => console.log(err))
   }
 

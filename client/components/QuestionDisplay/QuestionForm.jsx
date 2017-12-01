@@ -8,13 +8,14 @@ import { saveQuestion, submitQuestion } from '../../store'
 class QuestionForm extends Component {
   constructor (props) {
     super(props)
-    this.state = this.props.content ? {
+    this.state = this.props.question ? {
       description: this.props.question.description,
       content: this.props.question.content,
       answer: this.props.question.answer,
       boilerplate: this.props.question.boilerplate,
       userId: this.props.user.id,
-      locationId: this.props.location.id
+      locationId: this.props.location.id,
+      id: this.props.question.id
     } : {
       description: ``,
       content: ``,
@@ -27,7 +28,6 @@ class QuestionForm extends Component {
     this.handleContentChange = this.handleContentChange.bind(this)
     this.handleBoilerplateChange = this.handleBoilerplateChange.bind(this)
     this.handleAnswerChange = this.handleAnswerChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleDescriptionChange (event) {
@@ -47,13 +47,17 @@ class QuestionForm extends Component {
   }
 
   render () {
-    const { action } = this.props
+    const { action, question, clearStateInDrawer } = this.props
     const { description, content, boilerplate, answer } = this.state
 
-    action && action(this.state)
+    action && (
+      action(this.state),
+      clearStateInDrawer()
+    )
 
     console.log('QUESTION FORM ACTION: ', action)
-    console.log('QUESTION FORM STATE: ', this.state, ' USERID: ', this.props.user.id, ' LOCATIONID: ', location.id)
+    console.log('QUESTION FORM QUESTION: ', question)
+    console.log('QUESTION FORM STATE: ', this.state)
 
     return (
       <form>

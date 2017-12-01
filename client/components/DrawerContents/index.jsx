@@ -15,7 +15,8 @@ class DrawerContents extends Component {
       oldUrl: "",
       urlNew: true
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.setStateInDrawer = this.setStateInDrawer.bind(this)
+    this.clearStateInDrawer = this.clearStateInDrawer.bind(this)
   }
 
   componentDidMount () {
@@ -44,18 +45,20 @@ class DrawerContents extends Component {
       .catch(err => console.log(err))
   }
 
-  handleClick (action) {
+  setStateInDrawer (action) {
     this.setState({ action })
   }
 
-  render () {
-    console.log('DRAWER CONTENTS ACTION: ', this.state.action)
+  clearStateInDrawer (action) { // finish
+    this.setState({ action: '' })
+  }
 
+  render () {
     return (
       <div>
-        <ButtonContainer setStateInDrawer={ this.handleClick } />
+        <ButtonContainer setStateInDrawer={ this.setStateInDrawer } />
         <QuestionMenu questions={ this.props.allQuestions } />
-        <QuestionDisplay question={ this.props.question } action={ this.state.action } />
+        <QuestionDisplay question={ this.props.question } action={ this.state.action } clearStateInDrawer={ this.clearStateInDrawer } />
         <Repl />
       </div>
     )

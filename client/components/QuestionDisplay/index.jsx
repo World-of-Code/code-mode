@@ -9,7 +9,6 @@ import QuestionForm from './QuestionForm'
 // Mapped Button should choose view here
 const QuestionDisplay = props => {
   const { mode } = props
-  console.log('QUESTION DISPLAY ACTION: ', props.action)
 
   return (
     <div>
@@ -18,10 +17,17 @@ const QuestionDisplay = props => {
         <ReadQuestion question={ props.question } />
       } {
         mode && mode.type === 'Add' &&
-        <QuestionForm action={ props.action } />
+        <QuestionForm
+          action={ props.action }
+          clearStateInDrawer={ props.clearStateInDrawer }
+        />
       } {
         mode && mode.type === 'Edit' &&
-        <QuestionForm question={ props.question } action={ props.action } />
+        <QuestionForm
+          question={ props.question }
+          action={ props.action }
+          clearStateInDrawer={ props.clearStateInDrawer }
+        />
       }
     </div>
   )
