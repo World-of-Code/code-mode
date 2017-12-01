@@ -8,33 +8,28 @@ import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
 
 
 class DrawerContents extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      oldUrl: "",
+      urlNew: true,
+      questions: []
+    }
+  }
+
   componentDidMount () {
-    //console.log(window.location.href)
-    chrome.storage.local.set({ url: window.location.href }) //add url ---- key: url and key's value: window.location.href
-
-    chrome.storage.onChanged.addListener(changes => {
+  
+    chrome.storage.onChanged.addListener(changes => { 
       let url = changes['url']
-
-      if (url ) {
-        this.setState({display: false})
-        this.props.fetchLocation(window.location.href)
-        .then(url => {
-          if (url){
-           // console.log("rufgthuefrgu",url.location.url)
-            return this.props.fetchAllQuestions(url.location.id)
-          }
-        })
-        .then(questions => {
-          if (questions) {
-            const sortedQuestions = questions.questions.slice().sort((q1, q2) => q1.id - q2.id)
-            return this.props.setQuestion(sortedQuestions[0])
-          }
-        })
-        .catch(err => console.log(err))
-      this.props.getMode()
+      if (url && url.newValue !== this.state.oldUrl) {
+        this.setState({oldUrl: url})
+        window.location.reload();
       }
-
     })
+  
+    setInterval(()=>{
+      chrome.storage.local.set({ url: window.location.href }) //add url ---- key: url and key's value: window.location.href
+    },1000);
 //______________________________________________________________________________________
     this.props.fetchLocation(window.location.href)
       .then(url => {
@@ -56,19 +51,19 @@ class DrawerContents extends Component{
   render () {
     return (
       <div>
-        {
-          this.props.location &&
-          <ButtonContainer />
-        }
-        {
-          this.props.allQuestions &&
-          <div>
-            <QuestionMenu questions={ this.props.allQuestions } />
-            <QuestionDisplay question={ this.props.question } />
-          </div>
-        }
-        <Repl />
-      </div>
+      {
+        this.props.location &&
+        <ButtonContainer />
+      }
+      {
+        this.props.allQuestions &&
+        <div>
+          <QuestionMenu questions={ this.props.allQuestions } />
+          <QuestionDisplay question={ this.props.question } />
+        </div>
+      }
+      <Repl />
+    </div> 
     )
   }
 
