@@ -4,10 +4,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
-import { fetchLocation, fetchAllQuestions, setQuestion, setModeRegister, getMode } from '../../store'
+import { fetchLocation, fetchAllQuestions, setQuestion, setModeRegister } from '../../store'
 
 
-class DrawerContents extends Component{
+class DrawerContents extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      action: ''
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   componentDidMount () {
     chrome.storage.local.set({ url: window.location.href })
 
@@ -15,7 +23,7 @@ class DrawerContents extends Component{
       let url = changes['url']
 
       if (url ) {
-        this.setState({display: false})
+        this.setState({ display: false })
         this.props.fetchLocation(window.location.href)
         .then(url => {
           if (url){
@@ -29,9 +37,7 @@ class DrawerContents extends Component{
           }
         })
         .catch(err => console.log(err))
-      this.props.getMode()
       }
-
     })
 
     this.props.fetchLocation(window.location.href)
@@ -45,16 +51,21 @@ class DrawerContents extends Component{
           return this.props.setQuestion(sortedQuestions[0])
         }
       })
-      .then(this.props.getMode)
       .catch(err => console.log(err))
   }
 
+  handleClick (action) {
+    this.setState({ action })
+  }
+
   render () {
+    console.log('DRAWER CONTENTS ACTION: ', this.state.action)
+
     return (
       <div>
-        <ButtonContainer />
+        <ButtonContainer setStateInDrawer={ this.handleClick } />
         <QuestionMenu questions={ this.props.allQuestions } />
-        <QuestionDisplay question={ this.props.question } />
+        <QuestionDisplay question={ this.props.question } action={ this.state.action } />
         <Repl />
       </div>
     )
@@ -73,8 +84,7 @@ const mapDispatchToProps = dispatch => ({
   fetchLocation: url => dispatch(fetchLocation(url)),
   fetchAllQuestions: url => dispatch(fetchAllQuestions(url)),
   setQuestion: question => dispatch(setQuestion(question)),
-  setModeRegister: () => dispatch(setModeRegister()),
-  getMode: () => dispatch(getMode())
+  setModeRegister: () => dispatch(setModeRegister())
 })
 
 

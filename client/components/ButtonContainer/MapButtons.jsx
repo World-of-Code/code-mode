@@ -22,15 +22,16 @@ class MapButtons extends Component {
   }
 
   handleClick (type) {
-    const { question, allQuestions, location, user } = this.props
+    const { question, allQuestions, user } = this.props
     const action = type === 'register' ? `${type}Location` : `${type}Question`
     if (type === 'delete') this.props[action](question, allQuestions)
     else if (type === 'register') this.props[action](window.location.href)
+    else if (type === 'cancel') this.props[action](allQuestions)
+    else if (type === 'submit' || type === 'save') this.props.setStateInDrawer(this.props[action])
     else this.props[action](question, user)
   }
 
   render () {
-    console.log('mode ', this.props.mode)
     const questionCreator = this.props.user.id === this.props.question.userId
     const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
       if (button.name === 'add') return true
@@ -38,6 +39,8 @@ class MapButtons extends Component {
       if (this.props.mode.type === 'Register') return true
       return questionCreator && this.props.question.id
     })
+    console.log('MAP BUTTONS ACTION: ', this.props.action)
+
 
     return (
       this.props.question &&
@@ -60,7 +63,6 @@ class MapButtons extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  location: state.location,
   question: state.question,
   allQuestions: state.allQuestions,
   mode: state.mode

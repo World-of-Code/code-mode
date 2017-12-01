@@ -38,7 +38,7 @@ export const registerLocation = location =>
 
 export const editLocation = location =>
   dispatch =>
-    axios.put(`${BACK_END}/api/locations/${location.id}`, location)
+    axios.put(`${BACK_END}/api/locations/${location.id}`, { location })
       .then(res => dispatch(changeLocation(res.data)))
       .catch(err => console.log(err))
 

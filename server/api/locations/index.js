@@ -19,7 +19,7 @@ router.param('id', (req, res, next, id) => {
     .catch(next)
 })
 
-// get location by url
+// // get location by url
 router.post('/', (req, res, next) => {
   Location.findOne({ where: { url: req.body.location } })
     .then(location => res.send(location))
@@ -28,7 +28,6 @@ router.post('/', (req, res, next) => {
 
 // create a location
 router.post('/register', (req, res, next) => {
-  console.log('req.body!!!!!!!!!!!!!!!!!!!!! ', req.body)
   Location.create(req.body)
     .then(location => res.status(201).json(location))
     .catch(next)

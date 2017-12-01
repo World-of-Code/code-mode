@@ -7,12 +7,12 @@ import { BACK_END } from '../../store'
 /**
  * ACTION TYPES
  */
-const GET_ALL_QUESTIONS = 'GET_ALL_QUESTIONS'
+const SET_ALL_QUESTIONS = 'SET_ALL_QUESTIONS'
 
 /**
  * ACTION CREATORS
  */
-const getAllQuestions = questions => ({ type: GET_ALL_QUESTIONS, questions })
+const setAllQuestions = questions => ({ type: SET_ALL_QUESTIONS, questions })
 
 /**
  * THUNK CREATORS
@@ -20,7 +20,7 @@ const getAllQuestions = questions => ({ type: GET_ALL_QUESTIONS, questions })
 export const fetchAllQuestions = urlId =>
   dispatch =>
     axios.get(`${BACK_END}/api/questions/locations/${urlId}`)
-      .then(res => dispatch(getAllQuestions(res.data)))
+      .then(res => dispatch(setAllQuestions(res.data)))
       .catch(err => console.log(err))
 
 /**
@@ -29,7 +29,7 @@ export const fetchAllQuestions = urlId =>
 export default function(state = [], action) {
   switch (action.type) {
 
-    case GET_ALL_QUESTIONS:
+    case SET_ALL_QUESTIONS:
       return action.questions
 
     default:

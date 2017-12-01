@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END, setModeRead, setModeAdd, setModeEdit } from '../../store'
+import { BACK_END, setModeRead, setModeAdd, setModeEdit, fetchAllQuestions } from '../../store'
 
 
 /**
@@ -37,32 +37,33 @@ export const editQuestion = question =>
     dispatch(setModeEdit())
   }
 
-export const cancelQuestion = question =>
+export const cancelQuestion = allQuestions =>
   dispatch => {
-    dispatch(getQuestion(question))
+    if (allQuestions.length) dispatch(setQuestion(allQuestions[0]))
     dispatch(setModeRead())
   }
 
 export const saveQuestion = question =>
   dispatch =>
-    axios.put(`${BACK_END}/api/questions/${question.id}`, question)
+    axios.put(`${BACK_END}/api/questions/${question.id}`, { question })
       .then(res => dispatch(editQuestion(res.data)))
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
 
 // ready next question, delete previous, switch the state to the next
-export const deleteQuestion = (question, questions) =>
+export const deleteQuestion = (question, allQuestions) =>
   dispatch => {
-    const sortedQuestions = questions.sort((q1, q2) => q1.id - q2.id)
+    const sortedQuestions = allQuestions.sort((q1, q2) => q1.id - q2.id)
     const questionIndex = sortedQuestions.indexOf(question)
     const nextQuestion = sortedQuestions[questionIndex + 1]
                        ? sortedQuestions[questionIndex + 1]
                        : sortedQuestions[questionIndex - 1]
-    console.log('sorted', sortedQuestions, 'index', questionIndex, 'next', nextQuestion)
     axios.delete(`${BACK_END}/api/questions/${question.id}`)
-      .then(() => nextQuestion ? dispatch(setQuestion(nextQuestion)) : dispatch(setQuestion({}))
-    )
+      .then(() => nextQuestion
+                ? dispatch(setQuestion(nextQuestion))
+                : dispatch(setQuestion({})))
       .then(() => dispatch(setModeRead()))
+      .then(() => dispatch(fetchAllQuestions(question.locationId)))
       .catch(err => console.log(err))
   }
 
@@ -74,15 +75,20 @@ export const clearQuestion = question =>
       .catch(err => console.log(err))
 
 export const submitQuestion = question =>
-  dispatch =>
-    axios.post(`${BACK_END}/api/questions/`, question)
+  dispatch => {
+    console.log('HIIIIITTTTT ', question)
+    axios.post(`${BACK_END}/api/questions/`, {
+      content: question.content,
+      description: question.description,
+      answer: question.answer,
+      boilerplate: question.boilerplate,
+      userId: question.userId,
+      locationId: question.locationId
+    })
       .then(res => dispatch(createQuestion(res.data)))
       .then(() => dispatch(setModeRead()))
       .catch(err => console.log(err))
-
-export const sendQuestion = question =>
-  dispatch //=>
-    // send to content creator
+  }
 
 /**
  * REDUCER
