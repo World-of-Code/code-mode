@@ -39,8 +39,6 @@ class MapButtons extends Component {
       if (this.props.mode.type === 'Register') return true
       return questionCreator && this.props.question.id
     })
-    console.log('MAP BUTTONS ACTION: ', this.props.action)
-
 
     return (
       this.props.question &&
