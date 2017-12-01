@@ -35,21 +35,21 @@ render(){
       <form onSubmit={ handleSubmit } name={ name }>
         <div className="field">
           <label htmlFor="email" className="label">Email</label>
-          <div class="control">
+          <div className="control">
             <input name="email" type="email" className="input" placeholder="Email" required/>
           </div>
         </div>
         <div className="field">
           <label htmlFor="password" className="label">Password</label>
-          <div class="control">
+          <div className="control">
             <input name="password" type="password" minLength="3" className="input" placeholder="Password" required/>
           </div>
         </div>
         <div className="field is-grouped">
-          <div class="control">
+          <div className="control">
             <button type="submit" className="button is-primary animated bounceInLeft">{displayName}</button>
           </div>
-          <div class="control">
+          <div className="control">
             <button onClick={this.handleSubmit} className="button is-text animated bounceInRight">{displayName} with YouTube</button>
           </div>
         </div>
