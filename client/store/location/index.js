@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END } from '../../store'
+import { BACK_END, setModeRead } from '../../store'
 
 
 /**
@@ -17,8 +17,8 @@ const REMOVE_LOCATION = 'REMOVE_LOCATION'
  */
 const getLocation = location => ({ type: GET_LOCATION, location })
 const createLocation = location => ({ type: CREATE_LOCATION, location })
-const changeLocation = location => ({ type: CHANGE_LOCATION, location })
-const removeLocation = () => ({ type: REMOVE_LOCATION })
+// const changeLocation = location => ({ type: CHANGE_LOCATION, location })
+// const removeLocation = () => ({ type: REMOVE_LOCATION })
 
 /**
  * THUNK CREATORS
@@ -33,20 +33,23 @@ export const fetchLocation = location =>
 export const registerLocation = location =>
   dispatch =>
     axios.post(`${BACK_END}/api/locations/register`, { url: location })
-      .then(res => dispatch(createLocation(res.data)))
+      .then(res => {
+        dispatch(createLocation(res.data))
+        dispatch(setModeRead())
+      })
       .catch(err => console.log(err))
 
-export const editLocation = location =>
-  dispatch =>
-    axios.put(`${BACK_END}/api/locations/${location.id}`, { location })
-      .then(res => dispatch(changeLocation(res.data)))
-      .catch(err => console.log(err))
+// export const editLocation = location =>
+//   dispatch =>
+//     axios.put(`${BACK_END}/api/locations/${location.id}`, { location })
+//       .then(res => dispatch(changeLocation(res.data)))
+//       .catch(err => console.log(err))
 
-export const deleteLocation = locationId =>
-  dispatch =>
-    axios.delete(`${BACK_END}/api/locations/${locationId}`)
-      .then(() => dispatch(removeLocation()))
-      .catch(err => console.log(err))
+// export const deleteLocation = locationId =>
+//   dispatch =>
+//     axios.delete(`${BACK_END}/api/locations/${locationId}`)
+//       .then(() => dispatch(removeLocation()))
+//       .catch(err => console.log(err))
 
 /**
  * REDUCER
@@ -54,12 +57,12 @@ export const deleteLocation = locationId =>
 export default (state = {}, action) => {
   switch (action.type) {
 
+    // case CHANGE_LOCATION:
     case GET_LOCATION:
     case CREATE_LOCATION:
-    case CHANGE_LOCATION:
       return action.location
 
-    case REMOVE_LOCATION:
+    // case REMOVE_LOCATION:
     default:
       return state
   }

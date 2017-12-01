@@ -11,7 +11,7 @@ const QuestionDisplay = props => {
   const { mode } = props
 
   return (
-    <div>
+    <div >
       {
         mode && mode.type === 'Read' &&
         <ReadQuestion question={ props.question } />
