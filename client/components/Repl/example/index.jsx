@@ -118,7 +118,6 @@ class App extends Component {
       <div className="repl">
         <div className="buttons-section">
           <button onClick={ this.handleClick }>Run</button>
-          <button onClick={ this.handleSave }>Save</button>
           <button onClick={this.handleClear}>Clear</button>
         </div>
         <div className="columns">
