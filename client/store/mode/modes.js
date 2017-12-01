@@ -13,10 +13,9 @@ export const read = {
 export const add = {
   type: 'Add',
   buttons: [
-    { name: 'clear' },
+    // { name: 'clear' },
     { name: 'cancel' },
-    { name: 'submit' },
-    { name: 'send' }
+    { name: 'submit' }
   ]
 }
 
@@ -26,5 +25,12 @@ export const edit = {
     { name: 'cancel' },
     { name: 'delete' },
     { name: 'save' }
+  ]
+}
+
+export const register = {
+  type: 'Register',
+  buttons: [
+    { name: 'register' }
   ]
 }
