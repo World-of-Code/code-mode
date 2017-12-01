@@ -11,34 +11,24 @@ class DrawerContents extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      action: ''
+      action: '',
+      oldUrl: "",
+      urlNew: true
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount () {
-    chrome.storage.local.set({ url: window.location.href })
-
     chrome.storage.onChanged.addListener(changes => {
       let url = changes['url']
-
-      if (url ) {
-        this.setState({ display: false })
-        this.props.fetchLocation(window.location.href)
-        .then(url => {
-          if (url){
-            return this.props.fetchAllQuestions(url.location.id)
-          }
-        })
-        .then(questions => {
-          if (questions) {
-            const sortedQuestions = questions.questions.slice().sort((q1, q2) => q1.id - q2.id)
-            return this.props.setQuestion(sortedQuestions[0])
-          }
-        })
-        .catch(err => console.log(err))
+      if (url && url.newValue !== this.state.oldUrl) {
+        this.setState({ oldUrl: url })
+        window.location.reload()
       }
     })
+    setInterval(() => {
+      chrome.storage.local.set({ url: window.location.href })
+    }, 1000)
 
     this.props.fetchLocation(window.location.href)
       .then(url => {
