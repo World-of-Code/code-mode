@@ -3,40 +3,37 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchLocation, fetchAllQuestions, setQuestion, getMode } from '../../store'
 import { Repl, QuestionDisplay, QuestionMenu, ButtonContainer } from '../'
+import { fetchLocation, fetchAllQuestions, setQuestion, setModeRegister } from '../../store'
 
 
-class DrawerContents extends Component{
-  constructor(props){
+class DrawerContents extends Component {
+  constructor (props) {
     super(props)
-    this.state={
+    this.state = {
+      action: '',
       oldUrl: "",
-      urlNew: true,
-      questions: []
+      urlNew: true
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount () {
-  
-    chrome.storage.onChanged.addListener(changes => { 
+    chrome.storage.onChanged.addListener(changes => {
       let url = changes['url']
       if (url && url.newValue !== this.state.oldUrl) {
-        this.setState({oldUrl: url})
-        window.location.reload();
+        this.setState({ oldUrl: url })
+        window.location.reload()
       }
     })
-  
-    setInterval(()=>{
-      chrome.storage.local.set({ url: window.location.href }) //add url ---- key: url and key's value: window.location.href
-    },1000);
-//______________________________________________________________________________________
+    setInterval(() => {
+      chrome.storage.local.set({ url: window.location.href })
+    }, 1000)
+
     this.props.fetchLocation(window.location.href)
       .then(url => {
-        if (url){
-         // console.log("rufgthuefrgu",url.location.url)
-          return this.props.fetchAllQuestions(url.location.id)
-        }
+        if (url.location.id) return this.props.fetchAllQuestions(url.location.id)
+        else this.props.setModeRegister()
       })
       .then(questions => {
         if (questions) {
@@ -45,25 +42,22 @@ class DrawerContents extends Component{
         }
       })
       .catch(err => console.log(err))
-    this.props.getMode()
+  }
+
+  handleClick (action) {
+    this.setState({ action })
   }
 
   render () {
+    console.log('DRAWER CONTENTS ACTION: ', this.state.action)
+
     return (
       <div>
-      {
-        this.props.location &&
-        <ButtonContainer />
-      }
-      {
-        this.props.allQuestions &&
-        <div>
-          <QuestionMenu questions={ this.props.allQuestions } />
-          <QuestionDisplay question={ this.props.question } />
-        </div>
-      }
-      <Repl />
-    </div> 
+        <ButtonContainer setStateInDrawer={ this.handleClick } />
+        <QuestionMenu questions={ this.props.allQuestions } />
+        <QuestionDisplay question={ this.props.question } action={ this.state.action } />
+        <Repl />
+      </div>
     )
   }
 
@@ -80,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
   fetchLocation: url => dispatch(fetchLocation(url)),
   fetchAllQuestions: url => dispatch(fetchAllQuestions(url)),
   setQuestion: question => dispatch(setQuestion(question)),
-  getMode: () => dispatch(getMode())
+  setModeRegister: () => dispatch(setModeRegister())
 })
 
 

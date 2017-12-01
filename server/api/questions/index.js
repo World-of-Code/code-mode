@@ -6,7 +6,7 @@ const { Question, UserQuestion } = require('../../db/models')
 
 
 // find question by id (req.question)
-router.param('/:questionId', (req, res, next, id) => {
+router.param('id', (req, res, next, id) => {
   Question.findById(id, { include: [{ all: true }] })
     .then(question => {
       if (!question) throw err(404, 'question was not found')
@@ -29,11 +29,6 @@ router.get('/locations/:urlId', (req, res, next) => {
     .catch(next)
 })
 
-// get question by id
-// router.get('/:questionId', (req, res, next) => {
-//   res.json(req.question)
-// })
-
 // create a question
 router.post('/', (req, res, next) => {
   Question.create(req.body)
@@ -42,14 +37,14 @@ router.post('/', (req, res, next) => {
 })
 
 // edit question by id
-router.put('/:questionId', (req, res, next) =>{
+router.put('/:id', (req, res, next) => {
   req.question.update(req.body)
     .then(question => res.status(201).json(question))
     .catch(next)
 })
 
 // delete question by id
-router.delete('/:questionId', (req, res, next) =>{
+router.delete('/:id', (req, res, next) => {
   req.question.destroy()
     .then(() => res.sendStatus(204))
     .catch(next)
@@ -68,7 +63,7 @@ router.get('/:questionId/users/:userId', (req, res, next) => {
 })
 
 // create user's code
-router.post('/:questionId', (req, res, next) => {
+router.post('/:id', (req, res, next) => {
   UserQuestion.create(req.body)
     .then(userCode => res.json(userCode))
     .catch(next)

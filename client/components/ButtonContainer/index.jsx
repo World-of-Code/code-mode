@@ -6,14 +6,14 @@ import MapButtons from './MapButtons'
 
 
 // Renders different states based on button clicked
-const ButtonContainer = props => (
+const ButtonContainer = props => {
+  console.log('BUTTON CONTAINER ACTION: ', props.action)
+
+  return(
   <div>
-    {/* default: add, creator( edit, delete (only if exists) ) */}
-
-    <MapButtons />
-
+    <MapButtons setStateInDrawer={ props.setStateInDrawer } />
   </div>
-)
+)}
 
 
 export default ButtonContainer

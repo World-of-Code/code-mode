@@ -1,43 +1,35 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import ReadQuestion from './ReadQuestion'
 import QuestionForm from './QuestionForm'
 
 
 // Mapped Button should choose view here
-class QuestionDisplay extends Component {
-  render () {
-    return (
-      <div>
-        {/* configure layout */}
+const QuestionDisplay = props => {
+  const { mode } = props
+  console.log('QUESTION DISPLAY ACTION: ', props.action)
 
-        {/* Read Question */}
-        <ReadQuestion
-          question={ this.props.question }
-        />
-
-        {/* Add Question */}
-        <QuestionForm
-          action={ this.props.addQuestion }
-        />
-
-        {/* Edit Question */}
-        <QuestionForm
-          question={ this.props.question }
-          action={ this.props.editQuestion }
-        />
-
-      </div>
-    )
-  }
-
+  return (
+    <div>
+      {
+        mode && mode.type === 'Read' &&
+        <ReadQuestion question={ props.question } />
+      } {
+        mode && mode.type === 'Add' &&
+        <QuestionForm action={ props.action } />
+      } {
+        mode && mode.type === 'Edit' &&
+        <QuestionForm question={ props.question } action={ props.action } />
+      }
+    </div>
+  )
 }
 
-export default QuestionDisplay
+const mapStateToProps = state => ({
+  mode: state.mode
+})
 
 
-
-// if (this.props.whatever) {
-//   <QuestionForm props={props.somekindofprops} />
-// }
+export default connect(mapStateToProps)(QuestionDisplay)

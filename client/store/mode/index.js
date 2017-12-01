@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { read, add, edit } from './modes'
+import { read, add, edit, register } from './modes'
 
 
 /**
@@ -10,6 +10,7 @@ import { read, add, edit } from './modes'
 const SET_MODE_READ = 'SET_MODE_READ'
 const SET_MODE_ADD = 'SET_MODE_ADD'
 const SET_MODE_EDIT = 'SET_MODE_EDIT'
+const SET_MODE_REGISTER = 'SET_MODE_REGISTER'
 const GET_MODE = 'GET_MODE'
 
 /**
@@ -18,6 +19,7 @@ const GET_MODE = 'GET_MODE'
 export const setModeRead = () => ({ type: SET_MODE_READ })
 export const setModeAdd = () => ({ type: SET_MODE_ADD })
 export const setModeEdit = () => ({ type: SET_MODE_EDIT })
+export const setModeRegister = () => ({ type: SET_MODE_REGISTER })
 export const getMode = () => ({ type: GET_MODE })
 
 /**
@@ -34,6 +36,9 @@ export default (state = read, action) => {
 
     case SET_MODE_EDIT:
       return edit
+
+    case SET_MODE_REGISTER:
+      return register
 
     case GET_MODE:
     default:

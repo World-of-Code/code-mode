@@ -10,22 +10,26 @@ const MapQuestions = props => {
   const sortedQuestions = props.questions && props.questions.sort((q1, q2) => q1.id - q2.id)
 
   return (
-    props.questions &&
+    <div className="columns">
+    {
+      props.questions &&
       sortedQuestions.map(question => (
-        <div key={ question.id }>
+        <div key={ question.id } className="column">
           <button onClick={ () => props.setQuestion(question) }>
-              <div className="content">{ question.description }</div>
-              <div className="metadata">
-                {/* <Rating
-                      icon="star"
-                      defaultRating={ question.rating }
-                      maxRating={ 5 }
-                      disabled
-                /> */}
-              </div>
+            <div className="content">{ question.description }</div>
+            <div className="metadata">
+              {/* <Rating
+                    icon="star"
+                    defaultRating={ question.rating }
+                    maxRating={ 5 }
+                    disabled
+              /> */}
+            </div>
           </button>
         </div>
-    ))
+      ))
+    }
+    </div>
   )
 }
 
