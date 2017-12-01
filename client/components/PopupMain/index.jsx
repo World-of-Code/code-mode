@@ -35,10 +35,21 @@ class PopupMain extends Component {
     const { isLoggedIn } = this.props
 
     return (
-      <Frame>
-        <link rel="stylesheet" type="text/css" href="../../../chrome/style/index.scss" />
-          <button id = "toggle" type="button" onClick={ this.handleClick }>
-            toggle popup
+      <div>
+      <link rel="stylesheet" type="text/css" href="../../public/style/animate.css" />
+        <link rel="stylesheet" type="text/css" href="../../public/style/bulma.css" />
+
+        <div className="body is-popup">
+          <div className="container fluid">
+            <img src="https://raw.githubusercontent.com/TheUniverseofCoding/world-of-code/master/public/logo.jpg" alt="logo" className="animated bounceInDown"></img><br />
+          </div>
+          <button
+            id= "toggle"
+            type="button"
+            className="button is-toggle-code-mode animated bounceInDown"
+            onClick={ this.handleClick }
+          >
+            Toggle CodeMode!
           </button>
           {
             isLoggedIn
@@ -48,7 +59,8 @@ class PopupMain extends Component {
                 <Signup />
               </div>
           }
-      </Frame>
+        </div>
+      </div>
     )
   }
 }
