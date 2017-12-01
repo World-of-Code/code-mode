@@ -10,7 +10,8 @@ import {
   deleteQuestion,
   cancelQuestion,
   submitQuestion,
-  sendQuestion
+  sendQuestion,
+  registerLocation
 } from '../../store'
 
 
@@ -21,21 +22,25 @@ class MapButtons extends Component {
   }
 
   handleClick (type) {
-    const question = this.props.question
-    const action = `${type}Question`
-
-      if (type === 'delete') this.props[action](question, this.props.location.id)
-      else this.props[action](question)
+    const { question, allQuestions, user } = this.props
+    const action = type === 'register' ? `${type}Location` : `${type}Question`
+    if (type === 'delete') this.props[action](question, allQuestions)
+    else if (type === 'register') this.props[action](window.location.href)
+    else if (type === 'cancel') this.props[action](allQuestions)
+    else if (type === 'submit' || type === 'save') this.props.setStateInDrawer(this.props[action])
+    else this.props[action](question, user)
   }
 
   render () {
-    // fix buttonsAvailable + user
-    const pageAdmin = this.props.user.id === this.props.location.userId
+    const questionCreator = this.props.user.id === this.props.question.userId
     const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
       if (button.name === 'add') return true
-      if (!this.props.question.id ) return false
-      return pageAdmin ? true : false
+      if (this.props.mode.type === 'Add') return true
+      if (this.props.mode.type === 'Register') return true
+      return questionCreator && this.props.question.id
     })
+    console.log('MAP BUTTONS ACTION: ', this.props.action)
+
 
     return (
       this.props.question &&
@@ -43,7 +48,7 @@ class MapButtons extends Component {
         <div key={ button.name }>
           <button
             type="submit"
-            className={ `button ${button.name}` }
+            className="button"
             onClick={ () => this.handleClick(button.name) }
           >
             { button.name }
@@ -58,9 +63,9 @@ class MapButtons extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  location: state.location,
-  mode: state.mode,
-  question: state.question
+  question: state.question,
+  allQuestions: state.allQuestions,
+  mode: state.mode
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -71,7 +76,8 @@ const mapDispatchToProps = dispatch => ({
   deleteQuestion: (question, urlId) => dispatch(deleteQuestion(question, urlId)),
   cancelQuestion: question => dispatch(cancelQuestion(question)),
   submitQuestion: question => dispatch(submitQuestion(question)),
-  sendQuestion: () => dispatch(sendQuestion())
+  sendQuestion: () => dispatch(sendQuestion()),
+  registerLocation: url => dispatch(registerLocation(url))
 })
 
 

@@ -6,7 +6,7 @@ const { Location } = require('../../db/models')
 
 
 // find location by id
-router.param('/:id', (req, res, next, id) => {
+router.param('id', (req, res, next, id) => {
   Location.findById(id, { include: [{ all: true }] })
     .then(location => {
       if (!location) throw err(404, 'location was not found')
@@ -19,7 +19,7 @@ router.param('/:id', (req, res, next, id) => {
     .catch(next)
 })
 
-// get location by url
+// // get location by url
 router.post('/', (req, res, next) => {
   Location.findOne({ where: { url: req.body.location } })
     .then(location => res.send(location))
