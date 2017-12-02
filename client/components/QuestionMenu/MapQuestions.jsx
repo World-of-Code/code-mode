@@ -16,15 +16,7 @@ const MapQuestions = props => {
       sortedQuestions.map(question => (
         <div key={ question.id } className="column">
           <button onClick={ () => props.setQuestion(question) }>
-            <div className="content">{ question.description }</div>
-            <div className="metadata">
-              {/* <Rating
-                    icon="star"
-                    defaultRating={ question.rating }
-                    maxRating={ 5 }
-                    disabled
-              /> */}
-            </div>
+            <div>{ question.description }</div>
           </button>
         </div>
       ))
