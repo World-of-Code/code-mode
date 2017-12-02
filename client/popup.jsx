@@ -8,10 +8,10 @@ import store from './store'
 
 
 const initPopup = event => {
-  const popupBody = document.body
-  const popupApp = document.createElement('div')
-  popupApp.id = 'popup'
-  popupBody.append(popupApp)
+  // const popupBody = document.body
+  // const popupApp = document.createElement('div')
+  // popupApp.id = 'popup'
+  // popupBody.append(popupApp)
 
   ReactDOM.render(
     <Provider store={ store }>
@@ -32,10 +32,3 @@ switch (document.readyState) {
     initPopup(event)
     break
 }
-
-// ReactDOM.render(
-//   <Provider store={ store }>
-//     <PopupMain />
-//   </Provider>,
-//   document.getElementById('popup')
-// )
