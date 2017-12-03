@@ -31,15 +31,15 @@ class QuestionForm extends Component {
       userId: this.props.user.id,
       locationId: this.props.location.id,
       id: this.props.question.id,
-      theme: 'monokai',
-      mode: 'javascript'
     } : {
       description: ``,
       content: ``,
       boilerplate: ``,
       answer: ``,
       userId: this.props.user.id,
-      locationId: this.props.location.id
+      locationId: this.props.location.id,
+      theme: 'monokai',
+      mode: 'javascript'
     }
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
     this.handleContentChange = this.handleContentChange.bind(this)
