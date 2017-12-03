@@ -43,13 +43,13 @@ class MapButtons extends Component {
     return (
       this.props.question &&
       buttonsAvailable.map(button => (
-        <div key={ button.name }>
+        <div key={ button.name } >
           <button
             type="submit"
             className="button"
             onClick={ () => this.handleClick(button.name) }
           >
-            { button.name }
+            { `${button.name} question` }
           </button>
         </div>
       ))

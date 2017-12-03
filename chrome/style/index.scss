@@ -20,7 +20,7 @@ body {
   }
 }
 
-button {
+.button {
   cursor: pointer;
   display: inline-block;
   min-height: 1em;
@@ -41,4 +41,86 @@ button {
   text-decoration: none;
   border-radius: .28571429rem;
   box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+}
+
+.question-display {
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  vertical-align: baseline;
+  background: #e0e1e2 none;
+  color: rgba(0,0,0,.6);
+  font-size: 1em;
+  margin: 0 0 0.5em 0;
+  padding: .78571429em 1.5em .78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: .28571429rem;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+}
+
+.question-container {
+  width: 20em;
+  height: 5em;
+}
+
+.form-text {
+  outline: none;
+  resize: none;
+  overflow: auto;
+  width: 20em;
+  height: 6em;
+  padding: 0 2em 0 2em 0;
+}
+
+.form-input {
+  outline: none;
+  padding: 0 2em 0 2em 0;
+}
+
+.question-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pad {
+  padding: 0.2em 0 0.2em 0;
+}
+
+.pad-sides {
+  padding: 0 0.5em 0 0.5em;
+}
+
+.pad-sides-more {
+  padding: 0 1.5em 0 1.5em;
+}
+
+.pad-left {
+  padding: 0 0 0 0.8em;
+}
+
+.pad-left-more {
+  padding: 0 0 0 10em;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

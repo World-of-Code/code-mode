@@ -116,9 +116,9 @@ class App extends Component {
   render() {
     return (
       <div className="repl">
-        <div className="buttons-section">
-          <button onClick={ this.handleClick }>Run</button>
-          <button onClick={this.handleClear}>Clear</button>
+        <div className="buttons-section pad">
+          <button className="button" onClick={ this.handleClick }>Run</button>
+          <button className="button" onClick={ this.handleClear }>Clear</button>
         </div>
         <div className="columns">
           <div className="column">

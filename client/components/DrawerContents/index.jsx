@@ -49,17 +49,40 @@ class DrawerContents extends Component {
     this.setState({ action })
   }
 
-  clearStateInDrawer (action) { // finish
+  clearStateInDrawer () {
     this.setState({ action: '' })
   }
 
   render () {
+    const { mode, user } = this.props
+    const type = this.props.mode.type
+
     return (
       <div>
-        <ButtonContainer setStateInDrawer={ this.setStateInDrawer } />
-        <QuestionMenu questions={ this.props.allQuestions } />
-        <QuestionDisplay question={ this.props.question } action={ this.state.action } clearStateInDrawer={ this.clearStateInDrawer } />
-        <Repl />
+        {
+          //user && user.id &&
+          mode && type === 'Add' || type === 'Edit'
+          ? <ButtonContainer setStateInDrawer={ this.setStateInDrawer } />
+          : ''
+        } {
+          mode && type !== 'Add' && type !== 'Edit' &&
+          <QuestionMenu questions={ this.props.allQuestions } />
+        }
+        <QuestionDisplay
+          question={ this.props.question }
+          action={ this.state.action }
+          clearStateInDrawer={ this.clearStateInDrawer }
+        />
+        {
+          mode && type !== 'Add' && type !== 'Edit' &&
+          <div>
+            <ButtonContainer
+              setStateInDrawer={ this.setStateInDrawer }
+              mode={ mode }
+            />
+            <Repl />
+          </div>
+        }
       </div>
     )
   }
