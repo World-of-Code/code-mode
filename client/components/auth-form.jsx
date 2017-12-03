@@ -31,28 +31,29 @@ class AuthForm extends Component{
 render(){
   const { name, displayName, handleSubmit, error } = this.props
   return (
-    <div>
+    <div className="popup-background">
       <form onSubmit={ handleSubmit } name={ name }>
         <div className="field">
-          <label htmlFor="email" className="label">Email</label>
+          <label htmlFor="email" className="label">> Email</label>
           <div className="control">
-            <input name="email" type="email" className="input" placeholder="Email" required/>
+            <input name="email" type="email" className="input" required/>
           </div>
         </div>
         <div className="field">
-          <label htmlFor="password" className="label">Password</label>
+          <label htmlFor="password" className="label">> Password</label>
           <div className="control">
-            <input name="password" type="password" minLength="3" className="input" placeholder="Password" required/>
+            <input name="password" type="password" minLength="3" className="input" required/>
           </div>
         </div>
         <div className="field is-grouped">
           <div className="control">
-            <button type="submit" className="button is-primary animated bounceInLeft">{displayName}</button>
+            <button type="submit" className="button popup-button animated bounceInLeft">{ displayName }</button>
           </div>
           <div className="control">
-            <button onClick={this.handleSubmit} className="button is-text animated bounceInRight">{displayName} with YouTube</button>
+            <button onClick={ this.handleSubmit } className="button is-text popup-text animated bounceInRight">{ displayName } with YouTube</button>
           </div>
         </div>
+        <br />
         { error && error.response && <div> { error.response.data } </div> }
       </form>
       {/* <a href="http://background.html">{ displayName } with Youtube</a> */}
