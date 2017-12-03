@@ -19,8 +19,8 @@ class UserHome extends Component {
     const { email } = this.props
     return (
       <div>
-        <h3>Welcome, {email}</h3>
-        <button onClick={this.props.handleClick}>Logout</button>
+        <h3>Welcome, { email }</h3>
+        <button onClick={ this.props.handleClick }>Logout</button>
       </div>
     )
   }
@@ -39,7 +39,7 @@ const mapDispatch = dispatch => ({
   }
 })
 
-// may use later 
+// may use later
 
 // ReactDOM.render(
 //   <Provider store={store} >

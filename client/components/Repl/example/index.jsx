@@ -143,7 +143,7 @@ class App extends Component {
             />
           </div>
           <div className="column">
-          <h2 className="drawer-subheaders">> Code</h2>
+          <h2 className="drawer-subheaders">> Output</h2>
           <AceEditor
             mode={this.state.mode}
             theme={this.state.theme}

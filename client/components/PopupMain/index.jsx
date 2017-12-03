@@ -40,13 +40,13 @@ class PopupMain extends Component {
         <link rel="stylesheet" type="text/css" href="../../public/style/bulma.css" />
 
         <div className="body is-popup">
-          <div className="container fluid">
+          <div className="container fluid popup-background">
             <img src="https://raw.githubusercontent.com/TheUniverseofCoding/world-of-code/master/public/logo.jpg" alt="logo" className="animated bounceInDown"></img><br />
           </div>
           <button
             id= "toggle"
             type="button"
-            className="button is-toggle-code-mode animated bounceInDown"
+            className="button is-toggle-code-mode animated bounceInDown popup-button"
             onClick={ this.handleClick }
           >
             Toggle CodeMode!

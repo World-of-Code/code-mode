@@ -92,6 +92,31 @@ body {
   padding: 0 2em 0 2em 0;
 }
 
+.popup-background {
+  background: #393734;
+  border: 1px solid #339933;
+}
+
+.popup-button {
+  background: #1c1b1a;
+  color: #339933;
+  font-size: 1.2em;
+  border: 1px solid #339933;
+}
+
+.popup-input {
+  background: #1c1b1a;
+  color: #339933;
+  font-size: 1.2em;
+}
+
+.popup-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 100%;
+  color: #339933;
+  font-size: 1.2em;
+}
+
 .question-container {
   display: flex;
   justify-content: center;
