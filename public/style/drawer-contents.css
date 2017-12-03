@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron");
 
 .code-mode-logo {
-  font-family: 'Orbitron';
+  font-family: 'Orbitron' !important;
   font-weight: 600;
   color: #339933;
 }

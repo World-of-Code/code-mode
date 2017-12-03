@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store, { fetchQuestions } from './store'
 import DrawerComponents from './components/Drawer'
 
-import '../public/style/bulma.css';
+import '../public/style/bulma.css'
 
 const initApp = event => {
   const youtube = document.body
