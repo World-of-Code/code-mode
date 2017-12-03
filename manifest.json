@@ -8,7 +8,9 @@
     "default_title": "Login/Signup"
   },
   "icons": {
-    "128": "chrome/assets/img/icon-128.svg"
+    "16": "chrome/assets/img/icon-16.png",
+    "48": "chrome/assets/img/icon-48.png",
+    "128": "chrome/assets/img/icon-128.png"
   },
   "web_accessible_resources": [
     "inject.html"
