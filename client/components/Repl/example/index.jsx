@@ -117,12 +117,12 @@ class App extends Component {
     return (
       <div className="repl">
         <div className="buttons-section pad">
-          <button className="button" onClick={ this.handleClick }>Run</button>
-          <button className="button" onClick={ this.handleClear }>Clear</button>
+          <button className="question-display btn-border" onClick={ this.handleClick }>Run</button>
+          <button className="question-display btn-border" onClick={ this.handleClear }>Clear</button>
         </div>
         <div className="columns">
           <div className="column">
-            <h2 className="drawer-subheaders">Editor</h2>
+            <h2 className="drawer-subheaders">> Editor</h2>
             <AceEditor
               mode={ this.state.mode }
               theme={ this.state.theme }
@@ -143,7 +143,7 @@ class App extends Component {
             />
           </div>
           <div className="column">
-          <h2 className="drawer-subheaders">Code</h2>
+          <h2 className="drawer-subheaders">> Code</h2>
           <AceEditor
             mode={this.state.mode}
             theme={this.state.theme}

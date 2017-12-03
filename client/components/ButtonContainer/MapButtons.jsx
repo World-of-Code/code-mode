@@ -46,7 +46,7 @@ class MapButtons extends Component {
         <div key={ button.name } >
           <button
             type="submit"
-            className="button"
+            className="question-display btn-border"
             onClick={ () => this.handleClick(button.name) }
           >
             { `${button.name} question` }

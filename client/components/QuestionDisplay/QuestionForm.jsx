@@ -75,8 +75,8 @@ class QuestionForm extends Component {
     return (
       <form>
         <div className="column">
-          <div className="pad-sides pad-left-more">
-            <h4 className="drawer-subheaders">Question Title</h4>
+          <div className="pad-left-more">
+            <h4 className="drawer-subheaders">> Question Title</h4>
             <input
               type="text"
               value={ description }
@@ -85,8 +85,8 @@ class QuestionForm extends Component {
               onChange={ this.handleDescriptionChange }
             />
           </div>
-          <div className="pad-sides pad-left-more">
-            <h4 className="drawer-subheaders">Question Body</h4>
+          <div className="pad-left-more">
+            <h4 className="drawer-subheaders">> Question Body</h4>
             <textarea
               type="text"
               value={ content }
@@ -98,7 +98,7 @@ class QuestionForm extends Component {
         </div>
         <div className='repl columns' >
           <div className='column'>
-            <h2 className='drawer-subheaders'>Boilerplate</h2>
+            <h2 className='drawer-subheaders'>> Boilerplate</h2>
             <AceEditor
               mode = {this.state.mode}
               theme = {this.state.theme}
@@ -108,7 +108,7 @@ class QuestionForm extends Component {
             />
           </div>
           <div className='column'>
-            <h2 className='drawer-subheaders'>Solution</h2>
+            <h2 className='drawer-subheaders'>> Solution</h2>
             <AceEditor
               mode = {this.state.mode}
               theme = {this.state.theme}

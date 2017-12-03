@@ -16,7 +16,7 @@ const MapQuestions = props => {
         <div className="pad-sides" key={ question.id } >
           <button
             onClick={ () => props.setQuestion(question) }
-            className="question-display"
+            className="question-display question-border"
           >
             <div>{ question.description }</div>
           </button>

@@ -45,7 +45,7 @@ class DrawerComponents extends Component {
 
   render () {
     return (
-        <div className="drawer-bar-all">
+        <div className="drawer-bar-all" >
           {
             this.state.display
             ? <DrawerBar />
