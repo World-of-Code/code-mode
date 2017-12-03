@@ -9,9 +9,10 @@ import QuestionForm from './QuestionForm'
 // Mapped Button should choose view here
 const QuestionDisplay = props => {
   const { mode } = props
+  const questionContainer = mode && mode.type === 'Read' ? 'question-container' : ''
 
   return (
-    <div>
+    <div className={ `pad ${questionContainer}` }>
       {
         mode && mode.type === 'Read' &&
         <ReadQuestion question={ props.question } />
