@@ -6,8 +6,8 @@ import MapQuestions from './MapQuestions'
 
 const QuestionMenu = props => {
   return (
-    <div>
-      {/* container to format mapped questions */}
+    <div className="pad">
+      <h3 className="drawer-subheaders">> Questions</h3>
       <MapQuestions questions={ props.questions } location={ props.location } />
     </div>
   )

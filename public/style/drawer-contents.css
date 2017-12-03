@@ -1,11 +1,15 @@
 /* custom stuff related to the repl and buttons will go here */
 
-@import url('https://fonts.googleapis.com/css?family=Bangers');
+@import url("https://fonts.googleapis.com/css?family=Orbitron");
 
 .code-mode-logo {
-  font-family: 'Bangers';
+  font-family: 'Orbitron';
+  font-weight: 600;
+  color: #339933;
 }
 
 .drawer-subheaders {
-  font-family: 'Bangers';
+  font-family: 'Orbitron';
+  font-weight: 600;
+  color: #339933;
 }

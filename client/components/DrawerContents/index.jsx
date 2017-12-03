@@ -12,7 +12,7 @@ class DrawerContents extends Component {
     super(props)
     this.state = {
       action: '',
-      oldUrl: "",
+      oldUrl: '',
       urlNew: true
     }
     this.setStateInDrawer = this.setStateInDrawer.bind(this)
@@ -49,17 +49,43 @@ class DrawerContents extends Component {
     this.setState({ action })
   }
 
-  clearStateInDrawer (action) { // finish
+  clearStateInDrawer () {
     this.setState({ action: '' })
   }
 
   render () {
+    const { mode, user, question, allQuestions } = this.props
+    const type = mode.type
+    const loggedIn = user && user.id
+    const addOrEdit = mode && type === 'Add' || type === 'Edit'
+
     return (
       <div>
-        <ButtonContainer setStateInDrawer={ this.setStateInDrawer } />
-        <QuestionMenu questions={ this.props.allQuestions } />
-        <QuestionDisplay question={ this.props.question } action={ this.state.action } clearStateInDrawer={ this.clearStateInDrawer } />
-        <Repl />
+        {
+          mode && type === 'Add' || type === 'Edit'
+          ? <ButtonContainer setStateInDrawer={ this.setStateInDrawer } />
+          : ''
+        } {
+          mode && type !== 'Add' && type !== 'Edit' &&
+          <QuestionMenu questions={ allQuestions } />
+        } {
+          question.id || mode && type !== 'Read'
+          ? <QuestionDisplay
+              question={ question }
+              action={ this.state.action }
+              clearStateInDrawer={ this.clearStateInDrawer }
+            />
+          : ''
+        } {
+          loggedIn && mode && type !== 'Add' && type !== 'Edit' &&
+          <ButtonContainer
+            setStateInDrawer={ this.setStateInDrawer }
+            mode={ mode }
+          />
+        } {
+          mode && type !== 'Add' && type !== 'Edit' &&
+          <Repl />
+        }
       </div>
     )
   }
@@ -70,7 +96,8 @@ const mapStateToProps = state => ({
   location: state.location,
   allQuestions: state.allQuestions,
   question: state.question,
-  mode: state.mode
+  mode: state.mode,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({

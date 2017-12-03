@@ -71,7 +71,6 @@ export const deleteQuestion = (question, allQuestions) =>
                        : sortedQuestions[questionIndex - 1]
     axios.delete(`${BACK_END}/api/questions/${question.id}`)
       .then(response => {
-        console.log(response)
         if (nextQuestion) {
           dispatch(fetchAllQuestions(question.locationId))
           dispatch(setQuestion(nextQuestion))
