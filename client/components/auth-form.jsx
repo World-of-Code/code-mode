@@ -36,13 +36,13 @@ render(){
         <div className="field">
           <label htmlFor="email" className="label">> Email</label>
           <div className="control">
-            <input name="email" type="email" className="input" placeholder="Email" required/>
+            <input name="email" type="email" className="input" required/>
           </div>
         </div>
         <div className="field">
           <label htmlFor="password" className="label">> Password</label>
           <div className="control">
-            <input name="password" type="password" minLength="3" className="input" placeholder="Password" required/>
+            <input name="password" type="password" minLength="3" className="input" required/>
           </div>
         </div>
         <div className="field is-grouped">
@@ -53,6 +53,7 @@ render(){
             <button onClick={ this.handleSubmit } className="button is-text popup-text animated bounceInRight">{ displayName } with YouTube</button>
           </div>
         </div>
+        <br />
         { error && error.response && <div> { error.response.data } </div> }
       </form>
       {/* <a href="http://background.html">{ displayName } with Youtube</a> */}

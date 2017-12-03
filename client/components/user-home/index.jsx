@@ -8,6 +8,7 @@ import PopupMain from '../PopupMain'
 import { Provider } from 'react-redux'
 import store, { logout } from '../../store'
 
+
 /**
  * COMPONENT
  */
@@ -20,8 +21,8 @@ class UserHome extends Component {
     return (
       <div className="popup-background">
         <br />
-        <div classname="question-display question-border question-box center">
-          Welcome { email }
+        <div className="question-display question-border center">
+          Welcome { email }!
         </div>
         <br />
         <button
@@ -30,6 +31,8 @@ class UserHome extends Component {
         >
           Logout
         </button>
+        <br />
+        <br />
       </div>
     )
   }

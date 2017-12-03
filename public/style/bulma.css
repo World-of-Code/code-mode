@@ -1417,23 +1417,23 @@ a.box:active {
 }
 
 .button:hover, .button.is-hovered {
-  border-color: #b5b5b5;
-  color: #363636;
+  /* border-color: #b5b5b5; */
+  color: #339933;
 }
 
 .button:focus, .button.is-focused {
-  border-color: #3273dc;
-  color: #363636;
+  /* border-color: #3273dc; */
+  color: #339933;
 }
 
 .button:focus:not(:active), .button.is-focused:not(:active) {
-  -webkit-box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
-          box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+  /* -webkit-box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+          box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25); */
 }
 
 .button:active, .button.is-active {
-  border-color: #4a4a4a;
-  color: #363636;
+  /* border-color: #4a4a4a; */
+  color: #339933;
 }
 
 .button.is-text {
