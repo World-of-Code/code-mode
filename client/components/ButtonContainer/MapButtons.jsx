@@ -32,16 +32,18 @@ class MapButtons extends Component {
   }
 
   render () {
-    const questionCreator = this.props.user.id === this.props.question.userId
-    const buttonsAvailable = this.props.mode && this.props.mode.buttons.filter(button => {
+    const { mode, user, question } = this.props
+    const buttonType = mode.type !== 'Register' ? 'question' : 'url'
+    const questionCreator = user.id === question.userId
+    const buttonsAvailable = mode && mode.buttons.filter(button => {
       if (button.name === 'add') return true
-      if (this.props.mode.type === 'Add') return true
-      if (this.props.mode.type === 'Register') return true
-      return questionCreator && this.props.question.id
+      if (mode.type === 'Add') return true
+      if (mode.type === 'Register') return true
+      return questionCreator && question.id
     })
 
     return (
-      this.props.question &&
+      question &&
       buttonsAvailable.map(button => (
         <div key={ button.name } >
           <button
@@ -49,7 +51,7 @@ class MapButtons extends Component {
             className="question-display btn-border"
             onClick={ () => this.handleClick(button.name) }
           >
-            { `${button.name} question` }
+            { `${button.name} ${buttonType}` }
           </button>
         </div>
       ))

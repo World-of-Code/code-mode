@@ -70,8 +70,8 @@ class App extends Component {
     event.preventDefault()
     let value = this.state.value
     this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
-    if (this.state.value.includes('console.log')) {
-      let newValue = this.state.value.replace(/console.log/g, 'return')
+    if (value && value.includes('console.log')) {
+      let newValue = value.replace(/console.log/g, 'return')
       let value = newValue
       this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
     }
