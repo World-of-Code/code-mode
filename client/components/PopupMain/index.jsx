@@ -7,6 +7,8 @@ import { me } from '../../store'
 import { UserHome } from '../'
 import $ from 'jquery'
 import Frame from 'react-frame-component'
+import '../../../public/style/drawer-contents.css'
+
 
 class PopupMain extends Component {
   constructor(){
@@ -36,13 +38,9 @@ class PopupMain extends Component {
 
     return (
       <div>
-      <link rel="stylesheet" type="text/css" href="../../public/style/animate.css" />
-        <link rel="stylesheet" type="text/css" href="../../public/style/bulma.css" />
+        <link rel="stylesheet" type="text/css" href="../../public/style/animate.css" />
 
         <div className="body is-popup">
-          <div className="container fluid popup-background">
-            <img src="https://raw.githubusercontent.com/TheUniverseofCoding/world-of-code/master/public/logo.jpg" alt="logo" className="animated bounceInDown"></img><br />
-          </div>
           <button
             id= "toggle"
             type="button"

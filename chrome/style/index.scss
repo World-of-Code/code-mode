@@ -94,13 +94,19 @@ body {
 
 .popup-background {
   background: #393734;
-  border: 1px solid #339933;
 }
 
 .popup-button {
   background: #1c1b1a;
   color: #339933;
   font-size: 1.2em;
+  border: 1px solid #339933;
+}
+
+.popup-button-extra {
+  border: none;
+  outline: none;
+  border-radius: .28571429rem;
   border: 1px solid #339933;
 }
 

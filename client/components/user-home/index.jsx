@@ -18,9 +18,18 @@ class UserHome extends Component {
   render() {
     const { email } = this.props
     return (
-      <div>
-        <h3>Welcome, { email }</h3>
-        <button onClick={ this.props.handleClick }>Logout</button>
+      <div className="popup-background">
+        <br />
+        <div classname="question-display question-border question-box center">
+          Welcome { email }
+        </div>
+        <br />
+        <button
+        className="button popup-button popup-button-extra"
+        onClick={ this.props.handleClick }
+        >
+          Logout
+        </button>
       </div>
     )
   }

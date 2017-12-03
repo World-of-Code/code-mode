@@ -31,7 +31,7 @@ class AuthForm extends Component{
 render(){
   const { name, displayName, handleSubmit, error } = this.props
   return (
-    <div>
+    <div className="popup-background">
       <form onSubmit={ handleSubmit } name={ name }>
         <div className="field">
           <label htmlFor="email" className="label">> Email</label>
