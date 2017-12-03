@@ -7,9 +7,11 @@ import { me } from '../../store'
 import { UserHome } from '../'
 import $ from 'jquery'
 import Frame from 'react-frame-component'
+import '../../../public/style/drawer-contents.css'
+
 
 class PopupMain extends Component {
-  constructor(){
+  constructor (){
     super()
     this.state = {
       buttonToggle: true
@@ -22,35 +24,34 @@ class PopupMain extends Component {
   }
 
   handleClick () {
-    if(this.state.buttonToggle === true) {
-      this.setState({buttonToggle: false})
+    if (this.state.buttonToggle === true) {
+      this.setState({ buttonToggle: false })
       chrome.storage.local.set({ action: 'hide' })
     } else {
-      this.setState({buttonToggle: true})
+      this.setState({ buttonToggle: true })
       chrome.storage.local.set({ action: 'show' })
     }
   }
 
   render () {
     const { isLoggedIn } = this.props
+    const toggle = this.state.buttonToggle ? 'Deactivate' : 'Activate'
 
     return (
       <div>
-      <link rel="stylesheet" type="text/css" href="../../public/style/animate.css" />
-        <link rel="stylesheet" type="text/css" href="../../public/style/bulma.css" />
+        <link rel="stylesheet" type="text/css" href="../../public/style/animate.css" />
 
-        <div className="body is-popup">
-          <div className="container fluid">
-            <img src="https://raw.githubusercontent.com/TheUniverseofCoding/world-of-code/master/public/logo.jpg" alt="logo" className="animated bounceInDown"></img><br />
-          </div>
+        <div className="body is-popup popup-background">
+        <br />
           <button
             id= "toggle"
             type="button"
-            className="button is-toggle-code-mode animated bounceInDown"
+            className="button is-toggle-code-mode animated bounceInDown popup-button"
             onClick={ this.handleClick }
           >
-            Toggle CodeMode!
+            { toggle } CodeMode!
           </button>
+          <br />
           {
             isLoggedIn
             ? <UserHome />

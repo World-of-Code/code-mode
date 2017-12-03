@@ -8,6 +8,7 @@ import PopupMain from '../PopupMain'
 import { Provider } from 'react-redux'
 import store, { logout } from '../../store'
 
+
 /**
  * COMPONENT
  */
@@ -18,9 +19,20 @@ class UserHome extends Component {
   render() {
     const { email } = this.props
     return (
-      <div>
-        <h3>Welcome, {email}</h3>
-        <button onClick={this.props.handleClick}>Logout</button>
+      <div className="popup-background">
+        <br />
+        <div className="question-display question-border center">
+          Welcome { email }!
+        </div>
+        <br />
+        <button
+        className="button popup-button popup-button-extra"
+        onClick={ this.props.handleClick }
+        >
+          Logout
+        </button>
+        <br />
+        <br />
       </div>
     )
   }
@@ -39,7 +51,7 @@ const mapDispatch = dispatch => ({
   }
 })
 
-// may use later 
+// may use later
 
 // ReactDOM.render(
 //   <Provider store={store} >
