@@ -1,6 +1,5 @@
 import Drawer from 'rc-drawer';
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import DrawerContents from '../DrawerContents'
 import DrawerBar from './DrawerBar'

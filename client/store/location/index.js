@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { BACK_END } from '../../store'
+import { BACK_END, setModeRead } from '../../store'
 
 
 /**
@@ -33,7 +33,10 @@ export const fetchLocation = location =>
 export const registerLocation = location =>
   dispatch =>
     axios.post(`${BACK_END}/api/locations/register`, { url: location })
-      .then(res => dispatch(createLocation(res.data)))
+      .then(res => {
+        dispatch(createLocation(res.data))
+        dispatch(setModeRead())
+      })
       .catch(err => console.log(err))
 
 export const editLocation = location =>

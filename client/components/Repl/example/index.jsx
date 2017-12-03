@@ -70,8 +70,8 @@ class App extends Component {
     event.preventDefault()
     let value = this.state.value
     this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
-    if (this.state.value.includes('console.log')) {
-      let newValue = this.state.value.replace(/console.log/g, 'return')
+    if (value && value.includes('console.log')) {
+      let newValue = value.replace(/console.log/g, 'return')
       let value = newValue
       this.setState({ result: !eval(value) ? 'undefined' : eval(value).toString() })
     }
@@ -116,13 +116,13 @@ class App extends Component {
   render() {
     return (
       <div className="repl">
-        <div className="buttons-section">
-          <button onClick={ this.handleClick }>Run</button>
-          <button onClick={this.handleClear}>Clear</button>
+        <div className="buttons-section pad">
+          <button className="question-display btn-border" onClick={ this.handleClick }>Run</button>
+          <button className="question-display btn-border" onClick={ this.handleClear }>Clear</button>
         </div>
         <div className="columns">
           <div className="column">
-            <h2 className="drawer-subheaders">Editor</h2>
+            <h2 className="drawer-subheaders">> Editor</h2>
             <AceEditor
               mode={ this.state.mode }
               theme={ this.state.theme }
@@ -143,7 +143,7 @@ class App extends Component {
             />
           </div>
           <div className="column">
-          <h2 className="drawer-subheaders">Code</h2>
+          <h2 className="drawer-subheaders">> Code</h2>
           <AceEditor
             mode={this.state.mode}
             theme={this.state.theme}
