@@ -82,6 +82,7 @@ class QuestionForm extends Component {
               value={ description }
               name="description"
               className="form-input"
+              autocomplete="off"
               onChange={ this.handleDescriptionChange }
             />
           </div>
