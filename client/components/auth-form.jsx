@@ -36,7 +36,7 @@ render(){
         <div className="field">
           <label htmlFor="email" className="label">> Email</label>
           <div className="control">
-            <input name="email" type="email" className="input" autocomplete="off" required/>
+            <input name="email" type="email" className="input" autocomplete="off" spellcheck="false" required/>
           </div>
         </div>
         <div className="field">
