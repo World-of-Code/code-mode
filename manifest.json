@@ -36,7 +36,6 @@
       "matches": [
         "http://*.youtube.com/*", "https://*.youtube.com/*",
         "http://*.medium.com/*", "https://*.medium.com/*",
-        "http://*.github.com/*", "https://*.github.com/*",
         "http://*.channel9.msdn.com/*", "https://*.channel9.msdn.com/*",
         "http://*.ch9.ms/*", "https://*.ch9.ms/*",
         "http://*.jsforcats.com/*", "https://*.jsforcats.com/*",
