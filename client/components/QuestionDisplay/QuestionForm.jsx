@@ -31,6 +31,8 @@ class QuestionForm extends Component {
       userId: this.props.user.id,
       locationId: this.props.location.id,
       id: this.props.question.id,
+      theme: 'monokai',
+      mode: 'javascript'
     } : {
       description: ``,
       content: ``,
@@ -82,6 +84,7 @@ class QuestionForm extends Component {
               value={ description }
               name="description"
               className="form-input"
+              autocomplete="off"
               onChange={ this.handleDescriptionChange }
             />
           </div>
