@@ -31,6 +31,8 @@ class QuestionForm extends Component {
       userId: this.props.user.id,
       locationId: this.props.location.id,
       id: this.props.question.id,
+      theme: 'monokai',
+      mode: 'javascript'
     } : {
       description: ``,
       content: ``,
