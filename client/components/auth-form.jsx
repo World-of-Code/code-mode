@@ -36,13 +36,13 @@ render(){
         <div className="field">
           <label htmlFor="email" className="label">> Email</label>
           <div className="control">
-            <input name="email" type="email" className="input" required/>
+            <input name="email" type="email" className="input" autocomplete="off" required/>
           </div>
         </div>
         <div className="field">
           <label htmlFor="password" className="label">> Password</label>
           <div className="control">
-            <input name="password" type="password" minLength="3" className="input" required/>
+            <input name="password" type="password" minLength="3" className="input" autocomplete="off" required/>
           </div>
         </div>
         <div className="field is-grouped">
