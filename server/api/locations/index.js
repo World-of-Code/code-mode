@@ -21,8 +21,11 @@ router.param('id', (req, res, next, id) => {
 
 // // get location by url
 router.post('/', (req, res, next) => {
-  Location.findOne({ where: { url: req.body.location } })
-    .then(location => res.send(location))
+  Location.findOne({ where: { url: req.body.locations } })
+    .then(location => {
+      //console.log("location", location)
+      res.send(location)
+    })
     .catch(next)
 })
 
