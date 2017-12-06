@@ -32,7 +32,7 @@ describe('Location routes', () => {
                     return Location.findById(createLocations.id)
                 })
                 .then(foundLocation => {
-                    console.log("FOUND", foundLocation)
+                   // console.log("FOUND", foundLocation)
                     expect(foundLocation.url).to.be.equal('https://www.youtube.com/watch?v=BMUiFMZr7vk');
                 })
         })
