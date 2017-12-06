@@ -2,7 +2,7 @@
 
 ## CodeMode overview
 
-CodeMode is a Google Chrome extension that turns any Youtube coding tutorial into an interactive learning platform.
+CodeMode is a Google Chrome extension that turns any Youtube coding tutorial into an interactive learning platform. Activate CodeMode by [installing the extension on the Chrome Web Store](https://chrome.google.com/webstore/detail/code-mode/lojikgkcpdeolbgbfcapfpfhofkocnge).
 
 ![CodeMode intro gif](public/intro.gif)
 
@@ -25,6 +25,28 @@ CodeMode dramatically simplifies the process of coding along to Youtube videos b
 You can [view the CodeMode product demo on Youtube](https://youtube.com/watch?v=H9oYe_8Ks9M) to learn more about how we created CodeMode.
 
 ![CodeMode product demo on Youtube](public/youtube.jpeg)
+
+
+# For developers
+
+## How to run CodeMode locally
+
+- Open your terminal window, navigate to your desired directory, and type the following:
+```bs
+> git clone git@github.com:World-of-Code/code-mode.git
+> cd code-mode
+> yarn
+> yarn run start-dev
+```
+- Open up Chrome and go to `chrome://extensions`.
+- Make sure the 'Developer Mode' checkbox is on
+- Click 'Load unpacked extension...'
+- Navigate to the folder with CodeMode's `manifest.json` file and click 'Select'
+- Now you should be able to navigate to [any Youtube video](https://www.youtube.com/watch?v=H9oYe_8Ks9M) and see the CodeMode drawer at the bottom of the page!
+
+## Known issues
+
+- When multiple Youtube videos are open in separate tabs, CodeMode forces each page to reload continuously.
 
 ## Contribution guide
 
