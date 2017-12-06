@@ -24,7 +24,7 @@ CodeMode dramatically simplifies the process of coding along to Youtube videos b
 
 You can [view the CodeMode product demo on Youtube](https://youtube.com/watch?v=H9oYe_8Ks9M) to learn more about how we created CodeMode.
 
-![CodeMode product demo on Youtube](public/youtube-screenshot.jpeg)
+![CodeMode product demo on Youtube](public/youtube.jpeg)
 
 ## Contribution guide
 
