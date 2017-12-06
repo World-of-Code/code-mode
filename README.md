@@ -22,7 +22,7 @@ CodeMode dramatically simplifies the process of coding along to Youtube videos b
 
 ### Learn more
 
-You can [view the CodeMode product demo on Youtube](youtube.com/watch?v=H9oYe_8Ks9M) to learn more about how we created CodeMode.
+You can [view the CodeMode product demo on Youtube](https://youtube.com/watch?v=H9oYe_8Ks9M) to learn more about how we created CodeMode.
 
 ![CodeMode product demo on Youtube](public/youtube-screenshot.jpeg)
 
