@@ -108,12 +108,15 @@ class App extends Component {
 
   componentWillReceiveProps (nextProps) {
     let question = this.props.question
+    console.log("this question is ",this.props.question)
+    console.log("this is next question", nextProps)
     if (question && question.boilerplate !== nextProps.question.boilerplate) {
       this.setState({ value: nextProps.question.boilerplate })
     }
   }
 
   render() {
+    console.log("repl example")
     return (
       <div className="repl">
         <div className="buttons-section pad">
@@ -178,11 +181,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getQuestion: () => dispatch(getQuestion())
+  getQuestion: () => dispatch(getQuestion())  
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+// export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
 
 
 // const languages = [

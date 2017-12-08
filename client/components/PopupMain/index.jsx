@@ -33,6 +33,8 @@ class PopupMain extends Component {
     }
   }
 
+  
+
   render () {
     const { isLoggedIn } = this.props
     const toggle = this.state.buttonToggle ? 'Deactivate' : 'Activate'
@@ -54,7 +56,7 @@ class PopupMain extends Component {
           <br />
           {
             isLoggedIn
-            ? <UserHome />
+            ? <UserHome /> 
             : <div>
                 <Login />
                 <Signup />
