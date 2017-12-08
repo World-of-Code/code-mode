@@ -15,7 +15,7 @@
     "start": "node server",
     "start-dev": "yarn run build-client-watch & yarn run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/world-of-code-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js ./test/**/*.spec.js --compilers js:babel-register --exit"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/world-of-code-test' mocha --require ignore-styles -r jsdom-global/register ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js ./test/**/*.spec.js --compilers js:babel-register --exit"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,9 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^11.5.1",
+    "jsdom-global": "^3.0.2",
     "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
