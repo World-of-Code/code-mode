@@ -8,7 +8,7 @@ CodeMode is a Google Chrome extension that turns any Youtube coding tutorial int
 
 ### Why CodeMode?
 
-Youtube has invaluable educational videos and active communities of content creators and students. Unfortunately, for those students ot practice what they're learning, they have to find the video's sample code somewhere else on the web (if the content creator has made it available), open a separate tab or program to work, and constantly switch between these windows in order to follow along.
+Youtube has invaluable educational videos and active communities of content creators and students. Unfortunately, for those students to practice what they're learning, they have to find the video's sample code somewhere else on the web (if the content creator has made it available), open a separate tab or program to work, and constantly switch between these windows in order to follow along.
 
 CodeMode simplifies this process and **makes practice easier**.
 
